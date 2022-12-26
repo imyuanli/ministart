@@ -111,7 +111,7 @@ const handleSearch = () => {
 
 
 .blur-input {
-  width: 230px;
+  width: 270px;
   color: #fff;
   background-color: rgba(255, 255, 255, .25);
 }
