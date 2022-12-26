@@ -8,3 +8,17 @@
     justify-content: center;
     align-items: center;
 }
+
+body {
+    font-family: "Microsoft Yahei Light", "Microsoft Yahei", "PingFang SC", "Helvetica Neue", Helvetica, Tahoma, Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.bg-white-25 {
+    background-color: rgba(255, 255, 255, .25);
+}
+
+.bg-white-60 {
+    background-color: rgba(255, 255, 255, .6);
+}
