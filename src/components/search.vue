@@ -1,5 +1,5 @@
 <template>
-  <div :class="['search-box flex-center absolute left-1/2 -translate-x-1/2 top-40',isFocus?'focus-input':'blur-input']">
+  <div :class="['search-box flex-center absolute-center top-40',isFocus?'focus-input':'blur-input']">
     <!--    更换搜索引擎-->
     <el-popover
         v-if="isFocus"
