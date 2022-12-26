@@ -1,23 +1,31 @@
 <template>
-  <div class="content" @click.self="handleClickClose">
+  <div class="content" @click.self="handleClickClose" @contextmenu.prevent.stop="handleInputHidden">
     <!--    背景图片-->
     <img
-        @click.self="handleClickClose" src="https://tva4.sinaimg.cn/large/0060lm7Tly1ftg6xc454vj31hc0u07wh.jpg"
+       src="https://tva4.sinaimg.cn/large/0060lm7Tly1ftg6xc454vj31hc0u07wh.jpg"
         alt="背景"
-        :class="['fixed top-0 left-0 object-cover -z-30 w-full h-full duration-100',isFocus?'scale-110 blur-md':'']"
+        :class="['fixed top-0 left-0 object-cover -z-30 w-full h-full duration-100',isTwoPage || isFocus?'scale-110 blur':'']"
     >
     <!--    背景颜色-->
     <div class="cover"/>
     <!--    时间-->
     <div
-        class="absolute left-1/2 -translate-x-1/2 top-24 text-4xl font-semibold cursor-pointer hover:scale-125 duration-200 text-white">
+        class="absolute left-1/2 -translate-x-1/2 top-24 text-4xl font-semibold cursor-pointer hover:scale-125 duration-200 text-white"
+        @click="handleInputHidden"
+    >
       11:22
     </div>
     <!--搜索框-->
-    <Search
-        :isFocus="isFocus"
-        :handleClickOpen="handleClickOpen"
-    />
+    <div v-show="!isTwoPage">
+      <Search
+          :isFocus="isFocus"
+          :handleClickOpen="handleClickOpen"
+      />
+    </div>
+    <!--    二级页面-->
+    <div v-show="isTwoPage">
+      123123
+    </div>
   </div>
 </template>
 
@@ -33,7 +41,19 @@ const handleClickOpen = () => {
 }
 const handleClickClose = () => {
   isFocus.value = false
+  handleInputBlock()
 }
+
+//二级也页面
+const isTwoPage = ref(false)
+//鼠标右键
+const handleInputHidden = () => {
+  isTwoPage.value = false
+}
+const handleInputBlock= () => {
+  isTwoPage.value = true
+}
+
 </script>
 
 <style scoped>
