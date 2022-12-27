@@ -1,50 +1,13 @@
 <template>
-  <div class="absolute-center top-56">
-    <div class="grid gap-5 grid-cols-5 justify-items-center grid-rows-4">
+  <div class="absolute-center top-60 navboxCustom">
+    <div class="grid gap-2  md:gap-4 justify-items-center grid-cols-4 lg:grid-cols-8 md:grid-cols-7 sm:grid-cols-6">
       <div class="flex-center flex-col">
         <div class="flex-center mb-1 customNav">
-          <el-icon class="icon-plus mb-3" style="">
+          <el-icon class="icon-plus" style="">
             <Plus/>
           </el-icon>
-
         </div>
-        <div class="text-white text-base overflow-ellipsis truncate ">1232123212321232</div>
-      </div>
-
-      <div class="flex-center flex-col customNav">
-        <el-icon class="icon-plus" style="">
-          <Plus/>
-        </el-icon>
-      </div>
-      <div class="flex-center flex-col customNav">
-        <el-icon class="icon-plus" style="">
-          <Plus/>
-        </el-icon>
-      </div>
-      <div class="flex-center flex-col customNav">
-        <el-icon class="icon-plus" style="">
-          <Plus/>
-        </el-icon>
-      </div>
-      <div class="flex-center flex-col customNav">
-        <el-icon class="icon-plus" style="">
-          <Plus/>
-        </el-icon>
-      </div>
-      <div class="flex-center flex-col customNav">
-        <el-icon class="icon-plus" style="">
-          <Plus/>
-        </el-icon>
-      </div>
-      <div class="flex-center flex-col customNav">
-        <el-icon class="icon-plus" style="">
-          <Plus/>
-        </el-icon>
-      </div>
-      <div class="flex-center flex-col customNav">
-        <el-icon class="icon-plus" style="">
-          <Plus/>
-        </el-icon>
+        <div class="text-white text-center text-sm lg:text-lg md:text-base overflow-ellipsis truncate w-1/2">翻译</div>
       </div>
       <div class="flex-center flex-col customNav">
         <el-icon class="icon-plus" style="">
@@ -52,17 +15,6 @@
         </el-icon>
       </div>
     </div>
-    <!--    <div class="item">-->
-    <!--      <div>-->
-    <!--        <div v-if="items.iconObj.isText">-->
-    <!--          123-->
-    <!--        </div>-->
-    <!--        <div v-if="!items.iconObj.isText">-->
-    <!--          <img class="edit-icon" :src="items.iconObj.data" alt="">-->
-    <!--        </div>-->
-    <!--      </div>-->
-    <!--      <span class="item-title">{{ items.title }}</span>-->
-    <!--    </div>-->
   </div>
 </template>
 
@@ -88,9 +40,23 @@ const shortcuts_list = [
 </script>
 
 <style scoped>
+.navboxCustom {
+  height: 45%;
+  max-width: 800px;
+  width: 90%;
+  color: #fff;
+  transition: .25s;
+  overflow-y: auto;
+}
+
+.navboxCustom::-webkit-scrollbar {
+  display: none;
+}
+
 .customNav {
   width: 80px;
   height: 80px;
+  margin: 5px;
   border-radius: 15px;
   text-align: center;
   background-color: rgba(255, 255, 255, .1);
@@ -98,6 +64,29 @@ const shortcuts_list = [
   transition: background-color .35s;
   backdrop-filter: blur(40px) saturate(1.5);
 }
+
+@media (max-width: 1024px) {
+  .customNav {
+    width: 75px;
+    height: 75px;
+  }
+}
+
+@media (max-width: 768px) {
+  .customNav {
+    width: 70px;
+    height: 70px;
+  }
+}
+
+/*屏幕小于768的时候*/
+@media (max-width: 640px) {
+  .customNav {
+    width: 60px;
+    height: 60px;
+  }
+}
+
 
 .icon-plus {
   color: rgba(255, 255, 255, .5);
