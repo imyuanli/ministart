@@ -18,6 +18,7 @@
       <!--    快捷方式-->
       <MyTools/>
     </div>
+    <MyFooter />
   </div>
 </template>
 
@@ -26,6 +27,7 @@ import {ref} from "vue";
 import MySearch from '../components/my-search.vue'
 import MyTools from '../components/my-tools.vue'
 import NavBar from '../components/nav-bar.vue'
+import MyFooter from "../components/my-footer.vue";
 //输入框的值
 const inputValue = ref(null)
 //输入框聚焦
