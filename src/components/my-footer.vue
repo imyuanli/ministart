@@ -1,5 +1,5 @@
 <template>
-  <div class="footer">
+  <div class="footer mini-text-color">
     <div class="mb-1 text">
       Copyright © 2022 鸢离
     </div>
@@ -25,7 +25,6 @@
   transform: translateX(-50%);
   width: fit-content;
   font-size: 12px;
-  /*color: #fff;*/
   text-align: center;
   /*text-shadow: 0 0 20px rgb(0 0 0 / 80%);*/
   white-space: nowrap;

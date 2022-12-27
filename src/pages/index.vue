@@ -1,17 +1,17 @@
 <template>
   <div class="relative w-full h-screen min-h-screen">
-    <img
-        src="https://tva4.sinaimg.cn/large/0060lm7Tly1ftg6xc454vj31hc0u07wh.jpg"
-        alt="背景"
-        :class="['fixed top-0 left-0 object-cover -z-30 w-full h-full duration-100 opacity-1']"
-    >
+<!--    <img-->
+<!--        src="https://tva4.sinaimg.cn/large/0060lm7Tly1ftg6xc454vj31hc0u07wh.jpg"-->
+<!--        alt="背景"-->
+<!--        :class="['fixed top-0 left-0 object-cover -z-30 w-full h-full duration-100 opacity-0']"-->
+<!--    >-->
     <div class="cover"/>
     <NavBar/>
     <div class="main">
       <div class="absolute left-1/2 -translate-x-1/2 w-full flex-center top-28 flex-col">
         <!--        有背景时间就变成白色-->
         <div
-            class="text-4xl font-semibold cursor-pointer hover:scale-125 duration-200 mb-6">
+            class="text-4xl font-semibold cursor-pointer hover:scale-125 duration-200 mb-6 mini-text-color">
           11:22
         </div>
         <MySearch/>
@@ -67,9 +67,12 @@ const settingWord = {
   top: 0;
   width: 100%;
   height: 100%;
-  /*background: #E7F0F7;*/
+  background: #E7F0F7;
   transition: .25s;
-  background-image: radial-gradient(rgba(0, 0, 0, 0) 0, rgba(0, 0, 0, .5) 100%), radial-gradient(rgba(0, 0, 0, 0) 33%, rgba(0, 0, 0, .3) 166%);
+  /*background-image: radial-gradient(rgba(0, 0, 0, 0) 0, rgba(0, 0, 0, .5) 100%), radial-gradient(rgba(0, 0, 0, 0) 33%, rgba(0, 0, 0, .3) 166%);*/
+}
+
+.mini-cover{
 
 }
 

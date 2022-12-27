@@ -60,3 +60,11 @@ body {
         padding: 15px 20px 0;
     }
 }
+
+.mini-text-color{
+    color: rgba(0, 0, 0, .7);
+}
+
+.blur-text-color{
+    color: #fff;
+}

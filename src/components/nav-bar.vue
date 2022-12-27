@@ -3,17 +3,19 @@
     <el-tooltip
         class="box-item"
         effect="dark"
-        content="Top Right prompts info"
+        content="用户"
         placement="top-end"
+        :hide-after="50"
     >
       <div class="flex-center">
         <el-popover
             placement="bottom-start"
             trigger="click"
             style="max-width: calc(100% - 20px)"
+            :hide-after="50"
         >
           <template #reference>
-            <el-icon class="btn-icon mr-3">
+            <el-icon class="btn-icon mr-3 mini-text-color">
               <User/>
             </el-icon>
           </template>
@@ -30,17 +32,19 @@
     <el-tooltip
         class="box-item"
         effect="dark"
-        content="Top Right prompts info"
+        content="设置"
         placement="top-end"
+        :hide-after="50"
     >
       <div class="flex-center">
         <el-popover
             placement="bottom-start"
             trigger="click"
             style="max-width: calc(100% - 20px)"
+            :hide-after="50"
         >
           <template #reference>
-            <el-icon class="btn-icon hover:rotate-180 duration-200">
+            <el-icon class="btn-icon hover:rotate-180 duration-200 mini-text-color">
               <Setting/>
             </el-icon>
           </template>
@@ -58,7 +62,6 @@
       </div>
     </el-tooltip>
   </div>
-  <!--  -->
   <div class="dialog-box">
     <el-dialog
         v-model="centerDialogVisible"
