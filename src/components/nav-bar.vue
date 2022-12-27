@@ -21,7 +21,7 @@
           </template>
           <div>
             <div class="lip-btn" @click="centerDialogVisible = true">
-              <span class="user-name mb-1">鸢离鸢离鸢离鸢离鸢离鸢离</span>
+              <span class="block text-lg primary-color truncate overflow-ellipsis mb-1">鸢离鸢离鸢离鸢离鸢离鸢离</span>
               <span>账号管理</span>
             </div>
             <div class="lip-btn">退出登录</div>
@@ -71,7 +71,7 @@
     >
       <template #header="{ close, titleId, titleClass }">
         <div class="text-2xl text-black font-semibold truncate overflow-ellipsis">
-          欢迎您，<span style="color:#70C000;">鸢离</span>
+          欢迎您，<span style="color:#409eff;">鸢离</span>
         </div>
       </template>
       <div class="bg-white rounded-lg px-6 py-3">
@@ -181,15 +181,6 @@ const handleChange = (index, value) => {
   background-color: rgba(0, 0, 0, .1);
 }
 
-.user-name {
-  display: block;
-  font-size: 16px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  color: #70C000;
-}
-
 .dialog-box:deep(.el-dialog) {
   max-width: 600px;
   width: 90%;
@@ -235,11 +226,11 @@ const handleChange = (index, value) => {
 }
 
 .handle-icon:hover {
-  color: #70C000;
+  color: #409eff;
 }
 
 .my-input:focus {
-  border-bottom: solid 1px #70C000;
+  border-bottom: solid 1px #409eff;
 }
 
 .my-input {
@@ -264,7 +255,7 @@ const handleChange = (index, value) => {
 }
 
 .save-btn {
-  color: #70C000;
+  color: #409eff;
   font-size: 13px;
 }
 </style>
