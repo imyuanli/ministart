@@ -1,8 +1,7 @@
 <template>
-  <div :class="['search-box flex-center absolute left-1/2 -translate-x-1/2  top-40',isFocus?'focus-input':'blur-input']">
+  <div :class="['search-box flex-center']">
     <!--    更换搜索引擎-->
     <el-popover
-        v-if="isFocus"
         placement="bottom"
         trigger="click"
     >
@@ -18,18 +17,18 @@
         <span class="ml-1">设置搜索引擎</span>
       </div>
       <template #reference>
-        <div v-show="isFocus" class="search-btn left-2">
+        <div class="search-btn left-2">
           <img class="search-btn-eng" :src="searchEngines[currentIndex].icon" alt="">
         </div>
       </template>
     </el-popover>
     <input
-        class="my-input"
+        class="input-box"
         @click="handleClickOpen"
-        :placeholder="isFocus?'':'搜索'"
+        placeholder="搜索"
     />
-    <div @click="handleSearch" v-show="isFocus" class="search-btn right-2">
-      <el-icon style="vertical-align: middle;font-size: 18px;color:#70C000 ">
+    <div @click="handleSearch" class="search-btn right-2">
+      <el-icon style="vertical-align: middle;font-size: 18px">
         <Search/>
       </el-icon>
     </div>
@@ -38,11 +37,6 @@
 
 <script setup>
 import {ref, watch} from "vue";
-
-const props = defineProps({
-  isFocus: Boolean,
-  handleClickOpen: Function,
-})
 //popver
 const popoverVisible = ref(false)
 //选中的searchEngines
@@ -88,46 +82,20 @@ const handleSearch = () => {
 .search-box {
   height: 43px;
   max-width: 530px;
+  width: 90%;
   border-radius: 30px;
   overflow: hidden;
-  -webkit-backdrop-filter: blur(10px) saturate(1.5);
-  backdrop-filter: blur(10px) saturate(1.5);
-  box-shadow: rgb(0 0 0 / 20%) 0 0 10px;
+  background: #fff;
+  box-shadow: 0 2px 4px rgb(0 0 0 / 30%);
   transition: 300ms;
 }
 
-.focus-input {
-  width: 100%;
-  color: black;
-  background-color: rgba(255, 255, 255, .9);
-}
-
-/*屏幕小于768的时候*/
-@media (max-width: 768px) {
-  .search-box {
-    max-width: 90%;
-  }
-}
-
-
-.blur-input {
-  width: 270px;
-  color: #fff;
-  background-color: rgba(255, 255, 255, .25);
-}
-
-.blur-input:hover {
-  width: 100%;
-  background-color: rgba(255, 255, 255, .6);
-}
-
-.my-input {
+.input-box {
   outline: 0;
   border: none;
   width: 100%;
   height: 100%;
   padding: 0 20px;
-  color: #fff;
   background-color: transparent;
   font-size: 14px;
   text-align: center;
@@ -138,7 +106,7 @@ const handleSearch = () => {
   align-items: center;
   justify-content: center;
   position: relative;
-  width: 40px;
+  width: 45px;
   height: 40px;
   border-radius: 50%;
   cursor: pointer;
@@ -147,8 +115,7 @@ const handleSearch = () => {
 }
 
 .search-btn:hover {
-  border-radius: 50px;
-  background-color: #fff;
+  background-color: rgba(0, 0, 0, .1);
   filter: brightness(1.1);
 }
 
