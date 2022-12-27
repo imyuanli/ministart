@@ -55,7 +55,6 @@ const settingWord = {
 }
 
 //主题
-
 </script>
 
 <style scoped>
@@ -70,10 +69,6 @@ const settingWord = {
   background: #E7F0F7;
   transition: .25s;
   /*background-image: radial-gradient(rgba(0, 0, 0, 0) 0, rgba(0, 0, 0, .5) 100%), radial-gradient(rgba(0, 0, 0, 0) 33%, rgba(0, 0, 0, .3) 166%);*/
-}
-
-.mini-cover{
-
 }
 
 .main {

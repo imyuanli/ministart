@@ -9,14 +9,6 @@
         </div>
         <div class="text-black text-center text-base overflow-ellipsis truncate w-1/2 mini-text-color">翻译</div>
       </div>
-      <!--      <el-tooltip-->
-      <!--          class="box-item"-->
-      <!--          effect="light"-->
-      <!--          content="添加网站捷径"-->
-      <!--          placement="bottom"-->
-      <!--      >-->
-      <!--       -->
-      <!--      </el-tooltip>-->
       <div class="flex-center customNav" @click="dialogVisible = true">
         <el-icon class="icon-plus" style="">
           <Plus/>
@@ -61,7 +53,7 @@
   </div>
 </template>
 <script setup>
-import {ref} from "vue";
+import {ref, watch} from "vue";
 import MyInput from '../components/my-input.vue'
 
 const shortcuts_list = [
@@ -82,20 +74,30 @@ const shortcuts_list = [
     value: '选项5',
     label: '北京烤鸭'
   }]
-
 //右键弹窗
 const visible = ref(false)
 const top = ref(0)
 const left = ref(0)
 
+//打开
 const rightClick = (e, item, index) => {
-  console.log(e.pageY)
-  console.log(e.pageX)
   top.value = e.pageY;
   left.value = e.pageX;
   visible.value = true;
 }
-
+//关闭
+const closeMenu = () => {
+  top.value = 0;
+  left.value = 0;
+  visible.value = false;
+}
+watch(visible, (newValue, oldValue) => {
+  if (newValue) {
+    document.body.addEventListener('click', closeMenu)
+  } else {
+    document.body.removeEventListener('click', closeMenu)
+  }
+})
 //添加网站捷径
 const dialogVisible = ref(false)
 </script>
