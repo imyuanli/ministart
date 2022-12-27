@@ -8,7 +8,7 @@
     <div class="cover"/>
     <NavBar/>
     <!--主要内容-->
-    <div class="main">
+    <div class="main" @click.self="handleClickClose">
       <!--    时间-->
       <div class="absolute-center top-24 text-4xl font-semibold cursor-pointer hover:scale-125 duration-200 text-white">
         11:22
@@ -43,6 +43,7 @@ const handleClickClose = () => {
   position: relative;
   width: 100%;
   height: 100vh;
+  min-height: 100vh;
 }
 
 .cover {
@@ -58,10 +59,9 @@ const handleClickClose = () => {
 }
 
 .main {
-  width: 90%;
-  max-width: 1000px;
-  min-width: 320px;
-  margin: auto;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
   height: 100%;
 }
 </style>
