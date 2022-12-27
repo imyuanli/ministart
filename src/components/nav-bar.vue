@@ -1,46 +1,64 @@
 <template>
   <div class="absolute top-6 right-6 flex-center">
-    <el-popover
-        placement="bottom-start"
-        trigger="click"
-        style="max-width: calc(100% - 20px)"
+    <el-tooltip
+        class="box-item"
+        effect="dark"
+        content="Top Right prompts info"
+        placement="top-end"
     >
-      <template #reference>
-        <el-icon class="btn-icon mr-3">
-          <UserFilled/>
-        </el-icon>
-      </template>
-      <div>
-        <div class="lip-btn" @click="centerDialogVisible = true">
-          <span class="user-name mb-1">鸢离鸢离鸢离鸢离鸢离鸢离</span>
-          <span>账号管理</span>
-        </div>
-        <div class="lip-btn">退出登录</div>
+      <div class="flex-center">
+        <el-popover
+            placement="bottom-start"
+            trigger="click"
+            style="max-width: calc(100% - 20px)"
+        >
+          <template #reference>
+            <el-icon class="btn-icon mr-3">
+              <User/>
+            </el-icon>
+          </template>
+          <div>
+            <div class="lip-btn" @click="centerDialogVisible = true">
+              <span class="user-name mb-1">鸢离鸢离鸢离鸢离鸢离鸢离</span>
+              <span>账号管理</span>
+            </div>
+            <div class="lip-btn">退出登录</div>
+          </div>
+        </el-popover>
       </div>
-    </el-popover>
-    <el-popover
-        placement="bottom-start"
-        trigger="click"
-        style="max-width: calc(100% - 20px)"
+    </el-tooltip>
+    <el-tooltip
+        class="box-item"
+        effect="dark"
+        content="Top Right prompts info"
+        placement="top-end"
     >
-      <template #reference>
-        <el-icon class="btn-icon hover:rotate-180 duration-200">
-          <Tools/>
-        </el-icon>
-      </template>
-      <div>
-        <div class="lip-btn">常规设置</div>
-        <div class="lip-btn">壁纸设置</div>
-        <div class="lip-btn">搜索引擎设置</div>
-        <el-divider style="margin: 5px"/>
-        <div class="lip-btn">捐助</div>
-        <div class="lip-btn">帮助和反馈</div>
-        <el-divider style="margin: 5px"/>
-        <div class="lip-btn">设为主页</div>
+      <div class="flex-center">
+        <el-popover
+            placement="bottom-start"
+            trigger="click"
+            style="max-width: calc(100% - 20px)"
+        >
+          <template #reference>
+            <el-icon class="btn-icon hover:rotate-180 duration-200">
+              <Setting/>
+            </el-icon>
+          </template>
+          <div>
+            <div class="lip-btn">常规设置</div>
+            <div class="lip-btn">壁纸设置</div>
+            <div class="lip-btn">搜索引擎设置</div>
+            <el-divider style="margin: 5px"/>
+            <div class="lip-btn">捐助</div>
+            <div class="lip-btn">帮助和反馈</div>
+            <el-divider style="margin: 5px"/>
+            <div class="lip-btn">设为主页</div>
+          </div>
+        </el-popover>
       </div>
-    </el-popover>
+    </el-tooltip>
   </div>
-<!--  -->
+  <!--  -->
   <div class="dialog-box">
     <el-dialog
         v-model="centerDialogVisible"
@@ -143,12 +161,7 @@ const handleChange = (index, value) => {
 <style scoped>
 .btn-icon {
   font-size: 22px;
-  color: rgba(255, 255, 255, .35);
   cursor: pointer;
-}
-
-.btn-icon:hover {
-  color: rgba(255, 255, 255, .65);
 }
 
 .lip-btn {
