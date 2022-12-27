@@ -6,23 +6,26 @@
         :class="['fixed top-0 left-0 object-cover -z-30 w-full h-full duration-100',isTwoPage || isFocus?'scale-110 blur':'']"
     >
     <div class="cover"/>
+    <NavBar/>
+    <!--主要内容-->
     <div class="main">
       <!--    时间-->
       <div class="absolute-center top-24 text-4xl font-semibold cursor-pointer hover:scale-125 duration-200 text-white">
         11:22
       </div>
       <!--搜索框-->
-      <Search :isFocus="isFocus" :handleClickOpen="handleClickOpen"/>
+      <MySearch :isFocus="isFocus" :handleClickOpen="handleClickOpen"/>
       <!--    快捷方式-->
-      <Tools/>
+      <MyTools/>
     </div>
   </div>
 </template>
 
 <script setup>
 import {ref} from "vue";
-import Search from '../components/search.vue'
-import Tools from '../components/tools.vue'
+import MySearch from '../components/my-search.vue'
+import MyTools from '../components/my-tools.vue'
+import NavBar from '../components/nav-bar.vue'
 //输入框的值
 const inputValue = ref(null)
 //输入框聚焦
