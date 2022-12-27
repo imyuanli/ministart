@@ -17,7 +17,7 @@
 .footer {
   display: inline-block;
   border-radius: 2px;
-  backdrop-filter: blur(10px);
+  /*backdrop-filter: blur(10px);*/
   animation: delayedFadeIn 1s;
   position: fixed;
   bottom: 10px;
@@ -25,14 +25,14 @@
   transform: translateX(-50%);
   width: fit-content;
   font-size: 12px;
-  color: rgba(255, 255, 255, .6);
+  /*color: #fff;*/
   text-align: center;
-  text-shadow: 0 0 20px rgb(0 0 0 / 80%);
+  /*text-shadow: 0 0 20px rgb(0 0 0 / 80%);*/
   white-space: nowrap;
   padding: 3px 10px;
 }
 
-.text:hover {
-  color: rgba(255, 255, 255, 1);
-}
+/*.text:hover {*/
+/*  color: rgba(255, 255, 255, 1);*/
+/*}*/
 </style>
