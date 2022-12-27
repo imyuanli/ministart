@@ -10,7 +10,8 @@
     <!--主要内容-->
     <div class="main" @click.self="handleClickClose">
       <!--    时间-->
-      <div class="absolute left-1/2 -translate-x-1/2 top-24 text-4xl font-semibold cursor-pointer hover:scale-125 duration-200 text-white">
+      <div
+          class="absolute left-1/2 -translate-x-1/2 top-24 text-4xl font-semibold cursor-pointer hover:scale-125 duration-200 text-white">
         11:22
       </div>
       <!--搜索框-->
@@ -18,7 +19,7 @@
       <!--    快捷方式-->
       <MyTools/>
     </div>
-    <MyFooter />
+    <MyFooter/>
   </div>
 </template>
 
@@ -38,6 +39,32 @@ const handleClickOpen = () => {
 const handleClickClose = () => {
   isFocus.value = false
 }
+
+//常规设置
+
+// 时间或日期
+const settingTime = {
+  //显示时间
+  showTime: false,
+  //年月日
+  showDate: false,
+  //农历
+  showLunarCalendar: false,
+  //周
+  showWeek: false,
+  //秒
+  showSecond: false,
+}
+
+//一言
+const settingWord = {
+  showWord: false,
+  showAuthor: false,
+  showSource: false,
+}
+
+//主题
+
 </script>
 
 <style scoped>

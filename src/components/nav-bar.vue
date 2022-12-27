@@ -40,6 +40,7 @@
       </div>
     </el-popover>
   </div>
+<!--  -->
   <div class="dialog-box">
     <el-dialog
         v-model="centerDialogVisible"
@@ -93,12 +94,10 @@
       <template #footer></template>
     </el-dialog>
   </div>
-
-
 </template>
 <script setup>
 import {ref} from 'vue'
-
+//对话框
 const centerDialogVisible = ref(false)
 const info = [
   {
@@ -139,8 +138,6 @@ const handleChange = (index, value) => {
   currentIndex.value = index
   inputValue.value = value
 }
-
-
 </script>
 
 <style scoped>

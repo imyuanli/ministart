@@ -29,3 +29,34 @@ body {
 .bg-white-60 {
     background-color: rgba(255, 255, 255, .6);
 }
+
+
+:deep(.el-dialog) {
+    max-width: 600px;
+    width: 90%;
+    background-color: rgb(245, 245, 245) !important;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: rgb(0 0 0 / 5%) 0 10px 20px;
+}
+
+:deep(.el-dialog__body) {
+    padding: 35px;
+    max-height: 350px;
+    overflow: auto;
+}
+
+:deep(.el-dialog__body) {
+    padding: 15px 35px 0;
+}
+
+:deep(.el-dialog__body::-webkit-scrollbar) {
+    display: none
+}
+
+/*屏幕小于768的时候*/
+@media (max-width: 640px) {
+    :deep(.el-dialog__body) {
+        padding: 15px 20px 0;
+    }
+}
