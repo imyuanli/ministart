@@ -10,7 +10,7 @@
     <!--主要内容-->
     <div class="main" @click.self="handleClickClose">
       <!--    时间-->
-      <div class="absolute-center top-24 text-4xl font-semibold cursor-pointer hover:scale-125 duration-200 text-white">
+      <div class="absolute left-1/2 -translate-x-1/2 top-24 text-4xl font-semibold cursor-pointer hover:scale-125 duration-200 text-white">
         11:22
       </div>
       <!--搜索框-->

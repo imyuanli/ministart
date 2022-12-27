@@ -1,5 +1,5 @@
 <template>
-  <div class="absolute-center top-60 navboxCustom">
+  <div class="absolute left-1/2 -translate-x-1/2  top-60 navboxCustom">
     <div class="grid gap-2  md:gap-4 justify-items-center grid-cols-4 lg:grid-cols-8 md:grid-cols-7 sm:grid-cols-6">
       <div class="flex-center flex-col">
         <div class="flex-center mb-1 customNav">
