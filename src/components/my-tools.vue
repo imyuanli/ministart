@@ -24,17 +24,39 @@
         align-center
         class="rounded-lg"
     >
-      <div class="flex justify-center items-start flex-col bg-white rounded-lg px-6 py-3 text-base">
-        <div class="py-3 flex-center">
-          <div class="mr-3">网址</div>
+      <div class="flex justify-center items-start flex-col bg-white rounded-lg px-6 py-3 text-base info-text-color">
+        <div class="py-3 flex justify-start items-center w-full">
+          <div class="w-10">网址</div>
           <MyInput/>
         </div>
-        <div class="py-3 flex-center">
-          <div class="mr-3">网址</div>
+        <div class="py-3 flex justify-start items-center w-full">
+          <div class="w-10">名称</div>
           <MyInput/>
+        </div>
+        <div class="py-3 flex justify-start items-center w-full">
+          <div class="w-10">图标</div>
+          <div class="edit-icon-box">
+            <!--            <span v-if="isText" style="font-size:12px ">{{title.substring(0,5)}}</span>-->
+            <img class="edit-icon" src="https://www.jianfast.com/static/home/images/defaultsicon/null.png" alt="">
+          </div>
+          <div class="edit-btn-box">
+            <div class="edit-btn" @click="getUrlIcon">
+              智能
+            </div>
+            <div class="edit-btn" @click="changeText">
+              文字
+            </div>
+            <div class="edit-btn" @click="changeDefault">
+              默认
+            </div>
+          </div>
         </div>
       </div>
-      <template #footer></template>
+      <template #footer>
+        <el-button @click="handleClose">取 消</el-button>
+        <el-button v-if="!isUpdate" type="primary" @click="addShortcuts(false)" :loading="btnLoading">确 定</el-button>
+        <el-button v-if="isUpdate" type="primary" @click="addShortcuts(true)" :loading="btnLoading">更 新</el-button>
+      </template>
     </el-dialog>
   </div>
   <div v-show="visible" :style="{left:left+'px',top:top+'px'}" class="contextmenu">
@@ -254,5 +276,40 @@ const dialogVisible = ref(false)
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+.edit-icon-box {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 1px solid #cccccc;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.edit-icon {
+  width: 35px;
+  height: 35px;
+}
+
+.edit-btn-box {
+  width: 70%;
+  display: flex;
+  align-items: center;
+}
+
+.edit-btn {
+  font-size: 14px;
+  color: #4d4d4d;
+  width: 100%;
+  border-radius: 50px;
+  text-align: center;
+  border: 1px solid #f2f2f2;
+  margin: 5px;
+  cursor: pointer;
+  padding: 3px;
+  background-color: #f2f2f2;
 }
 </style>

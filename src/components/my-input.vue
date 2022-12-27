@@ -1,9 +1,11 @@
 <template>
-<!--  <input-->
-<!--      v-model="inputValue"-->
-<!--      maxlength="8"-->
-<!--      class="my-input"-->
-<!--  />-->
+  <div class="ml-3 w-full">
+    <input
+        v-model="inputValue"
+        maxlength="8"
+        class="my-input"
+    />
+  </div>
 </template>
 
 <script setup>
@@ -20,7 +22,7 @@
   line-height: 20px;
   outline: 0;
   padding: 0;
-  width: 95%;
+  width: 100%;
   border: none;
   border-radius: 0;
   border-bottom: solid 1px rgba(0, 0, 0, .1);
@@ -33,6 +35,6 @@
 }
 
 .my-input:focus {
-  border-bottom: solid 1px #70C000;
+  border-bottom: solid 1px #409eff;
 }
 </style>

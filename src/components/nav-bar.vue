@@ -71,13 +71,13 @@
     >
       <template #header="{ close, titleId, titleClass }">
         <div class="text-2xl text-black font-semibold truncate overflow-ellipsis">
-          欢迎您，<span style="color:#409eff;">鸢离</span>
+          欢迎您，<span class="primary-color">鸢离</span>
         </div>
       </template>
       <div class="bg-white rounded-lg px-6 py-3">
         <div v-for="(item,index) in info" :key="index" class="flex justify-between py-3">
           <div class="flex-center">
-            <div class="info-text mr-9">{{ item.name }}</div>
+            <div class="info-text-color mr-9">{{ item.name }}</div>
             <div v-show="index !== currentIndex" class="text-black">{{ item.value }}</div>
             <div v-show="index == currentIndex">
               <input

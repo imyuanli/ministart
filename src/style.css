@@ -22,6 +22,7 @@ body {
 .color-white-50 {
     background-color: rgba(255, 255, 255, .5);
 }
+
 .bg-white-50 {
     background-color: rgba(255, 255, 255, .5);
 }
@@ -61,14 +62,18 @@ body {
     }
 }
 
-.mini-text-color{
+.mini-text-color {
     color: rgba(0, 0, 0, .7);
 }
 
-.blur-text-color{
+.blur-text-color {
     color: #fff;
 }
 
-.primary-color{
+.primary-color {
     color: #409eff;
+}
+
+.info-text-color {
+    color: rgba(0, 0, 0, .35);
 }
