@@ -10,7 +10,7 @@
     <Header :commonSetting="commonSetting"/>
     <div class="main" @click.self="handleClickClose">
       <div v-if="commonSetting.showTime">
-        <div :class="['absolute left-1/2 -translate-x-1/2 top-44 text-4xl  font-semibold cursor-pointer hover:scale-125 duration-200',
+        <div :class="['absolute left-1/2 -translate-x-1/2 top-32 text-4xl  font-semibold cursor-pointer hover:scale-125 duration-200',
             getTextColor(commonSetting.showBackImg)]"
         >
           {{ dayjs(new Date()).format("HH:mm") }}

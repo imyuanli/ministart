@@ -1,6 +1,6 @@
 <template>
   <div
-      :class="['absolute left-1/2 -translate-x-1/2 top-60 search-box flex-center',
+      :class="['absolute left-1/2 -translate-x-1/2 top-48 search-box flex-center',
       showBackImg?'norm-search-box':'simple-search-box',
       isFocus?'focus-input':'']">
     <!--    更换搜索引擎-->
