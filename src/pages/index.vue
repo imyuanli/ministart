@@ -8,10 +8,10 @@
     <div class="cover"/>
     <NavBar/>
     <div class="main">
-      <div class="absolute left-1/2 -translate-x-1/2 w-full flex-center top-28 flex-col">
+      <div class="absolute left-1/2 -translate-x-1/2 w-full flex-center top-44 flex-col">
         <!--        有背景时间就变成白色-->
         <div
-            class="text-4xl font-semibold cursor-pointer hover:scale-125 duration-200 mb-6 mini-text-color">
+            class="text-4xl font-semibold cursor-pointer hover:scale-125 duration-200 mb-7 mini-text-color">
           11:22
         </div>
         <MySearch/>

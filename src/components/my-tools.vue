@@ -1,5 +1,5 @@
 <template>
-  <div class="absolute left-1/2 -translate-x-1/2 top-60 navboxCustom">
+  <div class="absolute left-1/2 -translate-x-1/2 top-80 navboxCustom">
     <div class="grid gap-2  md:gap-4 justify-items-center grid-cols-4 lg:grid-cols-9 md:grid-cols-7 sm:grid-cols-6">
       <div class="flex-center flex-col" @contextmenu.prevent="rightClick($event,items,index)">
         <div class="flex-center mb-1 customNav">
@@ -40,13 +40,13 @@
             <img class="edit-icon" src="https://www.jianfast.com/static/home/images/defaultsicon/null.png" alt="">
           </div>
           <div class="edit-btn-box">
-            <div class="edit-btn" @click="getUrlIcon">
+            <div class="edit-eng-btn" @click="getUrlIcon">
               智能
             </div>
-            <div class="edit-btn" @click="changeText">
+            <div class="edit-eng-btn" @click="changeText">
               文字
             </div>
-            <div class="edit-btn" @click="changeDefault">
+            <div class="edit-eng-btn" @click="changeDefault">
               默认
             </div>
           </div>
@@ -300,7 +300,7 @@ const dialogVisible = ref(false)
   align-items: center;
 }
 
-.edit-btn {
+.edit-eng-btn {
   font-size: 14px;
   color: #4d4d4d;
   width: 100%;

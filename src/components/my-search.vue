@@ -80,7 +80,7 @@ const handleSearch = () => {
 
 <style scoped>
 .search-box {
-  height: 43px;
+  height: 46px;
   max-width: 530px;
   width: 90%;
   border-radius: 30px;
