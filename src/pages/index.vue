@@ -1,38 +1,54 @@
 <template>
   <div class="relative w-full h-screen min-h-screen">
-<!--    <img-->
-<!--        src="https://tva4.sinaimg.cn/large/0060lm7Tly1ftg6xc454vj31hc0u07wh.jpg"-->
-<!--        alt="背景"-->
-<!--        :class="['fixed top-0 left-0 object-cover -z-30 w-full h-full duration-100 opacity-0']"-->
-<!--    >-->
-    <div class="cover"/>
-    <NavBar/>
+    <img
+        src="https://tva4.sinaimg.cn/large/0060lm7Tly1ftg6xc454vj31hc0u07wh.jpg"
+        alt="背景"
+        :class="['fixed top-0 left-0 object-cover -z-30 w-full h-full duration-100 opacity-1']"
+        v-if="commonSetting.showBackImg"
+    >
+    <div
+        :class="['cover',commonSetting.showBackImg?'cover-bg':'cover-bg-color']"
+    />
+    <NavBar :commonSetting="commonSetting"/>
     <div class="main">
-      <div class="absolute left-1/2 -translate-x-1/2 w-full flex-center top-44 flex-col">
-        <!--        有背景时间就变成白色-->
+      <div v-if="commonSetting.showTime">
         <div
-            class="text-4xl font-semibold cursor-pointer hover:scale-125 duration-200 mb-7 mini-text-color">
+            :class="['absolute left-1/2 -translate-x-1/2 top-44 text-4xl  font-semibold cursor-pointer hover:scale-125 duration-200',
+            getTextColor(commonSetting.showBackImg)]"
+        >
           11:22
         </div>
-        <MySearch/>
       </div>
+      <MySearch :showBackImg="commonSetting.showBackImg"/>
     </div>
-    <MyTools/>
-    <MyFooter/>
+    <!--    工具-->
+    <div v-if="commonSetting.showShortcut">
+      <MyTools  :showBackImg="commonSetting.showBackImg"/>
+    </div>
+    <div v-if="commonSetting.showFooter">
+      <MyFooter :textColor="getTextColor(commonSetting.showBackImg)"/>
+    </div>
   </div>
 </template>
 
 <script setup>
-import {ref} from "vue";
+import {reactive, ref} from "vue";
 import MySearch from '../components/my-search.vue'
 import MyTools from '../components/my-tools.vue'
 import NavBar from '../components/nav-bar.vue'
 import MyFooter from "../components/my-footer.vue";
+import {getTextColor} from '../utils/index.js'
 //输入框的值
 const inputValue = ref(null)
 
 //常规设置
-
+const commonSetting = reactive({
+  showTime: false,
+  showWord: false,
+  showShortcut: true,
+  showBackImg: true,
+  showFooter: false,
+})
 // 时间或日期
 const settingTime = {
   //显示时间
@@ -66,9 +82,15 @@ const settingWord = {
   top: 0;
   width: 100%;
   height: 100%;
-  background: #E7F0F7;
   transition: .25s;
-  /*background-image: radial-gradient(rgba(0, 0, 0, 0) 0, rgba(0, 0, 0, .5) 100%), radial-gradient(rgba(0, 0, 0, 0) 33%, rgba(0, 0, 0, .3) 166%);*/
+}
+
+.cover-bg-color {
+  background: #E7F0F7;
+}
+
+.cover-bg {
+  background-image: radial-gradient(rgba(0, 0, 0, 0) 0, rgba(0, 0, 0, .5) 100%), radial-gradient(rgba(0, 0, 0, 0) 33%, rgba(0, 0, 0, .3) 166%);
 }
 
 .main {
