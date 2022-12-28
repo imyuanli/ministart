@@ -25,9 +25,9 @@
     <div v-if="commonSetting.showShortcut">
       <Shortcut :showBackImg="commonSetting.showBackImg"/>
     </div>
-    <!--    <div v-if="commonSetting.showFooter">-->
-    <!--      <MyFooter :textColor="getTextColor(commonSetting.showBackImg)"/>-->
-    <!--    </div>-->
+    <div v-if="commonSetting.showFooter">
+      <MyFooter :textColor="getTextColor(commonSetting.showBackImg)"/>
+    </div>
   </div>
 </template>
 
