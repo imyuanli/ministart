@@ -1,5 +1,5 @@
 <template>
-  <div class="ml-3 w-full">
+  <div class="ml-6 w-full">
     <input
         v-model="inputValue"
         maxlength="8"

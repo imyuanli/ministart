@@ -1,66 +1,46 @@
 <template>
   <div class="absolute top-6 right-6 flex-center">
-    <el-tooltip
-        class="box-item"
-        effect="dark"
-        content="用户"
-        placement="top-end"
+    <el-popover
+        placement="bottom-start"
+        trigger="click"
+        style="max-width: calc(100% - 20px)"
         :hide-after="50"
     >
-      <div class="flex-center">
-        <el-popover
-            placement="bottom-start"
-            trigger="click"
-            style="max-width: calc(100% - 20px)"
-            :hide-after="50"
-        >
-          <template #reference>
-            <el-icon class="btn-icon mr-3 mini-text-color">
-              <User/>
-            </el-icon>
-          </template>
-          <div>
-            <div class="lip-btn" @click="centerDialogVisible = true">
-              <span class="block text-lg primary-color truncate overflow-ellipsis mb-1">鸢离鸢离鸢离鸢离鸢离鸢离</span>
-              <span>账号管理</span>
-            </div>
-            <div class="lip-btn">退出登录</div>
-          </div>
-        </el-popover>
+      <template #reference>
+        <el-icon class="btn-icon mr-3 mini-text-color">
+          <User/>
+        </el-icon>
+      </template>
+      <div>
+        <div class="lip-btn" @click="centerDialogVisible = true">
+          <span class="block text-lg primary-color truncate overflow-ellipsis mb-1">鸢离鸢离鸢离鸢离鸢离鸢离</span>
+          <span>账号管理</span>
+        </div>
+        <div class="lip-btn">退出登录</div>
       </div>
-    </el-tooltip>
-    <el-tooltip
-        class="box-item"
-        effect="dark"
-        content="设置"
-        placement="top-end"
+    </el-popover>
+    <el-popover
+        placement="bottom-start"
+        trigger="click"
+        style="max-width: calc(100% - 20px)"
         :hide-after="50"
     >
-      <div class="flex-center">
-        <el-popover
-            placement="bottom-start"
-            trigger="click"
-            style="max-width: calc(100% - 20px)"
-            :hide-after="50"
-        >
-          <template #reference>
-            <el-icon class="btn-icon hover:rotate-180 duration-200 mini-text-color">
-              <Setting/>
-            </el-icon>
-          </template>
-          <div>
-            <div class="lip-btn">常规设置</div>
-            <div class="lip-btn">壁纸设置</div>
-            <div class="lip-btn">搜索引擎设置</div>
-            <el-divider style="margin: 5px"/>
-            <div class="lip-btn">捐助</div>
-            <div class="lip-btn">帮助和反馈</div>
-            <el-divider style="margin: 5px"/>
-            <div class="lip-btn">设为主页</div>
-          </div>
-        </el-popover>
+      <template #reference>
+        <el-icon class="btn-icon hover:rotate-180 duration-200 mini-text-color">
+          <Setting/>
+        </el-icon>
+      </template>
+      <div>
+        <div class="lip-btn">常规设置</div>
+        <div class="lip-btn">壁纸设置</div>
+        <div class="lip-btn">搜索引擎设置</div>
+        <el-divider style="margin: 5px"/>
+        <div class="lip-btn">捐助</div>
+        <div class="lip-btn">帮助和反馈</div>
+        <el-divider style="margin: 5px"/>
+        <div class="lip-btn">设为主页</div>
       </div>
-    </el-tooltip>
+    </el-popover>
   </div>
   <div class="dialog-box">
     <el-dialog
@@ -77,14 +57,10 @@
       <div class="bg-white rounded-lg px-6 py-3">
         <div v-for="(item,index) in info" :key="index" class="flex justify-between py-3">
           <div class="flex-center">
-            <div class="info-text-color mr-9">{{ item.name }}</div>
-            <div v-show="index !== currentIndex" class="text-black">{{ item.value }}</div>
+            <div class="info-text-color">{{ item.name }}</div>
+            <div v-show="index !== currentIndex" class="text-black ml-6">{{ item.value }}</div>
             <div v-show="index == currentIndex">
-              <input
-                  v-model="inputValue"
-                  maxlength="8"
-                  class="my-input"
-              />
+              <MyInput/>
             </div>
           </div>
           <div class="flex-center">
@@ -118,6 +94,7 @@
 </template>
 <script setup>
 import {ref} from 'vue'
+import MyInput from "./my-input.vue";
 //对话框
 const centerDialogVisible = ref(false)
 const info = [

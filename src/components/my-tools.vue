@@ -1,6 +1,70 @@
 <template>
   <div class="absolute left-1/2 -translate-x-1/2 top-80 navboxCustom">
-    <div class="grid gap-2  md:gap-4 justify-items-center grid-cols-4 lg:grid-cols-9 md:grid-cols-7 sm:grid-cols-6">
+    <div class="grid gap-2  md:gap-4 justify-items-center grid-cols-5 lg:grid-cols-9 md:grid-cols-7 sm:grid-cols-6">
+      <div class="flex-center flex-col" @contextmenu.prevent="rightClick($event,items,index)">
+        <div class="flex-center mb-1 customNav">
+          <el-icon class="icon-plus" style="">
+            <Plus/>
+          </el-icon>
+        </div>
+        <div class="text-black text-center text-base overflow-ellipsis truncate w-1/2 mini-text-color">翻译</div>
+      </div>
+      <div class="flex-center flex-col" @contextmenu.prevent="rightClick($event,items,index)">
+        <div class="flex-center mb-1 customNav">
+          <el-icon class="icon-plus" style="">
+            <Plus/>
+          </el-icon>
+        </div>
+        <div class="text-black text-center text-base overflow-ellipsis truncate w-1/2 mini-text-color">翻译</div>
+      </div>
+      <div class="flex-center flex-col" @contextmenu.prevent="rightClick($event,items,index)">
+        <div class="flex-center mb-1 customNav">
+          <el-icon class="icon-plus" style="">
+            <Plus/>
+          </el-icon>
+        </div>
+        <div class="text-black text-center text-base overflow-ellipsis truncate w-1/2 mini-text-color">翻译</div>
+      </div>
+      <div class="flex-center flex-col" @contextmenu.prevent="rightClick($event,items,index)">
+        <div class="flex-center mb-1 customNav">
+          <el-icon class="icon-plus" style="">
+            <Plus/>
+          </el-icon>
+        </div>
+        <div class="text-black text-center text-base overflow-ellipsis truncate w-1/2 mini-text-color">翻译</div>
+      </div>
+      <div class="flex-center flex-col" @contextmenu.prevent="rightClick($event,items,index)">
+        <div class="flex-center mb-1 customNav">
+          <el-icon class="icon-plus" style="">
+            <Plus/>
+          </el-icon>
+        </div>
+        <div class="text-black text-center text-base overflow-ellipsis truncate w-1/2 mini-text-color">翻译</div>
+      </div>
+      <div class="flex-center flex-col" @contextmenu.prevent="rightClick($event,items,index)">
+        <div class="flex-center mb-1 customNav">
+          <el-icon class="icon-plus" style="">
+            <Plus/>
+          </el-icon>
+        </div>
+        <div class="text-black text-center text-base overflow-ellipsis truncate w-1/2 mini-text-color">翻译</div>
+      </div>
+      <div class="flex-center flex-col" @contextmenu.prevent="rightClick($event,items,index)">
+        <div class="flex-center mb-1 customNav">
+          <el-icon class="icon-plus" style="">
+            <Plus/>
+          </el-icon>
+        </div>
+        <div class="text-black text-center text-base overflow-ellipsis truncate w-1/2 mini-text-color">翻译</div>
+      </div>
+      <div class="flex-center flex-col" @contextmenu.prevent="rightClick($event,items,index)">
+        <div class="flex-center mb-1 customNav">
+          <el-icon class="icon-plus" style="">
+            <Plus/>
+          </el-icon>
+        </div>
+        <div class="text-black text-center text-base overflow-ellipsis truncate w-1/2 mini-text-color">翻译</div>
+      </div>
       <div class="flex-center flex-col" @contextmenu.prevent="rightClick($event,items,index)">
         <div class="flex-center mb-1 customNav">
           <el-icon class="icon-plus" style="">
