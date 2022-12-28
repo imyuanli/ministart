@@ -2,79 +2,18 @@
   <div class="absolute left-1/2 -translate-x-1/2 top-80 navboxCustom">
     <div class="grid gap-2  md:gap-4 justify-items-center grid-cols-5 lg:grid-cols-9 md:grid-cols-7 sm:grid-cols-6">
       <div class="flex-center flex-col" @contextmenu.prevent="rightClick($event,items,index)">
-        <div class="flex-center mb-1 customNav">
+        <div :class="['flex-center mb-1 customNav',showBackImg?'blur-customNav':'mini-customNav']">
           <el-icon class="icon-plus" style="">
             <Plus/>
           </el-icon>
         </div>
-        <div class="text-black text-center text-base overflow-ellipsis truncate w-1/2 mini-text-color">翻译</div>
-      </div>
-      <div class="flex-center flex-col" @contextmenu.prevent="rightClick($event,items,index)">
-        <div class="flex-center mb-1 customNav">
-          <el-icon class="icon-plus" style="">
-            <Plus/>
-          </el-icon>
+        <div :class="['text-black text-center text-sm overflow-ellipsis truncate w-1/2',getTextColor(showBackImg)]">
+          翻译
         </div>
-        <div class="text-black text-center text-base overflow-ellipsis truncate w-1/2 mini-text-color">翻译</div>
       </div>
-      <div class="flex-center flex-col" @contextmenu.prevent="rightClick($event,items,index)">
-        <div class="flex-center mb-1 customNav">
-          <el-icon class="icon-plus" style="">
-            <Plus/>
-          </el-icon>
-        </div>
-        <div class="text-black text-center text-base overflow-ellipsis truncate w-1/2 mini-text-color">翻译</div>
-      </div>
-      <div class="flex-center flex-col" @contextmenu.prevent="rightClick($event,items,index)">
-        <div class="flex-center mb-1 customNav">
-          <el-icon class="icon-plus" style="">
-            <Plus/>
-          </el-icon>
-        </div>
-        <div class="text-black text-center text-base overflow-ellipsis truncate w-1/2 mini-text-color">翻译</div>
-      </div>
-      <div class="flex-center flex-col" @contextmenu.prevent="rightClick($event,items,index)">
-        <div class="flex-center mb-1 customNav">
-          <el-icon class="icon-plus" style="">
-            <Plus/>
-          </el-icon>
-        </div>
-        <div class="text-black text-center text-base overflow-ellipsis truncate w-1/2 mini-text-color">翻译</div>
-      </div>
-      <div class="flex-center flex-col" @contextmenu.prevent="rightClick($event,items,index)">
-        <div class="flex-center mb-1 customNav">
-          <el-icon class="icon-plus" style="">
-            <Plus/>
-          </el-icon>
-        </div>
-        <div class="text-black text-center text-base overflow-ellipsis truncate w-1/2 mini-text-color">翻译</div>
-      </div>
-      <div class="flex-center flex-col" @contextmenu.prevent="rightClick($event,items,index)">
-        <div class="flex-center mb-1 customNav">
-          <el-icon class="icon-plus" style="">
-            <Plus/>
-          </el-icon>
-        </div>
-        <div class="text-black text-center text-base overflow-ellipsis truncate w-1/2 mini-text-color">翻译</div>
-      </div>
-      <div class="flex-center flex-col" @contextmenu.prevent="rightClick($event,items,index)">
-        <div class="flex-center mb-1 customNav">
-          <el-icon class="icon-plus" style="">
-            <Plus/>
-          </el-icon>
-        </div>
-        <div class="text-black text-center text-base overflow-ellipsis truncate w-1/2 mini-text-color">翻译</div>
-      </div>
-      <div class="flex-center flex-col" @contextmenu.prevent="rightClick($event,items,index)">
-        <div class="flex-center mb-1 customNav">
-          <el-icon class="icon-plus" style="">
-            <Plus/>
-          </el-icon>
-        </div>
-        <div class="text-black text-center text-base overflow-ellipsis truncate w-1/2 mini-text-color">翻译</div>
-      </div>
-      <div class="flex-center customNav" @click="dialogVisible = true">
-        <el-icon class="icon-plus" style="">
+      <div :class="['flex-center customNav',showBackImg?'blur-customNav':'mini-customNav']"
+           @click="dialogVisible = true">
+        <el-icon class="icon-plus">
           <Plus/>
         </el-icon>
       </div>
@@ -141,7 +80,11 @@
 <script setup>
 import {ref, watch} from "vue";
 import MyInput from '../components/my-input.vue'
+import {getTextColor} from '../utils/index.js'
 
+const props = defineProps({
+  showBackImg: Boolean
+})
 
 const shortcuts_list = [
   {
@@ -214,6 +157,23 @@ const dialogVisible = ref(false)
   transition: background-color .35s;
 }
 
+.mini-customNav {
+  background-color: #fff;
+}
+
+.mini-customNav:hover {
+  background: rgba(0, 0, 0, .1);
+}
+
+.blur-customNav {
+  background-color: rgba(255, 255, 255, .5);
+  backdrop-filter: blur(40px) saturate(1.5) !important;
+}
+
+.blur-customNav:hover {
+  background-color: rgb(215, 215, 215);
+}
+
 /*屏幕小于768的时候*/
 @media (max-width: 640px) {
   .customNav {
@@ -225,10 +185,6 @@ const dialogVisible = ref(false)
 .icon-plus {
   color: rgba(0, 0, 0, .5);
   font-size: 32px;
-}
-
-.customNav:hover {
-  background: rgba(0, 0, 0, .1);
 }
 
 .contextmenu {

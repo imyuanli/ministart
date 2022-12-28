@@ -1,7 +1,10 @@
 <template>
   <div
       :class="['absolute left-1/2 -translate-x-1/2 top-60 search-box flex-center',
-      showBackImg?'blur-search-box':'mini-search-box']">
+      showBackImg?'blur-search-box':'mini-search-box',
+      isFocus?'focus-input':''
+      ]
+">
     <!--    更换搜索引擎-->
     <el-popover
         placement="bottom"
@@ -30,7 +33,7 @@
         placeholder="搜索"
     />
     <div @click="handleSearch" class="search-btn right-2">
-      <el-icon class="blur-text-color" style="font-size: 18px">
+      <el-icon class="primary-color" style="font-size: 18px">
         <Search/>
       </el-icon>
     </div>
@@ -42,7 +45,9 @@ import {ref, watch} from "vue";
 import {getTextColor} from '../utils/index.js'
 
 const props = defineProps({
-  showBackImg: Boolean
+  showBackImg: Boolean,
+  isFocus: Boolean,
+  handleClickOpen: Function,
 })
 //popver
 const popoverVisible = ref(false)
@@ -124,7 +129,7 @@ const handleSearch = () => {
   align-items: center;
   justify-content: center;
   position: relative;
-  width: 45px;
+  min-width: 40px;
   height: 40px;
   border-radius: 50%;
   cursor: pointer;
@@ -163,4 +168,8 @@ const handleSearch = () => {
   margin-right: 6px;
 }
 
+.focus-input {
+  color: black;
+  background-color: rgba(255, 255, 255, .9);
+}
 </style>

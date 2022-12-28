@@ -69,11 +69,11 @@ body {
 
 /*精装*/
 .blur-text-color {
-    color: #fff !important;
+    color: rgba(255, 255, 255, .9) !important;
 }
 
 .primary-color {
-    color: #409eff!important;
+    color: #409eff !important;
 }
 
 .info-text-color {

@@ -1,5 +1,5 @@
 <template>
-  <div class="relative w-full h-screen min-h-screen">
+  <div class="relative w-full h-screen min-h-screen" @click.self="handleClickClose">
     <img
         src="https://tva4.sinaimg.cn/large/0060lm7Tly1ftg6xc454vj31hc0u07wh.jpg"
         alt="背景"
@@ -10,7 +10,7 @@
         :class="['cover',commonSetting.showBackImg?'cover-bg':'cover-bg-color']"
     />
     <NavBar :commonSetting="commonSetting"/>
-    <div class="main">
+    <div class="main" @click.self="handleClickClose">
       <div v-if="commonSetting.showTime">
         <div
             :class="['absolute left-1/2 -translate-x-1/2 top-44 text-4xl  font-semibold cursor-pointer hover:scale-125 duration-200',
@@ -19,11 +19,15 @@
           11:22
         </div>
       </div>
-      <MySearch :showBackImg="commonSetting.showBackImg"/>
+      <MySearch
+          :showBackImg="commonSetting.showBackImg"
+          :isFocus="isFocus"
+          :handleClickOpen="handleClickOpen"
+      />
     </div>
     <!--    工具-->
     <div v-if="commonSetting.showShortcut">
-      <MyTools  :showBackImg="commonSetting.showBackImg"/>
+      <MyTools :showBackImg="commonSetting.showBackImg"/>
     </div>
     <div v-if="commonSetting.showFooter">
       <MyFooter :textColor="getTextColor(commonSetting.showBackImg)"/>
@@ -38,8 +42,14 @@ import MyTools from '../components/my-tools.vue'
 import NavBar from '../components/nav-bar.vue'
 import MyFooter from "../components/my-footer.vue";
 import {getTextColor} from '../utils/index.js'
-//输入框的值
-const inputValue = ref(null)
+//输入框聚焦
+const isFocus = ref(false)
+const handleClickOpen = () => {
+  isFocus.value = true
+}
+const handleClickClose = () => {
+  isFocus.value = false
+}
 
 //常规设置
 const commonSetting = reactive({
@@ -49,28 +59,6 @@ const commonSetting = reactive({
   showBackImg: true,
   showFooter: false,
 })
-// 时间或日期
-const settingTime = {
-  //显示时间
-  showTime: false,
-  //年月日
-  showDate: false,
-  //农历
-  showLunarCalendar: false,
-  //周
-  showWeek: false,
-  //秒
-  showSecond: false,
-}
-
-//一言
-const settingWord = {
-  showWord: false,
-  showAuthor: false,
-  showSource: false,
-}
-
-//主题
 </script>
 
 <style scoped>
