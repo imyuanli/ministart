@@ -98,9 +98,14 @@
     <template #content>
       <div class="bg-white rounded-lg px-6 py-3">
         <div v-for="(item,index) in Object.keys(commonSetting)" :key="index" class="flex justify-between py-3">
-          <div>
-            {{ commonSettingText[item] }}
-          </div>
+         <div>
+           <div class="text-base text-black">
+             {{ commonSettingText[item].text }}
+           </div>
+           <div class="text-xs text-gray-400">
+             {{ commonSettingText[item]?.tips }}
+           </div>
+         </div>
           <div>
             <el-switch v-model="commonSetting[item]"/>
           </div>
@@ -211,6 +216,10 @@ const commonSettingText = reactive({
   showFooter: {
     text: "是否显示footer",
     tips: ''
+  },
+  showBlackBlur: {
+    text: "是否显示暗角滤镜",
+    tips: '该功能仅在拥有背景图后生效'
   },
 })
 watch(props, (newData, oldData) => {

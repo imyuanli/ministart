@@ -6,9 +6,7 @@
         :class="['fixed top-0 left-0 object-cover -z-30 w-full h-full duration-100 opacity-1',isFocus ? 'scale-110 blur':'']"
         v-if="commonSetting.showBackImg"
     >
-    <div
-        :class="['cover',commonSetting.showBackImg?'cover-bg':'cover-bg-color']"
-    />
+    <div :class="['cover',commonSetting.showBackImg?`${commonSetting.showBlackBlur?'cover-bg':''}`:'cover-bg-color']"/>
     <NavBar :commonSetting="commonSetting"/>
     <div class="main" @click.self="handleClickClose">
       <div v-if="commonSetting.showTime">
@@ -58,6 +56,7 @@ const commonSetting = reactive({
   showShortcut: true,
   showBackImg: true,
   showFooter: false,
+  showBlackBlur: true,
 })
 </script>
 
