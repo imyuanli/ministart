@@ -1,7 +1,7 @@
 <template>
   <div
       :class="['absolute left-1/2 -translate-x-1/2 top-48 search-box flex-center',
-      showBackImg?'norm-search-box':'simple-search-box',
+      isNormModel?'norm-search-box':'simple-search-box',
       isFocus?'focus-input':'']">
     <!--    更换搜索引擎-->
     <el-popover
@@ -42,6 +42,7 @@
 import {getTextColor} from '../utils/index.js'
 
 defineProps({
+  isNormModel: Boolean,
   showBackImg: Boolean,
   isFocus: Boolean,
   handleClickOpen: Function,

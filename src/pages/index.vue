@@ -3,10 +3,17 @@
     <img
         src="https://tva4.sinaimg.cn/large/0060lm7Tly1ftg6xc454vj31hc0u07wh.jpg"
         alt="背景"
-        :class="['fixed top-0 left-0 object-cover -z-30 w-full h-full duration-100 opacity-1',isFocus ? 'scale-110 blur':'']"
-        v-if="commonSetting.showBackImg"
+        class="fixed top-0 left-0 object-cover -z-30 w-full h-full duration-100 opacity-1 scale-105"
+        :class="[commonSetting.isNormModel && isFocus && 'scale-125 blur']"
+        v-if="commonSetting.isNormModel || commonSetting.showBackImg"
     >
-    <div :class="['cover',commonSetting.showBackImg?`${commonSetting.showBlackBlur?'cover-bg':''}`:'cover-bg-color']"/>
+    <!--标准模式才启动遮罩-->
+    <div
+        :class="['cover',commonSetting.isNormModel?
+          `${commonSetting.showBlackBlur &&'cover-bg'}`
+          :
+          `${!commonSetting.showBackImg && 'cover-bg-color'}`]"
+    />
     <Header :commonSetting="commonSetting"/>
     <div class="main" @click.self="handleClickClose">
       <div v-if="commonSetting.showTime">
@@ -17,13 +24,17 @@
         </div>
       </div>
       <MySearch
+          :isNormModel="commonSetting.isNormModel"
           :showBackImg="commonSetting.showBackImg"
           :isFocus="isFocus"
           :handleClickOpen="handleClickOpen"
       />
     </div>
     <div v-if="commonSetting.showShortcut">
-      <Shortcut :showBackImg="commonSetting.showBackImg"/>
+      <Shortcut
+          :isNormModel="commonSetting.isNormModel"
+          :showBackImg="commonSetting.showBackImg"
+      />
     </div>
     <div v-if="commonSetting.showFooter">
       <MyFooter :textColor="getTextColor(commonSetting.showBackImg)"/>
@@ -50,13 +61,13 @@ const handleClickClose = () => {
 
 //常规设置
 const commonSetting = reactive({
-  isSimpleStyle: true,
+  isNormModel: false,
   showTime: true,
   showWord: false,
   showShortcut: true,
-  showBackImg: true,
+  showBackImg: false,
   showFooter: false,
-  showBlackBlur: true,
+  showBlackBlur: false,
 })
 </script>
 

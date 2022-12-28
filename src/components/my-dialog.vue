@@ -6,9 +6,10 @@
         align-center
         class="rounded-lg"
         @close="handleChang"
+
     >
       <template #header="{ close, titleId, titleClass }">
-        <div class="text-2xl text-black font-semibold truncate overflow-ellipsis  flex-center">
+        <div class="text-xl text-black font-semibold truncate overflow-ellipsis  flex-center">
           <slot name="title"></slot>
         </div>
       </template>

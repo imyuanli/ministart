@@ -7,7 +7,7 @@
         :hide-after="50"
     >
       <template #reference>
-        <el-icon :class="['nav-bar mr-3',getTextColor(commonSetting.showBackImg)]">
+        <el-icon :class="['nav-bar mr-3',getTextColor(commonSetting['showBackImg'])]">
           <User/>
         </el-icon>
       </template>
@@ -26,7 +26,7 @@
         :hide-after="50"
     >
       <template #reference>
-        <el-icon :class="['nav-bar hover:rotate-180 duration-200',getTextColor(commonSetting.showBackImg)]">
+        <el-icon :class="['nav-bar hover:rotate-180 duration-200',getTextColor(commonSetting['showBackImg'])]">
           <Setting/>
         </el-icon>
       </template>
@@ -100,7 +100,7 @@
       <div class="bg-white rounded-lg px-6 py-3">
         <div v-for="(item,index) in Object.keys(commonSetting)" :key="index" class="flex justify-between py-3">
           <div>
-            <div class="text-base text-black">
+            <div class="text-md text-black">
               {{ commonSettingText[item].text }}
             </div>
             <div class="text-xs text-gray-400">
@@ -108,7 +108,7 @@
             </div>
           </div>
           <div>
-            <el-switch v-model="commonSetting[item]"/>
+            <el-switch  v-model="commonSetting[item]" @change="handleChangeSwitch(item)"/>
           </div>
         </div>
       </div>
@@ -145,7 +145,7 @@ import MyInput from "./my-input.vue";
 import MyDialog from "./my-dialog.vue";
 import {getTextColor} from '../utils/index.js'
 
-//
+
 const props = defineProps({
   commonSetting: Object
 })
@@ -198,9 +198,9 @@ const commonDialogVisible = ref(false)
 const handleCommonChange = () => commonDialogVisible.value = false
 
 const commonSettingText = reactive({
-  isSimpleStyle: {
-    text: "极简模式",
-    tips: '默认是极简模式，点击切换到标准模式'
+  isNormModel: {
+    text: "标准模式",
+    tips: '默认显示极简模式，点击切换到标准模式，默认模式将自动打开图片'
   },
   showTime: {
     text: "是否显示时间",
@@ -216,7 +216,7 @@ const commonSettingText = reactive({
   },
   showBackImg: {
     text: "是否显示背景图片",
-    tips: '显示图片后将变成滤镜模式'
+    tips: '显示图片后可对图片单独设置'
   },
   showFooter: {
     text: "是否显示footer",
@@ -224,13 +224,15 @@ const commonSettingText = reactive({
   },
   showBlackBlur: {
     text: "是否显示暗角滤镜",
-    tips: '该功能仅在拥有背景图后生效'
+    tips: '该功能仅在标准模式生效'
   },
 })
-watch(props, (newData, oldData) => {
-  console.log(newData)
-})
+const handleChangeSwitch=(item)=>{
+  //普通模式下
+  if(item =="isNormalModel"){
 
+  }
+}
 //壁纸弹窗
 const pictureDialogVisible = ref(false)
 const handlePictureChange = () => pictureDialogVisible.value = false

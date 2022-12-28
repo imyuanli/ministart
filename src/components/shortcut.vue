@@ -2,7 +2,7 @@
   <div class="absolute left-1/2 -translate-x-1/2 top-64 tool-box">
     <div class="grid gap-2 md:gap-4 justify-items-center grid-cols-5 lg:grid-cols-9 md:grid-cols-7 sm:grid-cols-6">
       <div class="flex-center flex-col" @contextmenu.prevent="rightClick($event,items,index)">
-        <div :class="['flex-center mb-1 customNav',showBackImg?'norm-customNav':'simple-customNav']">
+        <div :class="['flex-center mb-1 customNav',isNormModel?'norm-customNav':'simple-customNav']">
           <el-icon class="icon-plus" style="">
             <Plus/>
           </el-icon>
@@ -11,7 +11,7 @@
           翻译
         </div>
       </div>
-      <div :class="['flex-center customNav',showBackImg?'norm-customNav':'simple-customNav']"
+      <div :class="['flex-center customNav',isNormModel?'norm-customNav':'simple-customNav']"
            @click="editDialogVisible = true">
         <el-icon class="icon-plus">
           <Plus/>
@@ -83,7 +83,8 @@ import MyDialog from '../components/my-dialog.vue'
 import {getTextColor} from '../utils/index.js'
 
 defineProps({
-  showBackImg: Boolean
+  isNormModel: Boolean,
+  showBackImg: Boolean,
 })
 
 const editDialogVisible = ref(false)
@@ -147,7 +148,7 @@ const dialogVisible = ref(false)
 }
 
 .simple-customNav:hover {
-  background: rgba(0, 0, 0, .1);
+  background: #dadada;
 }
 
 .norm-customNav {
