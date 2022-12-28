@@ -3,7 +3,7 @@
     <img
         src="https://tva4.sinaimg.cn/large/0060lm7Tly1ftg6xc454vj31hc0u07wh.jpg"
         alt="背景"
-        :class="['fixed top-0 left-0 object-cover -z-30 w-full h-full duration-100 opacity-1']"
+        :class="['fixed top-0 left-0 object-cover -z-30 w-full h-full duration-100 opacity-1',isFocus ? 'scale-110 blur':'']"
         v-if="commonSetting.showBackImg"
     >
     <div
