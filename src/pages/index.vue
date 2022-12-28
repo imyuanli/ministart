@@ -16,11 +16,11 @@
           {{ dayjs(new Date()).format("HH:mm") }}
         </div>
       </div>
-      <!--      <MySearch-->
-      <!--          :showBackImg="commonSetting.showBackImg"-->
-      <!--          :isFocus="isFocus"-->
-      <!--          :handleClickOpen="handleClickOpen"-->
-      <!--      />-->
+      <MySearch
+          :showBackImg="commonSetting.showBackImg"
+          :isFocus="isFocus"
+          :handleClickOpen="handleClickOpen"
+      />
     </div>
     <!--    &lt;!&ndash;    工具&ndash;&gt;-->
     <!--    <div v-if="commonSetting.showShortcut">-->

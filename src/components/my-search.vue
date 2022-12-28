@@ -1,10 +1,8 @@
 <template>
   <div
       :class="['absolute left-1/2 -translate-x-1/2 top-60 search-box flex-center',
-      showBackImg?'blur-search-box':'mini-search-box',
-      isFocus?'focus-input':''
-      ]
-">
+      showBackImg?'norm-search-box':'simple-search-box',
+      isFocus?'focus-input':'']">
     <!--    更换搜索引擎-->
     <el-popover
         placement="bottom"
@@ -32,7 +30,7 @@
         @click="handleClickOpen"
         placeholder="搜索"
     />
-    <div @click="handleSearch" class="search-btn right-2">
+    <div class="search-btn right-2">
       <el-icon class="primary-color" style="font-size: 18px">
         <Search/>
       </el-icon>
@@ -41,16 +39,14 @@
 </template>
 
 <script setup>
-import {ref, watch} from "vue";
 import {getTextColor} from '../utils/index.js'
 
-const props = defineProps({
+defineProps({
   showBackImg: Boolean,
   isFocus: Boolean,
   handleClickOpen: Function,
 })
-//popver
-const popoverVisible = ref(false)
+
 //选中的searchEngines
 const currentIndex = 0
 const searchEngines = [
@@ -80,14 +76,6 @@ const searchEngines = [
     icon: 'https://www.sogou.com/images/logo/new/favicon.ico'
   },
 ]
-
-//搜索
-const handleSearch = () => {
-  let value = ""
-  value = this.inputValue.replaceAll('&', '%26')
-  value = this.inputValue.replaceAll('#', '%23')
-  window.location.href = this.selectTarget + value
-}
 </script>
 
 <style scoped>
@@ -100,12 +88,12 @@ const handleSearch = () => {
   transition: 300ms;
 }
 
-.mini-search-box {
+.simple-search-box {
   background: #fff;
   box-shadow: 0 2px 4px rgb(0 0 0 / 30%);
 }
 
-.blur-search-box {
+.norm-search-box {
   -webkit-backdrop-filter: blur(10px) saturate(1.5);
   backdrop-filter: blur(10px) saturate(1.5);
   box-shadow: rgb(0 0 0 / 20%) 0 0 10px;
@@ -149,7 +137,6 @@ const handleSearch = () => {
 
 .menu-item {
   display: flex;
-
   padding: 10px 5px;
   border-radius: 5px;
   color: black;
