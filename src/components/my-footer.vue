@@ -1,6 +1,6 @@
 <template>
-  <div class="footer mini-text-color">
-    <div class="mb-1 text">
+  <div :class="['footer',textColor]">
+    <div class="mb-1">
       Copyright © 2022 鸢离
     </div>
     <div>
@@ -11,13 +11,16 @@
 </template>
 
 <script setup>
+const props = defineProps({
+  textColor: String
+})
 </script>
 
 <style scoped>
 .footer {
   display: inline-block;
   border-radius: 2px;
-  /*backdrop-filter: blur(10px);*/
+  backdrop-filter: blur(10px);
   animation: delayedFadeIn 1s;
   position: fixed;
   bottom: 10px;
@@ -26,12 +29,8 @@
   width: fit-content;
   font-size: 12px;
   text-align: center;
-  /*text-shadow: 0 0 20px rgb(0 0 0 / 80%);*/
+  text-shadow: 0 0 20px rgb(0 0 0 / 80%);
   white-space: nowrap;
   padding: 3px 10px;
 }
-
-/*.text:hover {*/
-/*  color: rgba(255, 255, 255, 1);*/
-/*}*/
 </style>

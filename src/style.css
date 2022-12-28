@@ -62,18 +62,20 @@ body {
     }
 }
 
+/*精简版*/
 .mini-text-color {
-    color: rgba(0, 0, 0, .7);
+    color: rgba(0, 0, 0, .7) !important;
 }
 
+/*精装*/
 .blur-text-color {
-    color: #fff;
+    color: #fff !important;
 }
 
 .primary-color {
-    color: #409eff;
+    color: #409eff!important;
 }
 
 .info-text-color {
-    color: rgba(0, 0, 0, .35);
+    color: rgba(0, 0, 0, .35) !important;
 }

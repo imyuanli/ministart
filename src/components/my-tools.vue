@@ -142,6 +142,7 @@
 import {ref, watch} from "vue";
 import MyInput from '../components/my-input.vue'
 
+
 const shortcuts_list = [
   {
     value: '选项1',

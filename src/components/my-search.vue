@@ -1,5 +1,7 @@
 <template>
-  <div :class="['search-box flex-center']">
+  <div
+      :class="['absolute left-1/2 -translate-x-1/2 top-60 search-box flex-center',
+      showBackImg?'blur-search-box':'mini-search-box']">
     <!--    更换搜索引擎-->
     <el-popover
         placement="bottom"
@@ -23,12 +25,12 @@
       </template>
     </el-popover>
     <input
-        class="input-box"
+        :class='["input-box",getTextColor(showBackImg)]'
         @click="handleClickOpen"
         placeholder="搜索"
     />
     <div @click="handleSearch" class="search-btn right-2">
-      <el-icon style="vertical-align: middle;font-size: 18px">
+      <el-icon class="blur-text-color" style="font-size: 18px">
         <Search/>
       </el-icon>
     </div>
@@ -37,6 +39,11 @@
 
 <script setup>
 import {ref, watch} from "vue";
+import {getTextColor} from '../utils/index.js'
+
+const props = defineProps({
+  showBackImg: Boolean
+})
 //popver
 const popoverVisible = ref(false)
 //选中的searchEngines
@@ -85,10 +92,21 @@ const handleSearch = () => {
   width: 90%;
   border-radius: 30px;
   overflow: hidden;
-  background: #fff;
-  box-shadow: 0 2px 4px rgb(0 0 0 / 30%);
   transition: 300ms;
 }
+
+.mini-search-box {
+  background: #fff;
+  box-shadow: 0 2px 4px rgb(0 0 0 / 30%);
+}
+
+.blur-search-box {
+  -webkit-backdrop-filter: blur(10px) saturate(1.5);
+  backdrop-filter: blur(10px) saturate(1.5);
+  box-shadow: rgb(0 0 0 / 20%) 0 0 10px;
+  background: rgba(255, 255, 255, .5);
+}
+
 
 .input-box {
   outline: 0;
