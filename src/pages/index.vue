@@ -8,39 +8,42 @@
     >
     <div :class="['cover',commonSetting.showBackImg?`${commonSetting.showBlackBlur?'cover-bg':''}`:'cover-bg-color']"/>
     <Header :commonSetting="commonSetting"/>
-<!--    <div class="main" @click.self="handleClickClose">-->
-<!--      <div v-if="commonSetting.showTime">-->
-<!--        <div-->
-<!--            :class="['absolute left-1/2 -translate-x-1/2 top-44 text-4xl  font-semibold cursor-pointer hover:scale-125 duration-200',-->
-<!--            getTextColor(commonSetting.showBackImg)]"-->
-<!--        >-->
-<!--          11:22-->
-<!--        </div>-->
-<!--      </div>-->
-<!--      <MySearch-->
-<!--          :showBackImg="commonSetting.showBackImg"-->
-<!--          :isFocus="isFocus"-->
-<!--          :handleClickOpen="handleClickOpen"-->
-<!--      />-->
-<!--    </div>-->
-<!--    &lt;!&ndash;    工具&ndash;&gt;-->
-<!--    <div v-if="commonSetting.showShortcut">-->
-<!--      <MyTools :showBackImg="commonSetting.showBackImg"/>-->
-<!--    </div>-->
-<!--    <div v-if="commonSetting.showFooter">-->
-<!--      <MyFooter :textColor="getTextColor(commonSetting.showBackImg)"/>-->
-<!--    </div>-->
+    <div class="main" @click.self="handleClickClose">
+      <div v-if="commonSetting.showTime">
+        <div :class="['absolute left-1/2 -translate-x-1/2 top-44 text-4xl  font-semibold cursor-pointer hover:scale-125 duration-200',
+            getTextColor(commonSetting.showBackImg)]"
+        >
+          {{ dayjs(new Date()).format("HH:mm") }}
+        </div>
+      </div>
+      <!--      <MySearch-->
+      <!--          :showBackImg="commonSetting.showBackImg"-->
+      <!--          :isFocus="isFocus"-->
+      <!--          :handleClickOpen="handleClickOpen"-->
+      <!--      />-->
+    </div>
+    <!--    &lt;!&ndash;    工具&ndash;&gt;-->
+    <!--    <div v-if="commonSetting.showShortcut">-->
+    <!--      <MyTools :showBackImg="commonSetting.showBackImg"/>-->
+    <!--    </div>-->
+    <!--    <div v-if="commonSetting.showFooter">-->
+    <!--      <MyFooter :textColor="getTextColor(commonSetting.showBackImg)"/>-->
+    <!--    </div>-->
   </div>
 </template>
 
 <script setup>
-import {reactive, ref} from "vue";
+import {reactive, ref, onMounted} from "vue";
 import Header from "../components/header.vue";
 import MySearch from '../components/my-search.vue'
 import MyTools from '../components/my-tools.vue'
 import NavBar from '../components/header.vue'
 import MyFooter from "../components/my-footer.vue";
 import {getTextColor} from '../utils/index.js'
+import dayjs from "dayjs"
+//时间
+
+
 //输入框聚焦
 const isFocus = ref(false)
 const handleClickOpen = () => {
@@ -52,8 +55,8 @@ const handleClickClose = () => {
 
 //常规设置
 const commonSetting = reactive({
-  isSimpleStyle:true,
-  showTime: false,
+  isSimpleStyle: true,
+  showTime: true,
   showWord: false,
   showShortcut: true,
   showBackImg: true,
