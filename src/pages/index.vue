@@ -1,44 +1,47 @@
 <template>
   <div class="relative w-full h-screen min-h-screen" @click.self="handleClickClose">
-    <img
-        src="https://tva4.sinaimg.cn/large/0060lm7Tly1ftg6xc454vj31hc0u07wh.jpg"
-        alt="背景"
-        class="fixed top-0 left-0 object-cover -z-30 w-full h-full duration-100 opacity-1 scale-105"
-        :class="[commonSetting.isNormModel && isFocus && 'scale-125 blur']"
-        v-if="commonSetting.isNormModel || commonSetting.showBackImg"
-    >
-    <!--标准模式才启动遮罩-->
+    <!--    <img-->
+    <!--        src="https://tva4.sinaimg.cn/large/0060lm7Tly1ftg6xc454vj31hc0u07wh.jpg"-->
+    <!--        alt="背景"-->
+    <!--        class="fixed top-0 left-0 object-cover -z-30 w-full h-full duration-100 opacity-1 scale-105"-->
+    <!--        :class="[commonSetting.isNormModel && isFocus && 'scale-125 blur']"-->
+    <!--        v-if="commonSetting.isNormModel || commonSetting.showBackImg"-->
+    <!--    >-->
     <div
-        :class="['cover',commonSetting.isNormModel?
-          `${commonSetting.showBlackBlur &&'cover-bg'}`
-          :
-          `${!commonSetting.showBackImg && 'cover-bg-color'}`]"
+        class="cover"
+        :class="getBackgroundColor(model)"
     />
-    <Header :commonSetting="commonSetting"/>
-    <div class="main" @click.self="handleClickClose">
-      <div v-if="commonSetting.showTime">
-        <div :class="['absolute left-1/2 -translate-x-1/2 top-32 text-4xl  font-semibold cursor-pointer hover:scale-125 duration-200',
-            getTextColor(commonSetting.showBackImg)]"
+    <!--    <Header :commonSetting="commonSetting"/>-->
+    <div class="main " @click.self="handleClickClose">
+      <el-select v-model="model" class="absolute left-0 top-0" placeholder="Select" size="large">
+        <el-option
+            v-for="item in options"
+            :key="item.value"
+            :label="item.label"
+            :value="item.value"
+        />
+      </el-select>
+      <div>
+        <div
+            class="absolute left-1/2 -translate-x-1/2 top-32 text-4xl  font-semibold cursor-pointer hover:scale-125 duration-200"
+            :class="getTextColor(model)"
         >
           {{ dayjs(new Date()).format("HH:mm") }}
         </div>
       </div>
       <MySearch
-          :isNormModel="commonSetting.isNormModel"
-          :showBackImg="commonSetting.showBackImg"
-          :isFocus="isFocus"
-          :handleClickOpen="handleClickOpen"
+          :model="model"
       />
     </div>
-    <div v-if="commonSetting.showShortcut">
-      <Shortcut
-          :isNormModel="commonSetting.isNormModel"
-          :showBackImg="commonSetting.showBackImg"
-      />
-    </div>
-    <div v-if="commonSetting.showFooter">
-      <MyFooter :textColor="getTextColor(commonSetting.showBackImg)"/>
-    </div>
+    <!--    <div v-if="commonSetting.showShortcut">-->
+    <!--      <Shortcut-->
+    <!--          :isNormModel="commonSetting.isNormModel"-->
+    <!--          :showBackImg="commonSetting.showBackImg"-->
+    <!--      />-->
+    <!--    </div>-->
+    <!--    <div v-if="commonSetting.showFooter">-->
+    <!--      <MyFooter :textColor="getTextColor(commonSetting.showBackImg)"/>-->
+    <!--    </div>-->
   </div>
 </template>
 
@@ -48,7 +51,7 @@ import Header from "../components/header.vue";
 import MySearch from '../components/my-search.vue'
 import Shortcut from '../components/shortcut.vue'
 import MyFooter from "../components/my-footer.vue";
-import {getTextColor} from '../utils/index.js'
+import {getTextColor, getBackgroundColor} from '../utils/index.js'
 import dayjs from "dayjs"
 //输入框聚焦
 const isFocus = ref(false)
@@ -59,16 +62,35 @@ const handleClickClose = () => {
   isFocus.value = false
 }
 
+const options = [
+  {
+    value: 'simple',
+    label: '极简模式',
+  },
+  {
+    value: 'normal',
+    label: '标准模式',
+  },
+  {
+    value: 'dark',
+    label: '暗黑模式',
+  },
+  // {
+  //   value: 'flow',
+  //   label: '流畅模式',
+  // }
+]
+const model = ref('simple')
 //常规设置
-const commonSetting = reactive({
-  isNormModel: false,
-  showTime: true,
-  showWord: false,
-  showShortcut: true,
-  showBackImg: false,
-  showFooter: false,
-  showBlackBlur: false,
-})
+// const commonSetting = reactive({
+//   model: '',
+//   // showTime: true,
+//   // showWord: false,
+//   // showShortcut: true,
+//   // showBackImg: false,
+//   // showFooter: false,
+//   // showBlackBlur: false,
+// })
 </script>
 
 <style scoped>
@@ -81,10 +103,6 @@ const commonSetting = reactive({
   width: 100%;
   height: 100%;
   transition: .25s;
-}
-
-.cover-bg-color {
-  background: #E7F0F7;
 }
 
 .cover-bg {

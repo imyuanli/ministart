@@ -1,4 +1,9 @@
-//极简模式和标准模式
-export const getTextColor = (haveImg) => {
-    return haveImg ? 'norm-text-color' : 'simple-text-color'
+//和文本有关的颜色
+export const getTextColor = (model) => {
+    return `${model}-text-color`
+}
+
+//和背景有关的颜色
+export const getBackgroundColor = (model) => {
+    return `${model}-background-color`
 }

@@ -1,23 +1,27 @@
 <template>
   <div
-      :class="['absolute left-1/2 -translate-x-1/2 top-48 search-box flex-center',
-      isNormModel?'norm-search-box':'simple-search-box',
-      isFocus?'focus-input':'']">
+      class="absolute left-1/2 -translate-x-1/2 top-48 search-box flex-center"
+      :class="[`${model}-search-bg`,]">
     <!--    更换搜索引擎-->
     <el-popover
         placement="bottom"
         trigger="click"
+        :effect="model=='dark'?'dark':'light'"
     >
-      <div class="menu-item" v-for="(item,index) in searchEngines" :key="index">
+      <div
+          class="menu-item"
+          :class='getTextColor(model)'
+          v-for="(item,index) in searchEngines" :key="index"
+      >
         <img class="menu-img" :src="item.icon" alt="">
         <span>{{ item.name }}</span>
       </div>
       <!--      新增搜索-->
       <div class="menu-item">
-        <el-icon style="vertical-align: middle;font-size: 16px">
+        <el-icon :class='getTextColor(model)' style="vertical-align: middle;font-size: 16px">
           <Setting/>
         </el-icon>
-        <span class="ml-1">设置搜索引擎</span>
+        <span class="ml-1" :class='getTextColor(model)'>设置搜索引擎</span>
       </div>
       <template #reference>
         <div class="search-btn left-2">
@@ -26,7 +30,8 @@
       </template>
     </el-popover>
     <input
-        :class='["input-box",getTextColor(showBackImg)]'
+        class="input-box"
+        :class='getTextColor(model)'
         @click="handleClickOpen"
         placeholder="搜索"
     />
@@ -39,13 +44,14 @@
 </template>
 
 <script setup>
-import {getTextColor} from '../utils/index.js'
+import {getTextColor,} from '../utils/index.js'
 
 defineProps({
-  isNormModel: Boolean,
-  showBackImg: Boolean,
-  isFocus: Boolean,
-  handleClickOpen: Function,
+  // isNormModel: Boolean,
+  // showBackImg: Boolean,
+  // isFocus: Boolean,
+  // handleClickOpen: Function,
+  model: String
 })
 
 //选中的searchEngines
@@ -87,20 +93,10 @@ const searchEngines = [
   border-radius: 30px;
   overflow: hidden;
   transition: 300ms;
-}
-
-.simple-search-box {
-  background: #fff;
-  box-shadow: 0 2px 4px rgb(0 0 0 / 30%);
-}
-
-.norm-search-box {
   -webkit-backdrop-filter: blur(10px) saturate(1.5);
   backdrop-filter: blur(10px) saturate(1.5);
   box-shadow: rgb(0 0 0 / 20%) 0 0 10px;
-  background: rgba(255, 255, 255, .5);
 }
-
 
 .input-box {
   outline: 0;
