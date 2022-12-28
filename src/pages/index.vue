@@ -32,17 +32,13 @@
 </template>
 
 <script setup>
-import {reactive, ref, onMounted} from "vue";
+import {reactive, ref} from "vue";
 import Header from "../components/header.vue";
 import MySearch from '../components/my-search.vue'
 import Shortcut from '../components/shortcut.vue'
-import NavBar from '../components/header.vue'
 import MyFooter from "../components/my-footer.vue";
 import {getTextColor} from '../utils/index.js'
 import dayjs from "dayjs"
-//时间
-
-
 //输入框聚焦
 const isFocus = ref(false)
 const handleClickOpen = () => {
