@@ -7,7 +7,7 @@
         :hide-after="50"
     >
       <template #reference>
-        <el-icon :class="['btn-icon mr-3',getTextColor(commonSetting.showBackImg)]">
+        <el-icon :class="['nav-bar mr-3',getTextColor(commonSetting.showBackImg)]">
           <User/>
         </el-icon>
       </template>
@@ -26,7 +26,7 @@
         :hide-after="50"
     >
       <template #reference>
-        <el-icon :class="['btn-icon hover:rotate-180 duration-200',getTextColor(commonSetting.showBackImg)]">
+        <el-icon :class="['nav-bar hover:rotate-180 duration-200',getTextColor(commonSetting.showBackImg)]">
           <Setting/>
         </el-icon>
       </template>
@@ -54,7 +54,7 @@
       <div class="bg-white rounded-lg px-6 py-3">
         <div v-for="(item,index) in info" :key="index" class="flex justify-between py-3">
           <div class="flex-center">
-            <div class="info-text-color">{{ item.name }}</div>
+            <div class="prefix-text-color">{{ item.name }}</div>
             <div v-show="index !== currentIndex" class="text-black ml-6">{{ item.value }}</div>
             <div v-show="index == currentIndex">
               <MyInput/>
@@ -62,14 +62,15 @@
           </div>
           <div class="flex-center">
             <div v-if="item.type == 'copy'">
-              <el-icon class="info-icon handle-icon">
+              <el-icon class="suffix-icon handle-icon">
                 <CopyDocument/>
               </el-icon>
             </div>
             <div v-else-if="item.type =='edit'">
-              <el-icon @click="handleChange(index,item.value)"
-                       class="info-icon handle-icon"
-                       v-show="index !== currentIndex"
+              <el-icon
+                  @click="handleChange(index,item.value)"
+                  class="suffix-icon handle-icon"
+                  v-show="index !== currentIndex"
               >
                 <Edit/>
               </el-icon>
@@ -78,7 +79,7 @@
               </div>
             </div>
             <div v-else>
-              <el-icon class="info-icon handle-icon">
+              <el-icon class="suffix-icon handle-icon">
                 <View/>
               </el-icon>
             </div>
@@ -98,14 +99,14 @@
     <template #content>
       <div class="bg-white rounded-lg px-6 py-3">
         <div v-for="(item,index) in Object.keys(commonSetting)" :key="index" class="flex justify-between py-3">
-         <div>
-           <div class="text-base text-black">
-             {{ commonSettingText[item].text }}
-           </div>
-           <div class="text-xs text-gray-400">
-             {{ commonSettingText[item]?.tips }}
-           </div>
-         </div>
+          <div>
+            <div class="text-base text-black">
+              {{ commonSettingText[item].text }}
+            </div>
+            <div class="text-xs text-gray-400">
+              {{ commonSettingText[item]?.tips }}
+            </div>
+          </div>
           <div>
             <el-switch v-model="commonSetting[item]"/>
           </div>
@@ -113,30 +114,30 @@
       </div>
     </template>
   </MyDialog>
-  <!-- 壁纸设置 -->
-  <MyDialog
-      :dialogVisible="pictureDialogVisible"
-      :handleChang="handlePictureChange"
-  >
-    <template #title>
-      壁纸设置
-    </template>
-    <template #content>
-      12312321
-    </template>
-  </MyDialog>
-  <!-- 搜索设置 -->
-  <MyDialog
-      :dialogVisible="searchDialogVisible"
-      :handleChang="handleSearchChange"
-  >
-    <template #title>
-      搜索设置
-    </template>
-    <template #content>
-      12312321
-    </template>
-  </MyDialog>
+  <!--  &lt;!&ndash; 壁纸设置 &ndash;&gt;-->
+  <!--  <MyDialog-->
+  <!--      :dialogVisible="pictureDialogVisible"-->
+  <!--      :handleChang="handlePictureChange"-->
+  <!--  >-->
+  <!--    <template #title>-->
+  <!--      壁纸设置-->
+  <!--    </template>-->
+  <!--    <template #content>-->
+  <!--      12312321-->
+  <!--    </template>-->
+  <!--  </MyDialog>-->
+  <!--  &lt;!&ndash; 搜索设置 &ndash;&gt;-->
+  <!--  <MyDialog-->
+  <!--      :dialogVisible="searchDialogVisible"-->
+  <!--      :handleChang="handleSearchChange"-->
+  <!--  >-->
+  <!--    <template #title>-->
+  <!--      搜索设置-->
+  <!--    </template>-->
+  <!--    <template #content>-->
+  <!--      12312321-->
+  <!--    </template>-->
+  <!--  </MyDialog>-->
 </template>
 <script setup>
 import {reactive, ref, watch} from 'vue'
@@ -197,6 +198,10 @@ const commonDialogVisible = ref(false)
 const handleCommonChange = () => commonDialogVisible.value = false
 
 const commonSettingText = reactive({
+  isSimpleStyle: {
+    text: "极简模式",
+    tips: '默认是极简模式，点击切换到标准模式'
+  },
   showTime: {
     text: "是否显示时间",
     tips: ''
@@ -235,7 +240,7 @@ const handleSearchChange = () => searchDialogVisible.value = false
 </script>
 
 <style scoped>
-.btn-icon {
+.nav-bar {
   font-size: 22px;
   cursor: pointer;
 }
@@ -254,14 +259,10 @@ const handleSearchChange = () => searchDialogVisible.value = false
   background-color: rgba(0, 0, 0, .1);
 }
 
-.info-icon {
+.suffix-icon {
   color: rgba(0, 0, 0, .35);
   font-size: 16px;
   margin-right: 3px;
-}
-
-.info-text {
-  color: rgba(0, 0, 0, .35);
 }
 
 .handle-icon {
@@ -270,31 +271,6 @@ const handleSearchChange = () => searchDialogVisible.value = false
 
 .handle-icon:hover {
   color: #409eff;
-}
-
-.my-input:focus {
-  border-bottom: solid 1px #409eff;
-}
-
-.my-input {
-  -webkit-appearance: none;
-  box-sizing: border-box;
-  display: inline-block;
-  font-size: inherit;
-  height: 20px;
-  line-height: 20px;
-  outline: 0;
-  padding: 0;
-  width: 95%;
-  border: none;
-  border-radius: 0;
-  border-bottom: solid 1px rgba(0, 0, 0, .1);
-  color: black;
-  background-color: white;
-  transition: .25s;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
 }
 
 .save-btn {
