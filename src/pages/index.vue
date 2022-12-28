@@ -22,10 +22,9 @@
           :handleClickOpen="handleClickOpen"
       />
     </div>
-    <!--    &lt;!&ndash;    工具&ndash;&gt;-->
-    <!--    <div v-if="commonSetting.showShortcut">-->
-    <!--      <MyTools :showBackImg="commonSetting.showBackImg"/>-->
-    <!--    </div>-->
+    <div v-if="commonSetting.showShortcut">
+      <Shortcut :showBackImg="commonSetting.showBackImg"/>
+    </div>
     <!--    <div v-if="commonSetting.showFooter">-->
     <!--      <MyFooter :textColor="getTextColor(commonSetting.showBackImg)"/>-->
     <!--    </div>-->
@@ -36,7 +35,7 @@
 import {reactive, ref, onMounted} from "vue";
 import Header from "../components/header.vue";
 import MySearch from '../components/my-search.vue'
-import MyTools from '../components/my-tools.vue'
+import Shortcut from '../components/shortcut.vue'
 import NavBar from '../components/header.vue'
 import MyFooter from "../components/my-footer.vue";
 import {getTextColor} from '../utils/index.js'

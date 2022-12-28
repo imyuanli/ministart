@@ -1,8 +1,8 @@
 <template>
-  <div class="absolute left-1/2 -translate-x-1/2 top-80 navboxCustom">
-    <div class="grid gap-2  md:gap-4 justify-items-center grid-cols-5 lg:grid-cols-9 md:grid-cols-7 sm:grid-cols-6">
+  <div class="absolute left-1/2 -translate-x-1/2 top-80 tool-box">
+    <div class="grid gap-2 md:gap-4 justify-items-center grid-cols-5 lg:grid-cols-9 md:grid-cols-7 sm:grid-cols-6">
       <div class="flex-center flex-col" @contextmenu.prevent="rightClick($event,items,index)">
-        <div :class="['flex-center mb-1 customNav',showBackImg?'blur-customNav':'mini-customNav']">
+        <div :class="['flex-center mb-1 customNav',showBackImg?'norm-customNav':'simple-customNav']">
           <el-icon class="icon-plus" style="">
             <Plus/>
           </el-icon>
@@ -11,57 +11,56 @@
           翻译
         </div>
       </div>
-      <div :class="['flex-center customNav',showBackImg?'blur-customNav':'mini-customNav']"
-           @click="dialogVisible = true">
+      <div :class="['flex-center customNav',showBackImg?'norm-customNav':'simple-customNav']"
+           @click="editDialogVisible = true">
         <el-icon class="icon-plus">
           <Plus/>
         </el-icon>
       </div>
     </div>
   </div>
-  <div class="edit-dialog">
-    <el-dialog
-        title="编辑网站捷径"
-        v-model="dialogVisible"
-        width="30%"
-        align-center
-        class="rounded-lg"
-    >
-      <div class="flex justify-center items-start flex-col bg-white rounded-lg px-6 py-3 text-base info-text-color">
-        <div class="py-3 flex justify-start items-center w-full">
+  <MyDialog
+      :dialogVisible="editDialogVisible"
+      :handleChang="handleEditChange"
+  >
+    <template #title>
+      网站捷径设置
+    </template>
+    <template #content>
+      <div class="flex justify-center items-start flex-col bg-white rounded-lg px-6 py-3 text-base prefix-text-color">
+        <div class="py-3 shortcut-box">
           <div class="w-10">网址</div>
           <MyInput/>
         </div>
-        <div class="py-3 flex justify-start items-center w-full">
+        <div class="py-3 shortcut-box">
           <div class="w-10">名称</div>
           <MyInput/>
         </div>
-        <div class="py-3 flex justify-start items-center w-full">
+        <div class="py-3 shortcut-box">
           <div class="w-10">图标</div>
-          <div class="edit-icon-box">
-            <!--            <span v-if="isText" style="font-size:12px ">{{title.substring(0,5)}}</span>-->
-            <img class="edit-icon" src="https://www.jianfast.com/static/home/images/defaultsicon/null.png" alt="">
+          <div class="shortcut-icon-box">
+            <img class="shortcut-icon" src="https://www.jianfast.com/static/home/images/defaultsicon/null.png" alt="">
           </div>
-          <div class="edit-btn-box">
-            <div class="edit-eng-btn" @click="getUrlIcon">
+          <div class="shortcut-btn-box">
+            <div class="shortcut-btn">
               智能
             </div>
-            <div class="edit-eng-btn" @click="changeText">
+            <div class="shortcut-btn">
               文字
             </div>
-            <div class="edit-eng-btn" @click="changeDefault">
+            <div class="shortcut-btn">
               默认
             </div>
           </div>
         </div>
       </div>
-      <template #footer>
-        <el-button @click="handleClose">取 消</el-button>
-        <el-button v-if="!isUpdate" type="primary" @click="addShortcuts(false)" :loading="btnLoading">确 定</el-button>
-        <el-button v-if="isUpdate" type="primary" @click="addShortcuts(true)" :loading="btnLoading">更 新</el-button>
-      </template>
-    </el-dialog>
-  </div>
+    </template>
+    <template #bottom>
+      <el-button>取 消</el-button>
+      <el-button type="primary">确 定</el-button>
+      <el-button type="primary">更 新</el-button>
+    </template>
+  </MyDialog>
   <div v-show="visible" :style="{left:left+'px',top:top+'px'}" class="contextmenu">
     <div class="menu edit-btn">
       <el-icon class="menu-icon">
@@ -80,30 +79,16 @@
 <script setup>
 import {ref, watch} from "vue";
 import MyInput from '../components/my-input.vue'
+import MyDialog from '../components/my-dialog.vue'
 import {getTextColor} from '../utils/index.js'
 
-const props = defineProps({
+defineProps({
   showBackImg: Boolean
 })
 
-const shortcuts_list = [
-  {
-    value: '选项1',
-    label: '黄金糕'
-  }, {
-    value: '选项2',
-    label: '双皮奶',
-    disabled: true
-  }, {
-    value: '选项3',
-    label: '蚵仔煎'
-  }, {
-    value: '选项4',
-    label: '龙须面'
-  }, {
-    value: '选项5',
-    label: '北京烤鸭'
-  }]
+const editDialogVisible = ref(false)
+const handleEditChange = () => editDialogVisible.value = false
+
 //右键弹窗
 const visible = ref(false)
 const top = ref(0)
@@ -133,7 +118,7 @@ const dialogVisible = ref(false)
 </script>
 
 <style scoped>
-.navboxCustom {
+.tool-box {
   max-height: 45%;
   max-width: 800px;
   width: 95%;
@@ -142,7 +127,7 @@ const dialogVisible = ref(false)
   overflow-y: auto;
 }
 
-.navboxCustom::-webkit-scrollbar {
+.tool-box::-webkit-scrollbar {
   display: none;
 }
 
@@ -157,20 +142,20 @@ const dialogVisible = ref(false)
   transition: background-color .35s;
 }
 
-.mini-customNav {
+.simple-customNav {
   background-color: #fff;
 }
 
-.mini-customNav:hover {
+.simple-customNav:hover {
   background: rgba(0, 0, 0, .1);
 }
 
-.blur-customNav {
+.norm-customNav {
   background-color: rgba(255, 255, 255, .5);
   backdrop-filter: blur(40px) saturate(1.5) !important;
 }
 
-.blur-customNav:hover {
+.norm-customNav:hover {
   background-color: rgb(215, 215, 215);
 }
 
@@ -235,73 +220,16 @@ const dialogVisible = ref(false)
 }
 
 
-.dialog-content {
+.shortcut-box {
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   width: 100%;
-  flex-direction: column;
 }
 
-.edit-dialog:deep(.el-dialog) {
-  max-width: 600px;
-  width: 90%;
-  background-color: rgb(245, 245, 245) !important;
-  border-radius: 10px;
-  overflow: hidden;
-  box-shadow: rgb(0 0 0 / 5%) 0 10px 20px;
-}
-
-:deep(.el-dialog__body) {
-  padding: 35px;
-  max-height: 350px;
-  overflow: auto;
-}
-
-:deep(.el-dialog__body) {
-  padding: 15px 35px 0;
-}
-
-:deep(.el-dialog__body::-webkit-scrollbar) {
-  display: none
-}
-
-/*屏幕小于768的时候*/
-@media (max-width: 640px) {
-  :deep(.el-dialog__body) {
-    padding: 15px 20px 0;
-  }
-}
-
-
-.my-input:focus {
-  border-bottom: solid 1px #70C000;
-}
-
-.my-input {
-  -webkit-appearance: none;
-  box-sizing: border-box;
-  display: inline-block;
-  font-size: inherit;
-  height: 20px;
-  line-height: 20px;
-  outline: 0;
-  padding: 0;
-  width: 95%;
-  border: none;
-  border-radius: 0;
-  border-bottom: solid 1px rgba(0, 0, 0, .1);
-  color: black;
-  background-color: white;
-  transition: .25s;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.edit-icon-box {
-  width: 50px;
-  height: 50px;
+.shortcut-icon-box {
+  min-width: 45px;
+  height: 45px;
   border-radius: 50%;
   border: 1px solid #cccccc;
   display: flex;
@@ -310,18 +238,18 @@ const dialogVisible = ref(false)
   overflow: hidden;
 }
 
-.edit-icon {
+.shortcut-icon {
   width: 35px;
   height: 35px;
 }
 
-.edit-btn-box {
+.shortcut-btn-box {
   width: 70%;
   display: flex;
   align-items: center;
 }
 
-.edit-eng-btn {
+.shortcut-btn {
   font-size: 14px;
   color: #4d4d4d;
   width: 100%;
