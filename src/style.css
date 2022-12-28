@@ -24,11 +24,56 @@ body {
 }
 
 /*极简*/
+/*文本颜色*/
 .simple-text-color {
-    color: rgba(0, 0, 0, .7) !important;
+    color: #010101 !important;
+}
+
+/*背景颜色*/
+.simple-background-color {
+    background-color: #E7F0F7 !important;
+}
+
+.simple-search-bg {
+    background: #fff !important;
+}
+
+/*暗黑*/
+.dark-text-color {
+    color: #fff !important;
+}
+
+.dark-background-color {
+    background: #2E2E2E !important;
+}
+
+.dark-search-bg {
+    background: rgba(30, 30, 30, .9) !important;
 }
 
 /*标准*/
-.norm-text-color {
+.normal-text-color {
     color: rgba(255, 255, 255, .9) !important;
 }
+
+.normal-background-color {
+    background: rgba(255, 255, 255, .9) !important;
+}
+
+.normal-search-bg {
+    background: rgba(255, 255, 255, .5) !important;
+}
+
+/*流畅*/
+.flow-text-color {
+    color: #fff !important;
+}
+
+.flow-background-color {
+    background: #2E2E2E !important;
+}
+
+.flow-search-bg {
+    background: rgba(30, 30, 30, .9) !important;
+}
+
