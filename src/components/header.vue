@@ -32,9 +32,9 @@
       </template>
       <div>
         <div class="lip-btn" @click="commonDialogVisible = true">常规设置</div>
-        <el-divider style="margin: 5px"/>
-        <div class="lip-btn">捐助</div>
-        <div class="lip-btn">帮助和反馈</div>
+<!--        <el-divider style="margin: 5px"/>-->
+<!--        <div class="lip-btn">捐助</div>-->
+<!--        <div class="lip-btn">帮助和反馈</div>-->
         <el-divider style="margin: 5px"/>
         <div class="lip-btn">设为主页</div>
       </div>
@@ -136,6 +136,10 @@ const commonSettingText=reactive({
   showBackImg:{
     intro:"是否显示背景图片",
     tips:"",
+  },
+  isNewTab:{
+    intro:"在新标签页打开第三方搜索结果",
+    tips:"默认是在当前页面",
   },
 })
 

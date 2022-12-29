@@ -7,6 +7,7 @@
       <div
           class="menu-item"
           v-for="(item,index) in searchEngines" :key="index"
+          @click="currentIndex = index"
       >
         <img class="menu-img" :src="item.icon" alt="">
         <span>{{ item.name }}</span>
@@ -27,6 +28,8 @@
     <input
         class="input-box"
         placeholder="搜索"
+        v-model="inputValue"
+        @keydown.enter="searchData"
     />
     <div class="search-btn right-2">
       <el-icon class="primary-color" style="font-size: 18px">
@@ -38,34 +41,56 @@
 
 <script setup>
 //选中的searchEngines
-const currentIndex = 0
-const searchEngines = [
-  {
-    name: "百度",
-    target: "https://www.baidu.com/s?wd=",
-    icon: 'https://www.baidu.com/favicon.ico'
-  },
-  {
-    name: "必应",
-    target: "https://cn.bing.com/search?q=",
-    icon: 'https://www.jianfast.com/static/home/images/searchChoice/bing.svg'
-  },
-  {
-    name: "谷歌",
-    target: "https://www.google.com/search?q=",
-    icon: 'https://www.jianfast.com/static/home/images/searchChoice/google.svg'
-  },
-  {
-    name: "360",
-    target: "https://www.so.com/s?q=",
-    icon: 'https://s2.ssl.qhimg.com/static/121a1737750aa53d.ico'
-  },
-  {
-    name: "搜狗",
-    target: "https://www.sogou.com/web?query=",
-    icon: 'https://www.sogou.com/images/logo/new/favicon.ico'
-  },
-]
+import {reactive, ref, watch} from "vue";
+
+const props = defineProps({
+  isOpenNewTab: Boolean
+})
+
+const currentIndex = ref(0)
+const inputValue = ref("")
+const searchEngines = reactive(
+    [
+      {
+        name: "百度",
+        target: "https://www.baidu.com/s?wd=",
+        icon: 'https://www.baidu.com/favicon.ico'
+      },
+      {
+        name: "必应",
+        target: "https://cn.bing.com/search?q=",
+        icon: 'https://www.jianfast.com/static/home/images/searchChoice/bing.svg'
+      },
+      {
+        name: "谷歌",
+        target: "https://www.google.com/search?q=",
+        icon: 'https://www.jianfast.com/static/home/images/searchChoice/google.svg'
+      },
+      {
+        name: "360",
+        target: "https://www.so.com/s?q=",
+        icon: 'https://s2.ssl.qhimg.com/static/121a1737750aa53d.ico'
+      },
+      {
+        name: "搜狗",
+        target: "https://www.sogou.com/web?query=",
+        icon: 'https://www.sogou.com/images/logo/new/favicon.ico'
+      },
+    ]
+)
+
+const searchData = () => {
+  let value = ""
+  value = inputValue.value.replaceAll('&', '%26')
+  value = inputValue.value.replaceAll('#', '%23')
+  let res = searchEngines[currentIndex.value]?.target + value
+  if (props.isOpenNewTab) {
+    window.open(res)
+  } else {
+    window.location.href = res
+  }
+}
+
 </script>
 
 <style scoped>

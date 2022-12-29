@@ -21,7 +21,7 @@
           {{ dayjs(new Date()).format("HH:mm") }}
         </div>
       </div>
-      <MySearch/>
+      <MySearch :isOpenNewTab="commonSettings.isNewTab"/>
     </div>
     <div v-if="commonSettings.showShortcut">
       <Shortcut/>
@@ -42,6 +42,7 @@ import MyFooter from "../components/my-footer.vue";
 // import {getTextColor, getBackgroundColor} from '../utils/index.js'
 import store from 'store'
 
+
 const commonSettings = reactive(
     store.get("commonSettings") ?
         store.get("commonSettings")
@@ -51,6 +52,7 @@ const commonSettings = reactive(
           showShortcut: false,
           showFooter: false,
           showBackImg: false,
+          isNewTab:false
         }
 )
 
@@ -85,18 +87,6 @@ watch(commonSettings, (newData) => {
 //   //   label: '流畅模式',
 //   // }
 // ]
-// const model = ref('simple')
-
-// console.log(dayjs().year())
-// console.log(dayjs().month())
-// console.log(dayjs().date())
-// console.log(dayjs().hour())
-// console.log(dayjs().minute())
-// console.log(dayjs().second())
-// console.log(dayjs().day())
-// const commonSettings=reactive({
-//
-// })
 
 </script>
 
