@@ -17,7 +17,7 @@
     <div class="main">
       <div v-if="commonSettings.showTime">
         <div
-            class="absolute left-1/2 -translate-x-1/2 top-36 text-4xl font-semibold cursor-pointer hover:scale-125 duration-200">
+            class="absolute left-1/2 -translate-x-1/2 top-36 md:top-1/2 text-4xl font-semibold cursor-pointer hover:scale-125 duration-200">
           {{ dayjs(new Date()).format("HH:mm") }}
         </div>
       </div>
@@ -102,11 +102,11 @@ watch(commonSettings, (newData) => {
 }
 
 .cover-background {
-  background: #E7F0F7;
+  background:#f7f7f7;
 }
 
 .cover-image {
-  background-image: radial-gradient(rgba(0, 0, 0, 0) 0, rgba(0, 0, 0, .5) 100%), radial-gradient(rgba(0, 0, 0, 0) 33%, rgba(0, 0, 0, .3) 166%);
+  background-image: radial-gradient(rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.5) 100%), radial-gradient(rgba(0, 0, 0, 0) 33%, rgba(0, 0, 0, 0.3) 166%);
 }
 
 .main {

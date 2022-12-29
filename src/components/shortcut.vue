@@ -1,7 +1,12 @@
 <template>
   <div class="absolute left-1/2 -translate-x-1/2 top-80 tool-box">
     <div class="grid gap-2 md:gap-4 justify-items-center grid-cols-5 lg:grid-cols-9 md:grid-cols-7 sm:grid-cols-6">
-      <div class="flex-center flex-col" @contextmenu.prevent="rightClick($event,items,index)">
+      <div class="flex-center flex-col"
+           @contextmenu.prevent="rightClick($event,items,index)"
+           @touchstart.prevent="touchStart($event)"
+           @touchmove="touchMove()"
+           @touchend="touchEnd()"
+      >
         <div class="flex-center mb-1 customNav">
           <el-icon class="icon-plus" style="">
             <Plus/>
@@ -80,6 +85,7 @@
 import {ref, watch} from "vue";
 import MyInput from '../components/my-input.vue'
 import MyDialog from '../components/my-dialog.vue'
+//编辑弹框
 const editDialogVisible = ref(false)
 const handleEditChange = () => editDialogVisible.value = false
 
@@ -88,11 +94,15 @@ const visible = ref(false)
 const top = ref(0)
 const left = ref(0)
 
-//打开
-const rightClick = (e, item, index) => {
-  top.value = e.pageY;
-  left.value = e.pageX;
+//打开menu
+const openMenu = (x, y) => {
+  left.value = x;
+  top.value = y;
   visible.value = true;
+}
+//右键打开
+const rightClick = (e) => {
+  openMenu(e.pageX, e.pageY)
 }
 //关闭
 const closeMenu = () => {
@@ -100,6 +110,33 @@ const closeMenu = () => {
   left.value = 0;
   visible.value = false;
 }
+//移动端长按
+let timeOutEvent
+//长按事件（起始）
+const touchStart = (e) => {
+  timeOutEvent = setTimeout(() => {
+    //真正长按后应该执行的内容
+    timeOutEvent = 0;
+    const touches = e.touches[0]
+    openMenu(touches.pageX, touches.pageY)
+  }, 500); //这里设置定时器，定义长按500毫秒触发长按事件
+  return false;
+}
+//手释放，如果在500毫秒内就释放，则取消长按事件，此时可以执行onclick应该执行的事件
+const touchEnd = (item) => {
+  clearTimeout(timeOutEvent); //清除定时器
+  if (timeOutEvent !== 0) {
+    //这里写要执行的内容（如onclick事件）
+    console.log("点击但未长按");
+  }
+  return false;
+}
+//如果手指有移动，则取消所有事件，此时说明用户只是要移动而不是长按
+const touchMove = () => {
+  clearTimeout(timeOutEvent); //清除定时器
+  timeOutEvent = 0;
+}
+
 watch(visible, (newValue, oldValue) => {
   if (newValue) {
     document.body.addEventListener('click', closeMenu)
@@ -107,8 +144,6 @@ watch(visible, (newValue, oldValue) => {
     document.body.removeEventListener('click', closeMenu)
   }
 })
-//添加网站捷径
-const dialogVisible = ref(false)
 </script>
 
 <style scoped>
@@ -135,6 +170,7 @@ const dialogVisible = ref(false)
   cursor: pointer;
   transition: background-color .35s;
 }
+
 .customNav:hover {
   background: rgb(235, 235, 235);
 }
