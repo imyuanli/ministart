@@ -1,79 +1,77 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-/*flex居中*/
-.flex-center {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
 body {
     font-family: "Microsoft Yahei Light", "Microsoft Yahei", "PingFang SC", "Helvetica Neue", Helvetica, Tahoma, Arial, sans-serif;
     margin: 0;
     padding: 0;
 }
 
-.primary-color {
-    color: #409eff !important;
+.flex-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-.prefix-text-color {
-    color: rgba(0, 0, 0, .35) !important;
-}
+/*.primary-color {*/
+/*    color: #409eff !important;*/
+/*}*/
 
-/*极简*/
-/*文本颜色*/
-.simple-text-color {
-    color: #010101 !important;
-}
+/*.prefix-text-color {*/
+/*    color: rgba(0, 0, 0, .35) !important;*/
+/*}*/
 
-/*背景颜色*/
-.simple-background-color {
-    background-color: #E7F0F7 !important;
-}
+/*!*极简*!*/
+/*!*文本颜色*!*/
+/*.simple-text-color {*/
+/*    color: #010101 !important;*/
+/*}*/
 
-.simple-search-bg {
-    background: #fff !important;
-}
+/*!*背景颜色*!*/
+/*.simple-background-color {*/
+/*    background-color: #E7F0F7 !important;*/
+/*}*/
 
-/*暗黑*/
-.dark-text-color {
-    color: #fff !important;
-}
+/*.simple-search-bg {*/
+/*    background: #fff !important;*/
+/*}*/
 
-.dark-background-color {
-    background: #2E2E2E !important;
-}
+/*!*暗黑*!*/
+/*.dark-text-color {*/
+/*    color: #fff !important;*/
+/*}*/
 
-.dark-search-bg {
-    background: rgba(30, 30, 30, .9) !important;
-}
+/*.dark-background-color {*/
+/*    background: #2E2E2E !important;*/
+/*}*/
 
-/*标准*/
-.normal-text-color {
-    color: rgba(255, 255, 255, .9) !important;
-}
+/*.dark-search-bg {*/
+/*    background: rgba(30, 30, 30, .9) !important;*/
+/*}*/
 
-.normal-background-color {
-    background: rgba(255, 255, 255, .9) !important;
-}
+/*!*标准*!*/
+/*.normal-text-color {*/
+/*    color: rgba(255, 255, 255, .9) !important;*/
+/*}*/
 
-.normal-search-bg {
-    background: rgba(255, 255, 255, .5) !important;
-}
+/*.normal-background-color {*/
+/*    background: rgba(255, 255, 255, .9) !important;*/
+/*}*/
 
-/*流畅*/
-.flow-text-color {
-    color: #fff !important;
-}
+/*.normal-search-bg {*/
+/*    background: rgba(255, 255, 255, .5) !important;*/
+/*}*/
 
-.flow-background-color {
-    background: #2E2E2E !important;
-}
+/*!*流畅*!*/
+/*.flow-text-color {*/
+/*    color: #fff !important;*/
+/*}*/
 
-.flow-search-bg {
-    background: rgba(30, 30, 30, .9) !important;
-}
+/*.flow-background-color {*/
+/*    background: #2E2E2E !important;*/
+/*}*/
+
+/*.flow-search-bg {*/
+/*    background: rgba(30, 30, 30, .9) !important;*/
+/*}*/
 

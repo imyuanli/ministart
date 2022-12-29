@@ -1,16 +1,11 @@
 <template>
-  <div
-      class="absolute left-1/2 -translate-x-1/2 top-48 search-box flex-center"
-      :class="[`${model}-search-bg`,]">
-    <!--    更换搜索引擎-->
+  <div class="absolute left-1/2 -translate-x-1/2 top-56 search-box flex-center">
     <el-popover
         placement="bottom"
         trigger="click"
-        :effect="model=='dark'?'dark':'light'"
     >
       <div
           class="menu-item"
-          :class='getTextColor(model)'
           v-for="(item,index) in searchEngines" :key="index"
       >
         <img class="menu-img" :src="item.icon" alt="">
@@ -18,10 +13,10 @@
       </div>
       <!--      新增搜索-->
       <div class="menu-item">
-        <el-icon :class='getTextColor(model)' style="vertical-align: middle;font-size: 16px">
+        <el-icon style="vertical-align: middle;font-size: 16px">
           <Setting/>
         </el-icon>
-        <span class="ml-1" :class='getTextColor(model)'>设置搜索引擎</span>
+        <span class="ml-1">设置搜索引擎</span>
       </div>
       <template #reference>
         <div class="search-btn left-2">
@@ -31,8 +26,6 @@
     </el-popover>
     <input
         class="input-box"
-        :class='getTextColor(model)'
-        @click="handleClickOpen"
         placeholder="搜索"
     />
     <div class="search-btn right-2">
@@ -44,16 +37,6 @@
 </template>
 
 <script setup>
-import {getTextColor,} from '../utils/index.js'
-
-defineProps({
-  // isNormModel: Boolean,
-  // showBackImg: Boolean,
-  // isFocus: Boolean,
-  // handleClickOpen: Function,
-  model: String
-})
-
 //选中的searchEngines
 const currentIndex = 0
 const searchEngines = [
@@ -93,8 +76,7 @@ const searchEngines = [
   border-radius: 30px;
   overflow: hidden;
   transition: 300ms;
-  -webkit-backdrop-filter: blur(10px) saturate(1.5);
-  backdrop-filter: blur(10px) saturate(1.5);
+  background: #fff;
   box-shadow: rgb(0 0 0 / 20%) 0 0 10px;
 }
 
