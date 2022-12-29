@@ -96,17 +96,17 @@
     </template>
     <template #content>
       <div class="bg-white rounded-lg px-6 py-3">
-        <div v-for="(item,index) in Object.keys(commonSetting)" :key="index" class="flex justify-between py-3">
+        <div v-for="(item,index) in Object.keys(commonSettings)" :key="index" class="flex justify-between py-3">
           <div>
             <div class="text-md text-black">
-              {{ commonSettingText[item].text }}
+              {{ commonSettingText[item].intro }}
             </div>
             <div class="text-xs text-gray-400">
               {{ commonSettingText[item]?.tips }}
             </div>
           </div>
           <div>
-            <el-switch  v-model="commonSetting[item]" @change="handleChangeSwitch(item)"/>
+            <el-switch  v-model="commonSettings[item]"/>
           </div>
         </div>
       </div>
@@ -117,6 +117,29 @@
 import {reactive, ref} from 'vue'
 import MyInput from "./my-input.vue";
 import MyDialog from "./my-dialog.vue";
+defineProps({
+  commonSettings:Object
+})
+const commonSettingText=reactive({
+  showTime:{
+    intro:"是否显示时间",
+    tips:"",
+  },
+  showShortcut:{
+    intro:"是否显示快捷方式",
+    tips:"",
+  },
+  showFooter:{
+    intro:"是否显示底部版权信息",
+    tips:"",
+  },
+  showBackImg:{
+    intro:"是否显示背景图片",
+    tips:"",
+  },
+})
+
+
 // //个人信息
 // const infoDialogVisible = ref(false)
 // const handleInfoChange = () => infoDialogVisible.value = false
