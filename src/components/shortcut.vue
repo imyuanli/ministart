@@ -1,17 +1,17 @@
 <template>
-  <div class="absolute left-1/2 -translate-x-1/2 top-64 tool-box">
+  <div class="absolute left-1/2 -translate-x-1/2 top-80 tool-box">
     <div class="grid gap-2 md:gap-4 justify-items-center grid-cols-5 lg:grid-cols-9 md:grid-cols-7 sm:grid-cols-6">
       <div class="flex-center flex-col" @contextmenu.prevent="rightClick($event,items,index)">
-        <div :class="['flex-center mb-1 customNav',isNormModel?'norm-customNav':'simple-customNav']">
+        <div class="flex-center mb-1 customNav">
           <el-icon class="icon-plus" style="">
             <Plus/>
           </el-icon>
         </div>
-        <div :class="['text-black text-center text-sm overflow-ellipsis truncate w-1/2',getTextColor(showBackImg)]">
+        <div class="text-black text-center text-sm overflow-ellipsis truncate w-1/2">
           翻译
         </div>
       </div>
-      <div :class="['flex-center customNav',isNormModel?'norm-customNav':'simple-customNav']"
+      <div :class="['flex-center customNav']"
            @click="editDialogVisible = true">
         <el-icon class="icon-plus">
           <Plus/>
@@ -80,13 +80,6 @@
 import {ref, watch} from "vue";
 import MyInput from '../components/my-input.vue'
 import MyDialog from '../components/my-dialog.vue'
-import {getTextColor} from '../utils/index.js'
-
-defineProps({
-  isNormModel: Boolean,
-  showBackImg: Boolean,
-})
-
 const editDialogVisible = ref(false)
 const handleEditChange = () => editDialogVisible.value = false
 
@@ -142,22 +135,8 @@ const dialogVisible = ref(false)
   cursor: pointer;
   transition: background-color .35s;
 }
-
-.simple-customNav {
-  background-color: #fff;
-}
-
-.simple-customNav:hover {
-  background: #dadada;
-}
-
-.norm-customNav {
-  background-color: rgba(255, 255, 255, .5);
-  backdrop-filter: blur(40px) saturate(1.5) !important;
-}
-
-.norm-customNav:hover {
-  background-color: rgb(215, 215, 215);
+.customNav:hover {
+  background: rgb(235, 235, 235);
 }
 
 /*屏幕小于768的时候*/
