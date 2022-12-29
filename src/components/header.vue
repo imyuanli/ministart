@@ -1,5 +1,24 @@
 <template>
   <div class="absolute top-6 right-6 flex-center">
+<!--    <el-popover-->
+<!--        placement="bottom-start"-->
+<!--        trigger="click"-->
+<!--        style="max-width: calc(100% - 20px)"-->
+<!--        :hide-after="50"-->
+<!--    >-->
+<!--      <template #reference>-->
+<!--        <el-icon :class="['nav-bar mr-3',getTextColor(commonSetting['showBackImg'])]">-->
+<!--          <User/>-->
+<!--        </el-icon>-->
+<!--      </template>-->
+<!--      <div>-->
+<!--        <div class="lip-btn" @click="infoDialogVisible = true">-->
+<!--          <span class="block text-lg primary-color truncate overflow-ellipsis mb-1">鸢离鸢离鸢离鸢离鸢离鸢离</span>-->
+<!--          <span>账号管理</span>-->
+<!--        </div>-->
+<!--        <div class="lip-btn">退出登录</div>-->
+<!--      </div>-->
+<!--    </el-popover>-->
     <el-popover
         placement="bottom-start"
         trigger="click"
@@ -7,33 +26,12 @@
         :hide-after="50"
     >
       <template #reference>
-        <el-icon :class="['nav-bar mr-3',getTextColor(commonSetting['showBackImg'])]">
-          <User/>
-        </el-icon>
-      </template>
-      <div>
-        <div class="lip-btn" @click="infoDialogVisible = true">
-          <span class="block text-lg primary-color truncate overflow-ellipsis mb-1">鸢离鸢离鸢离鸢离鸢离鸢离</span>
-          <span>账号管理</span>
-        </div>
-        <div class="lip-btn">退出登录</div>
-      </div>
-    </el-popover>
-    <el-popover
-        placement="bottom-start"
-        trigger="click"
-        style="max-width: calc(100% - 20px)"
-        :hide-after="50"
-    >
-      <template #reference>
-        <el-icon :class="['nav-bar hover:rotate-180 duration-200',getTextColor(commonSetting['showBackImg'])]">
+        <el-icon :class="['nav-bar hover:rotate-180 duration-200']">
           <Setting/>
         </el-icon>
       </template>
       <div>
         <div class="lip-btn" @click="commonDialogVisible = true">常规设置</div>
-        <div class="lip-btn" @click="pictureDialogVisible = true">壁纸设置</div>
-        <div class="lip-btn" @click="searchDialogVisible = true">搜索引擎设置</div>
         <el-divider style="margin: 5px"/>
         <div class="lip-btn">捐助</div>
         <div class="lip-btn">帮助和反馈</div>
@@ -42,52 +40,52 @@
       </div>
     </el-popover>
   </div>
-  <!--  info-->
-  <MyDialog
-      :dialogVisible="infoDialogVisible"
-      :handleChang="handleInfoChange"
-  >
-    <template #title>
-      欢迎您，<span class="primary-color">鸢离</span>
-    </template>
-    <template #content>
-      <div class="bg-white rounded-lg px-6 py-3">
-        <div v-for="(item,index) in info" :key="index" class="flex justify-between py-3">
-          <div class="flex-center">
-            <div class="prefix-text-color">{{ item.name }}</div>
-            <div v-show="index !== currentIndex" class="text-black ml-6">{{ item.value }}</div>
-            <div v-show="index == currentIndex">
-              <MyInput/>
-            </div>
-          </div>
-          <div class="flex-center">
-            <div v-if="item.type == 'copy'">
-              <el-icon class="suffix-icon handle-icon">
-                <CopyDocument/>
-              </el-icon>
-            </div>
-            <div v-else-if="item.type =='edit'">
-              <el-icon
-                  @click="handleChange(index,item.value)"
-                  class="suffix-icon handle-icon"
-                  v-show="index !== currentIndex"
-              >
-                <Edit/>
-              </el-icon>
-              <div class="save-btn" v-show="index == currentIndex">
-                保存
-              </div>
-            </div>
-            <div v-else>
-              <el-icon class="suffix-icon handle-icon">
-                <View/>
-              </el-icon>
-            </div>
-          </div>
-        </div>
-      </div>
-    </template>
-  </MyDialog>
+<!--  &lt;!&ndash;  info&ndash;&gt;-->
+<!--  <MyDialog-->
+<!--      :dialogVisible="infoDialogVisible"-->
+<!--      :handleChang="handleInfoChange"-->
+<!--  >-->
+<!--    <template #title>-->
+<!--      欢迎您，<span class="primary-color">鸢离</span>-->
+<!--    </template>-->
+<!--    <template #content>-->
+<!--      <div class="bg-white rounded-lg px-6 py-3">-->
+<!--        <div v-for="(item,index) in info" :key="index" class="flex justify-between py-3">-->
+<!--          <div class="flex-center">-->
+<!--            <div class="prefix-text-color">{{ item.name }}</div>-->
+<!--            <div v-show="index !== currentIndex" class="text-black ml-6">{{ item.value }}</div>-->
+<!--            <div v-show="index == currentIndex">-->
+<!--              <MyInput/>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--          <div class="flex-center">-->
+<!--            <div v-if="item.type == 'copy'">-->
+<!--              <el-icon class="suffix-icon handle-icon">-->
+<!--                <CopyDocument/>-->
+<!--              </el-icon>-->
+<!--            </div>-->
+<!--            <div v-else-if="item.type =='edit'">-->
+<!--              <el-icon-->
+<!--                  @click="handleChange(index,item.value)"-->
+<!--                  class="suffix-icon handle-icon"-->
+<!--                  v-show="index !== currentIndex"-->
+<!--              >-->
+<!--                <Edit/>-->
+<!--              </el-icon>-->
+<!--              <div class="save-btn" v-show="index == currentIndex">-->
+<!--                保存-->
+<!--              </div>-->
+<!--            </div>-->
+<!--            <div v-else>-->
+<!--              <el-icon class="suffix-icon handle-icon">-->
+<!--                <View/>-->
+<!--              </el-icon>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </template>-->
+<!--  </MyDialog>-->
   <!-- 常规设置 -->
   <MyDialog
       :dialogVisible="commonDialogVisible"
@@ -114,72 +112,41 @@
       </div>
     </template>
   </MyDialog>
-  <!--  &lt;!&ndash; 壁纸设置 &ndash;&gt;-->
-  <!--  <MyDialog-->
-  <!--      :dialogVisible="pictureDialogVisible"-->
-  <!--      :handleChang="handlePictureChange"-->
-  <!--  >-->
-  <!--    <template #title>-->
-  <!--      壁纸设置-->
-  <!--    </template>-->
-  <!--    <template #content>-->
-  <!--      12312321-->
-  <!--    </template>-->
-  <!--  </MyDialog>-->
-  <!--  &lt;!&ndash; 搜索设置 &ndash;&gt;-->
-  <!--  <MyDialog-->
-  <!--      :dialogVisible="searchDialogVisible"-->
-  <!--      :handleChang="handleSearchChange"-->
-  <!--  >-->
-  <!--    <template #title>-->
-  <!--      搜索设置-->
-  <!--    </template>-->
-  <!--    <template #content>-->
-  <!--      12312321-->
-  <!--    </template>-->
-  <!--  </MyDialog>-->
 </template>
 <script setup>
-import {reactive, ref, watch} from 'vue'
+import {reactive, ref} from 'vue'
 import MyInput from "./my-input.vue";
 import MyDialog from "./my-dialog.vue";
-import {getTextColor} from '../utils/index.js'
-
-
-const props = defineProps({
-  commonSetting: Object
-})
-
-//个人信息
-const infoDialogVisible = ref(false)
-const handleInfoChange = () => infoDialogVisible.value = false
-const info = [
-  {
-    name: "UID",
-    value: '2865437316qphijt',
-    type: 'copy'
-  },
-  {
-    name: "邮箱",
-    value: '2865437316@qq.com',
-    type: 'edit'
-  },
-  {
-    name: "昵称",
-    value: '鸢离',
-    type: 'edit'
-  },
-  {
-    name: "生日",
-    value: '',
-    type: 'edit'
-  },
-  {
-    name: "注册时间",
-    value: '2021-03-05',
-    type: ''
-  },
-]
+// //个人信息
+// const infoDialogVisible = ref(false)
+// const handleInfoChange = () => infoDialogVisible.value = false
+// const info = [
+//   {
+//     name: "UID",
+//     value: '2865437316qphijt',
+//     type: 'copy'
+//   },
+//   {
+//     name: "邮箱",
+//     value: '2865437316@qq.com',
+//     type: 'edit'
+//   },
+//   {
+//     name: "昵称",
+//     value: '鸢离',
+//     type: 'edit'
+//   },
+//   {
+//     name: "生日",
+//     value: '',
+//     type: 'edit'
+//   },
+//   {
+//     name: "注册时间",
+//     value: '2021-03-05',
+//     type: ''
+//   },
+// ]
 //编辑
 const currentIndex = ref(null)
 //更新的值
@@ -192,53 +159,10 @@ const handleChange = (index, value) => {
   currentIndex.value = index
   inputValue.value = value
 }
-
 //常规设置
 const commonDialogVisible = ref(false)
 const handleCommonChange = () => commonDialogVisible.value = false
 
-const commonSettingText = reactive({
-  isNormModel: {
-    text: "标准模式",
-    tips: '默认显示极简模式，点击切换到标准模式，默认模式将自动打开图片'
-  },
-  showTime: {
-    text: "是否显示时间",
-    tips: ''
-  },
-  showWord: {
-    text: "是否显示一言",
-    tips: ''
-  },
-  showShortcut: {
-    text: "是否显示快捷方式",
-    tips: ''
-  },
-  showBackImg: {
-    text: "是否显示背景图片",
-    tips: '显示图片后可对图片单独设置'
-  },
-  showFooter: {
-    text: "是否显示footer",
-    tips: ''
-  },
-  showBlackBlur: {
-    text: "是否显示暗角滤镜",
-    tips: '该功能仅在标准模式生效'
-  },
-})
-const handleChangeSwitch=(item)=>{
-  //普通模式下
-  if(item =="isNormalModel"){
-
-  }
-}
-//壁纸弹窗
-const pictureDialogVisible = ref(false)
-const handlePictureChange = () => pictureDialogVisible.value = false
-//搜索弹窗
-const searchDialogVisible = ref(false)
-const handleSearchChange = () => searchDialogVisible.value = false
 </script>
 
 <style scoped>
