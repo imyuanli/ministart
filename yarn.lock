@@ -924,6 +924,11 @@ run-parallel@^1.1.9:
   dependencies:
     queue-microtask "^1.2.2"
 
+solarlunar-es@^1.0.9:
+  version "1.0.9"
+  resolved "https://registry.yarnpkg.com/solarlunar-es/-/solarlunar-es-1.0.9.tgz#fdd29efbf28afa0f649f19732c9ed01a2dd3c7b7"
+  integrity sha512-Phsk53NMRexjZkXmL6Q9l1UOtJ0GPt+/KUu+mCZkGIV9GlXpYxwjjh4hGhSd7j7k/PrVtX5Uh7/iW5R7fJ+STg==
+
 source-map-js@^1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/source-map-js/-/source-map-js-1.0.2.tgz#adbc361d9c62df380125e7f161f71c826f1e490c"
