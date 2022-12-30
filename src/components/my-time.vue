@@ -1,10 +1,10 @@
 <template>
-  <div v-if="time" class="absolute left-1/2 -translate-x-1/2 top-24 flex-center flex-col">
+  <div v-if="time" class="absolute left-1/2 -translate-x-1/2 top-16 flex-center flex-col">
     <div
         class="cursor-pointer hover:scale-125 duration-200"
         :style="{
               fontSize:size+'px',
-              fontWeight:weight?400:600,
+              fontWeight:weight?600:400,
               fontFamily:family,
               color:color,
             }"
