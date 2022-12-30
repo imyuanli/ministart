@@ -6,7 +6,7 @@
         align-center
         class="rounded-lg"
         @close="handleChang"
-
+        :close-on-click-modal="false"
     >
       <template #header="{ close, titleId, titleClass }">
         <div class="text-xl text-black font-semibold truncate overflow-ellipsis  flex-center">
@@ -40,7 +40,7 @@ watch(props, (newData, oldData) => {
 .dialog-box:deep(.el-dialog) {
   max-width: 600px;
   width: 90%;
-  background-color: rgb(245, 245, 245) !important;
+  background-color: #F1F0F5 !important;
   border-radius: 10px;
   overflow: hidden;
   box-shadow: rgb(0 0 0 / 5%) 0 10px 20px;

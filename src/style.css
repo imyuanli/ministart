@@ -13,65 +13,69 @@ body {
     align-items: center;
 }
 
-/*.primary-color {*/
-/*    color: #409eff !important;*/
+
+:root {
+    --primary-color: #1890ff;
+    --search-height: 46px;
+    --search-radius: 23px;
+    --search-bgColor: rgba(255, 255, 255, var(--search-opcity));
+    --search-opcity: 0.7;
+    --icon-radius: 16px;
+    --icon-size: 104px;
+    --icon-max-width: 1350px;
+    --icon-gap-x: 30px;
+    --icon-gap-y: 30px;
+    --icon-opacity: 1;
+    --icon-name: block;
+    --icon-nameSize: 12px;
+    --icon-nameColor: #fff;
+    --time-size: 80px;
+    --time-font: inherit;
+    --time-color: #fff;
+    --time-fontWeight: 400;
+    --time-month: inline;
+    --time-week: inline;
+    --time-lunar: inline;
+    --time-sec: none;
+    --sidebar-width: 50px;
+    --sidebar-opacity: 0.5;
+    --wall-mask: 0;
+    --wall-blur:3px;
+}
+
+
+/*.light {*/
+/*    --alpha-color: 0, 0, 0;*/
+/*    --alpha-bg: 255, 255, 255;*/
+/*    --bg-body: #f1f0f5;*/
+/*    --bg-card: #fff;*/
+/*    --bg-info: #f5f5f5;*/
+/*    --bg-input: #f0f1f4;*/
+/*    --bg-hover: #e2e0e0;*/
+/*    --bg-btn: #dcdada;*/
+/*    --dividing-line: #f2f2f2;*/
+/*    --border-card: var(--dividing-line);*/
+/*    --d-main: #222;*/
+/*    --d-sub: #939393;*/
+/*    --d-hover: rgba(var(--alpha-color), .5);*/
+/*    --img-bg: var(--bg-card);*/
+/*    --img-text: var(--alpha-bg);*/
 /*}*/
 
-/*.prefix-text-color {*/
-/*    color: rgba(0, 0, 0, .35) !important;*/
+/*.dark {*/
+/*    --alpha-color: 255, 255, 255;*/
+/*    --alpha-bg: 0, 0, 0;*/
+/*    --bg-body: #0c0c0c;*/
+/*    --bg-card: #1c1c1e;*/
+/*    --bg-info: #16161a;*/
+/*    --bg-input: #25252c;*/
+/*    --bg-hover: #25252c;*/
+/*    --bg-btn: #303134;*/
+/*    --dividing-line: #202025;*/
+/*    --border-card: var(--dividing-line);*/
+/*    --d-main: #dfdddd;*/
+/*    --d-sub: #999;*/
+/*    --d-hover: rgba(var(--alpha-color), .6);*/
+/*    --img-bg: var(--alpha-bg);*/
+/*    --img-text: 255, 255, 255;*/
 /*}*/
-
-/*!*极简*!*/
-/*!*文本颜色*!*/
-/*.simple-text-color {*/
-/*    color: #010101 !important;*/
-/*}*/
-
-/*!*背景颜色*!*/
-/*.simple-background-color {*/
-/*    background-color: #E7F0F7 !important;*/
-/*}*/
-
-/*.simple-search-bg {*/
-/*    background: #fff !important;*/
-/*}*/
-
-/*!*暗黑*!*/
-/*.dark-text-color {*/
-/*    color: #fff !important;*/
-/*}*/
-
-/*.dark-background-color {*/
-/*    background: #2E2E2E !important;*/
-/*}*/
-
-/*.dark-search-bg {*/
-/*    background: rgba(30, 30, 30, .9) !important;*/
-/*}*/
-
-/*!*标准*!*/
-/*.normal-text-color {*/
-/*    color: rgba(255, 255, 255, .9) !important;*/
-/*}*/
-
-/*.normal-background-color {*/
-/*    background: rgba(255, 255, 255, .9) !important;*/
-/*}*/
-
-/*.normal-search-bg {*/
-/*    background: rgba(255, 255, 255, .5) !important;*/
-/*}*/
-
-/*!*流畅*!*/
-/*.flow-text-color {*/
-/*    color: #fff !important;*/
-/*}*/
-
-/*.flow-background-color {*/
-/*    background: #2E2E2E !important;*/
-/*}*/
-
-/*.flow-search-bg {*/
-/*    background: rgba(30, 30, 30, .9) !important;*/
-/*}*/
-
