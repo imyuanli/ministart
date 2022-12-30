@@ -40,7 +40,7 @@ body {
     --sidebar-width: 50px;
     --sidebar-opacity: 0.5;
     --wall-mask: 0;
-    --wall-blur:3px;
+    --wall-blur:0;
 }
 
 

@@ -95,145 +95,34 @@
       常规设置
     </template>
     <template #content>
-      <SettingPanel>
+      <SettingPanel
+          :settingObj="baseSetting"
+      >
+        <template #panel-title>
+          通用设置
+        </template>
+      </SettingPanel>
+      <SettingPanel
+          :settingObj="timeSetting"
+      >
         <template #panel-title>
           时间/日期
-        </template>
-        <template #panel-content>
-          <div v-for="(item,index) in Object.keys(commonSettings.timeSetting)" :key="index">
-            <div class="flex justify-between py-3">
-              <div class="flex-1">
-                <div class="text-md text-black">
-                  {{ setInfo[item].intro }}
-                </div>
-                <div class="text-xs text-gray-400">
-                  {{ setInfo[item]?.tips }}
-                </div>
-              </div>
-              <div class="flex-1 flex justify-end items-center">
-                <el-switch
-                    v-if="setInfo[item].type==='switch'"
-                    v-model="commonSettings.timeSetting[item]"
-                />
-                <el-slider
-                    v-if="setInfo[item].type==='slider'"
-                    v-model="commonSettings.timeSetting[item]"
-                    class="w-full"
-                    :min="setInfo[item].min"
-                    :max="setInfo[item].max"
-                />
-                <el-select
-                    v-if="setInfo[item].type==='select'"
-                    v-model="commonSettings.timeSetting[item]"
-                >
-                  <el-option
-                      v-for="item in setInfo[item].options"
-                      :key="item.value"
-                      :label="item.label"
-                      :value="item.value"
-                  />
-                </el-select>
-                <el-color-picker
-                    v-if="setInfo[item].type==='picker'"
-                    v-model="commonSettings.timeSetting[item]"
-                />
-              </div>
-            </div>
-          </div>
         </template>
       </SettingPanel>
     </template>
   </MyDialog>
 </template>
 <script setup>
-import {reactive, ref} from 'vue'
+import {ref, toRefs} from 'vue'
 import SettingPanel from "./setting-panel.vue";
 import MyDialog from "./my-dialog.vue";
 
-defineProps({
+const props = defineProps({
   commonSettings: Object
 })
+let {timeSetting,baseSetting} = toRefs(props.commonSettings)
 
-
-const setInfo = reactive({
-  time: {
-    intro: "是否显示时间",
-    tips: "",
-    type: "switch",
-  },
-  hover24: {
-    intro: "是否显示24小时制",
-    tips: "",
-    type: "switch",
-  },
-  month: {
-    intro: "是否显示年月日",
-    tips: "",
-    type: "switch",
-  },
-  week: {
-    intro: "是否显示星期",
-    tips: "",
-    type: "switch",
-  },
-  lunar: {
-    intro: "是否显示农历",
-    tips: "",
-    type: "switch",
-  },
-  second: {
-    intro: "是否显示秒数",
-    tips: "",
-    type: "switch",
-  },
-  weight: {
-    intro: "是否显示粗体时间",
-    tips: "该项仅会控制时间，不会控制日期该项仅会控制时间，不会控制日期该项仅会控制时间，不会控制日期该项仅会控制时间，不会控制日期",
-    type: "switch",
-  },
-  size: {
-    intro: "选择字体大小",
-    tips: "该项仅会控制时间，不会控制日期",
-    type: "slider",
-    min: 30,
-    max: 60,
-  },
-  family: {
-    intro: "选择时间字体",
-    tips: "",
-    type: "select",
-    options: [
-      {
-        value: 'Option1',
-        label: 'Option1',
-      },
-      {
-        value: 'Option2',
-        label: 'Option2',
-      },
-      {
-        value: 'Option3',
-        label: 'Option3',
-      },
-      {
-        value: 'Option4',
-        label: 'Option4',
-      },
-      {
-        value: 'Option5',
-        label: 'Option5',
-      },
-    ]
-  },
-  color: {
-    intro: "选择颜色",
-    tips: "",
-    type: "picker",
-  },
-})
-
-
-// //个人信息
+//个人信息
 // const infoDialogVisible = ref(false)
 // const handleInfoChange = () => infoDialogVisible.value = false
 // const info = [

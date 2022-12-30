@@ -1,60 +1,46 @@
 <template>
   <div class="relative w-full h-screen min-h-screen">
     <div
-        class="back-img fixed top-0 left-0 object-cover -z-30 w-full h-full duration-100"
-        style="background-image: url('https://cn.bing.com/th?id=OHR.ChalkRock_ZH-CN2893565655_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&qlt=50')">
-    </div>
+        class="back-img"
+        :style="{backgroundImage:`url(${imgUrl})`}"
+    />
     <Header :commonSettings="commonSettings"/>
-    <!--    <div class="main">-->
-    <!--      <div v-if="commonSettings.showTime">-->
-    <!--        <div-->
-    <!--            class="absolute left-1/2 -translate-x-1/2 top-36 md:top-1/2 text-4xl font-semibold cursor-pointer hover:scale-125 duration-200">-->
-    <!--          {{ dayjs(new Date()).format("HH:mm") }}-->
-    <!--        </div>-->
-    <!--      </div>-->
-    <!--      <MySearch :isOpenNewTab="commonSettings.isNewTab"/>-->
-    <!--    </div>-->
-    <!--    <div v-if="commonSettings.showShortcut">-->
-    <!--      <Shortcut/>-->
-    <!--    </div>-->
-    <!--    <div v-if="commonSettings.showFooter">-->
-    <!--      <MyFooter/>-->
-    <!--    </div>-->
+    <div class="main">
+      <MyTime :timeSetting="commonSettings.timeSetting"/>
+    </div>
+    <MyFooter :simple="baseSetting.simpleFooter"/>
   </div>
 </template>
 
 <script setup>
-import {reactive, ref, watch} from "vue";
-import dayjs from "dayjs"
+import {reactive, ref, toRefs, watch} from "vue";
 import Header from "../components/header.vue";
-import MySearch from '../components/my-search.vue'
-import Shortcut from '../components/shortcut.vue'
+import MyTime from '../components/my-time.vue'
 import MyFooter from "../components/my-footer.vue";
-// import {getTextColor, getBackgroundColor} from '../utils/index.js'
-import store from 'store'
 
+const imgUrl = ref('https://cn.bing.com/th?id=OHR.ChalkRock_ZH-CN2893565655_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&qlt=50')
 const commonSettings = reactive(
     {
       timeSetting: {
-        time:true,
-        hover24:true,
-        month:true,
-        week:true,
-        lunar:true,
-        second:false,
-        weight:true,
+        time: true,
+        month: true,
+        week: true,
+        lunar: true,
+        weight: true,
         family: "Arial",
         size: 40,
         color: "#ffffff",
       },
       // searchBox:{},
-      base:{
-        iconOpenNewBlank: true,
-        searchOpenNewBlank: true,
-        showWord:false,
+      baseSetting: {
+        iconNewBlank: true,
+        searchNewBlank: true,
+        showWord: false,
+        simpleFooter: false,
       }
     }
 )
+const {baseSetting} = toRefs(commonSettings)
 
 watch(commonSettings, (newData) => {
   console.log(commonSettings)
@@ -92,6 +78,19 @@ watch(commonSettings, (newData) => {
 </script>
 
 <style scoped>
+.back-img {
+  position: fixed;
+  top: 0;
+  left: 0;
+  object-fit: cover;
+  z-index: -30;
+  width: 100%;
+  height: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
 .back-img:after {
   content: '';
   position: absolute;
