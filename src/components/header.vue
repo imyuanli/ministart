@@ -104,6 +104,7 @@
       </SettingPanel>
       <SettingPanel
           :settingObj="timeSetting"
+          mainSwitch="time"
       >
         <template #panel-title>
           时间/日期
