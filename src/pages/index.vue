@@ -7,6 +7,7 @@
     <Header :commonSettings="commonSettings"/>
     <div class="main">
       <MyTime :timeSetting="commonSettings.timeSetting"/>
+      <MySearch :searchSetting="commonSettings.searchSetting"/>
     </div>
     <MyFooter :simple="baseSetting.simpleFooter"/>
   </div>
@@ -16,6 +17,8 @@
 import {reactive, ref, toRefs, watch} from "vue";
 import Header from "../components/header.vue";
 import MyTime from '../components/my-time.vue'
+import MySearch from '../components/my-search.vue'
+
 import MyFooter from "../components/my-footer.vue";
 
 const imgUrl = ref('https://cn.bing.com/th?id=OHR.ChalkRock_ZH-CN2893565655_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&qlt=50')
@@ -30,6 +33,13 @@ const commonSettings = reactive(
         family: "Arial",
         size: 40,
         color: "#ffffff",
+      },
+      searchSetting: {
+        search: true,
+        height: 46,
+        radius: 30,
+        opacity: 70,
+        blank: true,
       },
       // searchBox:{},
       baseSetting: {

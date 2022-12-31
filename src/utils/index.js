@@ -1,4 +1,5 @@
 export const setInfo = {
+    //时间
     time: {
         intro: "显示时间",
         tips: "",
@@ -63,6 +64,41 @@ export const setInfo = {
         tips: "",
         type: "picker",
     },
+
+    //搜索框
+    search: {
+        intro: "显示搜索框",
+        tips: "",
+        type: "switch",
+    },
+    height: {
+        intro: "搜索框的高度",
+        tips: "",
+        type: "slider",
+        min: 36,
+        max: 50,
+    },
+    radius: {
+        intro: "搜索框的圆角",
+        tips: "",
+        type: "slider",
+        min: 0,
+        max: 50,
+    },
+    opacity: {
+        intro: "搜索框的透明度",
+        tips: "",
+        type: "slider",
+        min: 0,
+        max: 100,
+    },
+    blank: {
+        intro: "新标签页打开搜索结果",
+        tips: "",
+        type: "switch",
+    },
+
+    //常规
     searchNewBlank: {
         intro: "新标签页打开搜索结果",
         tips: "",

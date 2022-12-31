@@ -95,19 +95,27 @@
       常规设置
     </template>
     <template #content>
-      <SettingPanel
-          :settingObj="baseSetting"
-      >
-        <template #panel-title>
-          通用设置
-        </template>
-      </SettingPanel>
+<!--      <SettingPanel-->
+<!--          :settingObj="baseSetting"-->
+<!--      >-->
+<!--        <template #panel-title>-->
+<!--          通用设置-->
+<!--        </template>-->
+<!--      </SettingPanel>-->
       <SettingPanel
           :settingObj="timeSetting"
           mainSwitch="time"
       >
         <template #panel-title>
           时间/日期
+        </template>
+      </SettingPanel>
+      <SettingPanel
+          :settingObj="searchSetting"
+          mainSwitch="search"
+      >
+        <template #panel-title>
+          搜索栏
         </template>
       </SettingPanel>
     </template>
@@ -121,7 +129,7 @@ import MyDialog from "./my-dialog.vue";
 const props = defineProps({
   commonSettings: Object
 })
-let {timeSetting,baseSetting} = toRefs(props.commonSettings)
+let {timeSetting, baseSetting, searchSetting} = toRefs(props.commonSettings)
 
 //个人信息
 // const infoDialogVisible = ref(false)

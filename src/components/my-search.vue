@@ -1,5 +1,12 @@
 <template>
-  <div class="absolute left-1/2 -translate-x-1/2 top-56 search-box flex-center">
+  <div v-if="search"
+       class="absolute left-1/2 -translate-x-1/2 top-44 search-box flex-center"
+       :style="{
+              height:height+'px',
+              borderRadius:radius+'px',
+              backgroundColor:`rgba(255,255,255,${opacity/100})`,
+            }"
+  >
     <el-popover
         placement="bottom"
         trigger="click"
@@ -41,11 +48,19 @@
 
 <script setup>
 //选中的searchEngines
-import {reactive, ref, watch} from "vue";
+import {reactive, ref, toRefs, watch} from "vue";
 
 const props = defineProps({
-  isOpenNewTab: Boolean
+  searchSetting: Object
 })
+
+const {
+  search,
+  height,
+  radius,
+  opacity,
+  blank,
+} = toRefs(props.searchSetting)
 
 const currentIndex = ref(0)
 const inputValue = ref("")
@@ -84,7 +99,7 @@ const searchData = () => {
   value = inputValue.value.replaceAll('&', '%26')
   value = inputValue.value.replaceAll('#', '%23')
   let res = searchEngines[currentIndex.value]?.target + value
-  if (props.isOpenNewTab) {
+  if (blank.value) {
     window.open(res)
   } else {
     window.location.href = res
@@ -95,13 +110,10 @@ const searchData = () => {
 
 <style scoped>
 .search-box {
-  height: 46px;
   max-width: 530px;
   width: 90%;
-  border-radius: 30px;
   overflow: hidden;
   transition: 300ms;
-  background: #fff;
   box-shadow: rgb(0 0 0 / 20%) 0 0 10px;
 }
 
