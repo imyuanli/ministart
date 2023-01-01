@@ -1,6 +1,6 @@
 <template>
   <div v-if="search"
-       class="absolute left-1/2 -translate-x-1/2 top-44 search-box flex-center"
+       class="search-box flex-center mb-6"
        :style="{
               height:height+'px',
               borderRadius:radius+'px',

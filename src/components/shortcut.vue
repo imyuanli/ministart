@@ -1,5 +1,5 @@
 <template>
-  <div class="absolute left-1/2 -translate-x-1/2 top-80 tool-box">
+  <div class="tool-box">
     <div class="grid gap-2 md:gap-4 justify-items-center grid-cols-5 lg:grid-cols-9 md:grid-cols-7 sm:grid-cols-6">
       <div class="flex-center flex-col"
            @contextmenu.prevent="rightClick($event,items,index)"
@@ -97,7 +97,7 @@ const left = ref(0)
 //打开menu
 const openMenu = (x, y) => {
   left.value = x;
-  top.value = y;
+  top.value = y-60;
   visible.value = true;
 }
 //右键打开

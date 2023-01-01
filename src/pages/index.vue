@@ -1,13 +1,14 @@
 <template>
-  <div class="relative w-full h-screen min-h-screen">
+  <div class="relative w-full h-screen min-h-screen flex-center">
     <div
         class="back-img"
         :style="{backgroundImage:`url(${imgUrl})`}"
     />
     <Header :commonSettings="commonSettings"/>
-    <div class="main">
+    <div class="main ">
       <MyTime :timeSetting="commonSettings.timeSetting"/>
       <MySearch :searchSetting="commonSettings.searchSetting"/>
+      <Shortcut />
     </div>
     <MyFooter :simple="baseSetting.simpleFooter"/>
   </div>
@@ -20,6 +21,7 @@ import MyTime from '../components/my-time.vue'
 import MySearch from '../components/my-search.vue'
 
 import MyFooter from "../components/my-footer.vue";
+import Shortcut from "../components/shortcut.vue";
 
 const imgUrl = ref('https://cn.bing.com/th?id=OHR.ChalkRock_ZH-CN2893565655_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&qlt=50')
 const commonSettings = reactive(
@@ -133,7 +135,11 @@ watch(commonSettings, (newData) => {
 .main {
   width: 100%;
   max-width: 1200px;
-  margin: 0 auto;
-  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  position: absolute;
+  top: 60px;
 }
 </style>
