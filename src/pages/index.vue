@@ -8,7 +8,7 @@
     <div class="main ">
       <MyTime :timeSetting="commonSettings.timeSetting"/>
       <MySearch :searchSetting="commonSettings.searchSetting"/>
-      <Shortcut />
+<!--      <Shortcut />-->
     </div>
     <MyFooter :simple="baseSetting.simpleFooter"/>
   </div>
@@ -55,7 +55,7 @@ const commonSettings = reactive(
 const {baseSetting} = toRefs(commonSettings)
 
 watch(commonSettings, (newData) => {
-  console.log(commonSettings)
+  // console.log(commonSettings)
   // store.set("commonSettings", newData)
 })
 

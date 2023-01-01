@@ -1,47 +1,68 @@
 <template>
-  <div v-if="search"
-       class="search-box flex-center mb-6"
-       :style="{
+  <div v-if="search" class="search-box mb-6">
+    <div
+        class="flex-center shadow-md mb-2"
+        :style="{
               height:height+'px',
               borderRadius:radius+'px',
               backgroundColor:`rgba(255,255,255,${opacity/100})`,
             }"
-  >
-    <el-popover
-        placement="bottom"
-        trigger="click"
+    >
+      <div
+          class="search-btn left-2"
+          @click.stop="searchVisible = !searchVisible"
+      >
+        <img class="search-btn-eng" :src="searchEngines[currentIndex].icon" alt="">
+      </div>
+      <input
+          class="input-box"
+          placeholder="搜索"
+          v-model="inputValue"
+          @keydown.enter="searchData"
+      />
+      <div class="search-btn right-2" @click="searchData">
+        <el-icon class="primary-color" style="font-size: 18px">
+          <Search/>
+        </el-icon>
+      </div>
+    </div>
+    <div
+        v-show="searchVisible"
+        class="p-2 flex justify-start items-center flex-wrap fadeInDown"
+        :style="{
+              borderRadius:radius+'px',
+              backgroundColor:`rgba(255,255,255,${opacity/100})`,
+            }"
     >
       <div
           class="menu-item"
-          v-for="(item,index) in searchEngines" :key="index"
-          @click="currentIndex = index"
+          v-for="(item,index) in searchEngines"
+          :key="index"
+          @click="selectCurrent(index)"
       >
-        <img class="menu-img" :src="item.icon" alt="">
-        <span>{{ item.name }}</span>
-      </div>
-      <!--      新增搜索-->
-      <div class="menu-item">
-        <el-icon style="vertical-align: middle;font-size: 16px">
-          <Setting/>
-        </el-icon>
-        <span class="ml-1">设置搜索引擎</span>
-      </div>
-      <template #reference>
-        <div class="search-btn left-2">
-          <img class="search-btn-eng" :src="searchEngines[currentIndex].icon" alt="">
+        <div class="flex-center flex-col">
+          <div class="p-2 bg-white rounded-md flex-center mb-1">
+            <img class="menu-img" :src="item.icon" alt="">
+          </div>
+          <div>
+            {{ item.name }}
+          </div>
         </div>
-      </template>
-    </el-popover>
-    <input
-        class="input-box"
-        placeholder="搜索"
-        v-model="inputValue"
-        @keydown.enter="searchData"
-    />
-    <div class="search-btn right-2">
-      <el-icon class="primary-color" style="font-size: 18px">
-        <Search/>
-      </el-icon>
+      </div>
+      <div
+          class="menu-item"
+      >
+        <div class="flex-center flex-col">
+          <div class="p-2 bg-white rounded-md flex-center mb-1">
+            <el-icon class="menu-img #1890ff">
+              <Setting/>
+            </el-icon>
+          </div>
+          <div>
+            设置
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -49,7 +70,6 @@
 <script setup>
 //选中的searchEngines
 import {reactive, ref, toRefs, watch} from "vue";
-
 const props = defineProps({
   searchSetting: Object
 })
@@ -62,38 +82,49 @@ const {
   blank,
 } = toRefs(props.searchSetting)
 
-const currentIndex = ref(0)
-const inputValue = ref("")
-const searchEngines = reactive(
-    [
-      {
-        name: "百度",
-        target: "https://www.baidu.com/s?wd=",
-        icon: 'https://www.baidu.com/favicon.ico'
-      },
-      {
-        name: "必应",
-        target: "https://cn.bing.com/search?q=",
-        icon: 'https://www.jianfast.com/static/home/images/searchChoice/bing.svg'
-      },
-      {
-        name: "谷歌",
-        target: "https://www.google.com/search?q=",
-        icon: 'https://www.jianfast.com/static/home/images/searchChoice/google.svg'
-      },
-      {
-        name: "360",
-        target: "https://www.so.com/s?q=",
-        icon: 'https://s2.ssl.qhimg.com/static/121a1737750aa53d.ico'
-      },
-      {
-        name: "搜狗",
-        target: "https://www.sogou.com/web?query=",
-        icon: 'https://www.sogou.com/images/logo/new/favicon.ico'
-      },
-    ]
-)
+//搜索引擎弹窗
+const searchVisible = ref(false)
+const closeSearch = () => {
+  searchVisible.value = false
+}
 
+//选择搜索引擎
+const searchEngines = reactive([
+  {
+    name: "百度",
+    target: "https://www.baidu.com/s?wd=",
+    icon: 'https://www.baidu.com/favicon.ico'
+  },
+  {
+    name: "必应",
+    target: "https://cn.bing.com/search?q=",
+    icon: 'https://www.jianfast.com/static/home/images/searchChoice/bing.svg'
+  },
+  {
+    name: "谷歌",
+    target: "https://www.google.com/search?q=",
+    icon: 'https://www.jianfast.com/static/home/images/searchChoice/google.svg'
+  },
+  {
+    name: "360",
+    target: "https://www.so.com/s?q=",
+    icon: 'https://s2.ssl.qhimg.com/static/121a1737750aa53d.ico'
+  },
+  {
+    name: "搜狗",
+    target: "https://www.sogou.com/web?query=",
+    icon: 'https://www.sogou.com/images/logo/new/favicon.ico'
+  },
+
+])
+const currentIndex = ref(0)
+const selectCurrent = (index) => {
+  currentIndex.value = index
+  closeSearch()
+}
+
+//搜索
+const inputValue = ref("")
 const searchData = () => {
   let value = ""
   value = inputValue.value.replaceAll('&', '%26')
@@ -106,6 +137,14 @@ const searchData = () => {
   }
 }
 
+//关闭选择搜索引擎的弹窗
+watch(searchVisible, (newValue, oldValue) => {
+  if (newValue) {
+    document.body.addEventListener('click', closeSearch)
+  } else {
+    document.body.removeEventListener('click', closeSearch)
+  }
+})
 </script>
 
 <style scoped>
@@ -113,8 +152,6 @@ const searchData = () => {
   max-width: 530px;
   width: 90%;
   overflow: hidden;
-  transition: 300ms;
-  box-shadow: rgb(0 0 0 / 20%) 0 0 10px;
 }
 
 .input-box {
@@ -153,7 +190,9 @@ const searchData = () => {
 
 .menu-item {
   display: flex;
-  padding: 10px 5px;
+  justify-content: center;
+  align-items: center;
+  padding: 6px 10px;
   border-radius: 5px;
   color: black;
   font-size: 12px;
@@ -166,9 +205,9 @@ const searchData = () => {
 }
 
 .menu-img {
-  width: 18px;
+  width: 20px;
   height: auto;
-  margin-right: 6px;
+  font-size: 20px;
 }
 
 .focus-input {
