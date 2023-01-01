@@ -134,7 +134,6 @@ watch(commonSettings, (newData) => {
 
 .main {
   width: 100%;
-  max-width: 1200px;
   display: flex;
   justify-content: center;
   align-items: center;
