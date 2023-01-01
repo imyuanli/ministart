@@ -8,7 +8,7 @@
     <div class="main ">
       <MyTime :timeSetting="commonSettings.timeSetting"/>
       <MySearch :searchSetting="commonSettings.searchSetting"/>
-<!--      <Shortcut />-->
+      <Shortcut :toolSetting="commonSettings.toolSetting"/>
     </div>
     <MyFooter :simple="baseSetting.simpleFooter"/>
   </div>
@@ -42,6 +42,13 @@ const commonSettings = reactive(
         radius: 30,
         opacity: 70,
         blank: true,
+      },
+      toolSetting: {
+        size: 60,
+        radius: 30,
+        opacity: 100,
+        gapX: 30,
+        gapY: 30,
       },
       // searchBox:{},
       baseSetting: {

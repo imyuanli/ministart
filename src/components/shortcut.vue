@@ -1,27 +1,43 @@
 <template>
   <div class="tool-box">
-    <div class="grid gap-2 md:gap-4 justify-items-center grid-cols-5 lg:grid-cols-9 md:grid-cols-7 sm:grid-cols-6">
-      <div class="flex-center flex-col"
-           @contextmenu.prevent="rightClick($event,items,index)"
-           @touchstart.prevent="touchStart($event)"
-           @touchmove="touchMove()"
-           @touchend="touchEnd()"
+    <div
+        class="tool-grid"
+        :style="{
+              gridTemplateColumns:`repeat(auto-fill,${size+gapY}px)`,
+              gridTemplateRows:`repeat(auto-fill,${size+gapX}px)`,
+         }"
+    >
+      <div class="tool-item"
+           v-for="(item,index) in toolsArr"
+           :style="{
+               padding: `0 ${gapY/2}px ${gapX}px`,
+               opacity:opacity/100,
+               borderRadius:`${radius}px`,
+               gridColumn: `span ${item.size[1]}`,
+               gridRow: `span ${item.size[0]}`,
+               width:`${size*item.size[1] + gapY*item.size[1]}px`,
+               height:`${size*item.size[0]+ gapY*item.size[0]}px`
+            }"
       >
-        <div class="flex-center mb-1 customNav">
-          <el-icon class="icon-plus" style="">
-            <Plus/>
-          </el-icon>
-        </div>
-        <div class="text-black text-center text-sm overflow-ellipsis truncate w-1/2">
-          翻译
+        <div class="box">
+          {{ item.name }}
         </div>
       </div>
-      <div :class="['flex-center customNav']"
-           @click="editDialogVisible = true">
-        <el-icon class="icon-plus">
-          <Plus/>
-        </el-icon>
-      </div>
+
+      <!--      <div class="flex-center flex-col">-->
+      <!--        <div class="flex-center mb-1 customNav">-->
+      <!--          <img src="	https://files.codelife.cc/icons/taobao.svg" alt="">-->
+      <!--        </div>-->
+      <!--        <div class="text-black text-center text-sm overflow-ellipsis truncate w-1/2">-->
+      <!--          翻译-->
+      <!--        </div>-->
+      <!--      </div>-->
+      <!--      <div :class="['flex-center customNav']"-->
+      <!--           @click="editDialogVisible = true">-->
+      <!--        <el-icon class="icon-plus">-->
+      <!--          <Plus/>-->
+      <!--        </el-icon>-->
+      <!--      </div>-->
     </div>
   </div>
   <MyDialog
@@ -82,9 +98,115 @@
   </div>
 </template>
 <script setup>
-import {ref, watch} from "vue";
+import {ref, toRefs, watch} from "vue";
 import MyInput from '../components/my-input.vue'
 import MyDialog from '../components/my-dialog.vue'
+
+const props = defineProps({
+  toolSetting: Object
+})
+
+const {
+  size,
+  radius,
+  opacity,
+  gapX,
+  gapY
+} = toRefs(props.toolSetting)
+
+const toolsArr = [
+  {
+    name: "秘塔2",
+    src: "https://files.codelife.cc/icons/xiezuocat.com.svg",
+    type: "icon",
+    url: "https://xiezuocat.com/#/?s=itab",
+    size: [1, 2]
+  },
+  {
+    name: "秘塔2",
+    src: "https://files.codelife.cc/icons/xiezuocat.com.svg",
+    type: "icon",
+    url: "https://xiezuocat.com/#/?s=itab",
+    size: [2, 1]
+  },
+  {
+    name: "秘塔2",
+    src: "https://files.codelife.cc/icons/xiezuocat.com.svg",
+    type: "icon",
+    url: "https://xiezuocat.com/#/?s=itab",
+    size: [2, 1]
+  },
+  {
+    name: "秘塔2",
+    src: "https://files.codelife.cc/icons/xiezuocat.com.svg",
+    type: "icon",
+    url: "https://xiezuocat.com/#/?s=itab",
+    size: [2, 2]
+  },
+  {
+    name: "秘塔2",
+    src: "https://files.codelife.cc/icons/xiezuocat.com.svg",
+    type: "icon",
+    url: "https://xiezuocat.com/#/?s=itab",
+    size: [1, 2]
+  },
+  {
+    name: "秘塔2",
+    src: "https://files.codelife.cc/icons/xiezuocat.com.svg",
+    type: "icon",
+    url: "https://xiezuocat.com/#/?s=itab",
+    size: [2, 1]
+  },
+  {
+    name: "秘塔2",
+    src: "https://files.codelife.cc/icons/xiezuocat.com.svg",
+    type: "icon",
+    url: "https://xiezuocat.com/#/?s=itab",
+    size: [1, 1]
+  },
+  {
+    name: "秘塔2",
+    src: "https://files.codelife.cc/icons/xiezuocat.com.svg",
+    type: "icon",
+    url: "https://xiezuocat.com/#/?s=itab",
+    size: [1, 1]
+  },
+  {
+    name: "秘塔2",
+    src: "https://files.codelife.cc/icons/xiezuocat.com.svg",
+    type: "icon",
+    url: "https://xiezuocat.com/#/?s=itab",
+    size: [1, 1]
+  },
+  {
+    name: "秘塔2",
+    src: "https://files.codelife.cc/icons/xiezuocat.com.svg",
+    type: "icon",
+    url: "https://xiezuocat.com/#/?s=itab",
+    size: [1, 1]
+  },
+  {
+    name: "秘塔2",
+    src: "https://files.codelife.cc/icons/xiezuocat.com.svg",
+    type: "icon",
+    url: "https://xiezuocat.com/#/?s=itab",
+    size: [1, 1]
+  },
+  {
+    name: "秘塔2",
+    src: "https://files.codelife.cc/icons/xiezuocat.com.svg",
+    type: "icon",
+    url: "https://xiezuocat.com/#/?s=itab",
+    size: [1, 1]
+  },
+  {
+    name: "秘塔2",
+    src: "https://files.codelife.cc/icons/xiezuocat.com.svg",
+    type: "icon",
+    url: "https://xiezuocat.com/#/?s=itab",
+    size: [1, 1]
+  },
+]
 //编辑弹框
 const editDialogVisible = ref(false)
 const handleEditChange = () => editDialogVisible.value = false
@@ -97,7 +219,7 @@ const left = ref(0)
 //打开menu
 const openMenu = (x, y) => {
   left.value = x;
-  top.value = y-60;
+  top.value = y - 60;
   visible.value = true;
 }
 //右键打开
@@ -158,6 +280,34 @@ watch(visible, (newValue, oldValue) => {
 
 .tool-box::-webkit-scrollbar {
   display: none;
+}
+
+.tool-grid {
+  position: relative;
+  display: grid;
+  padding-top: 2vh;
+  user-select: none;
+  grid-auto-flow: dense;
+  box-sizing: border-box;
+  justify-content: center;
+  padding-bottom: 50px;
+}
+
+.tool-item {
+  list-style-type: none;
+  position: relative;
+  height: 100%;
+  box-sizing: border-box;
+
+}
+
+.box {
+  background: red;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
 }
 
 .customNav {
