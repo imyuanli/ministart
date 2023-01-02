@@ -1,5 +1,10 @@
 <template>
-  <div class="tool-box">
+  <div
+      class="tool-box"
+      :style="{
+              maxWidth:`${maxWidth}px`,
+         }"
+  >
     <div
         class="tool-grid"
         :style="{
@@ -10,23 +15,40 @@
       <div class="tool-item"
            v-for="(item,index) in toolsArr"
            :style="{
-               padding: `0 ${gapY/2}px ${gapX}px`,
-               opacity:opacity/100,
-               borderRadius:`${radius}px`,
-               gridColumn: `span ${item.size[1]}`,
-               gridRow: `span ${item.size[0]}`,
-               width:`${size*item.size[1] + gapY*item.size[1]}px`,
-               height:`${size*item.size[0]+ gapY*item.size[0]}px`
+               padding: `0 ${gapX/2}px ${gapY}px`,
+               gridColumn: `span ${item.grid.split('x')[1]}`,
+               gridRow: `span ${item.grid.split('x')[0]}`,
+               width:`${size*item.grid.split('x')[1] + gapY*item.grid.split('x')[1]}px`,
+               height:`${size*item.grid.split('x')[0]+ gapY*item.grid.split('x')[0]}px`
             }"
+           :key="index"
       >
-        <div class="box">
-          {{ item.name }}
+        <div class="flex-center flex-col w-full h-full">
+          <div class="bg-white rounded-md cursor-pointer w-full h-full flex-center"
+               :style="{
+                 opacity:opacity/100,
+                 borderRadius:`${radius}px`,
+                }"
+          >
+            <img
+                class="w-full h-full object-cover"
+                v-if="item.type=='icon'"
+                :src="item.src" alt=""
+                :style="{
+                  borderRadius:`${radius}px`,
+                }"
+            >
+            <span v-if="item.type=='text'">{{ item.src }}</span>
+          </div>
+<!--          <div class="mt-1">-->
+<!--            {{ item.name }}-->
+<!--          </div>-->
         </div>
+        <div class="flex-center">{{item.name}}</div>
       </div>
-
       <!--      <div class="flex-center flex-col">-->
       <!--        <div class="flex-center mb-1 customNav">-->
-      <!--          <img src="	https://files.codelife.cc/icons/taobao.svg" alt="">-->
+      <!--          <img src="https://files.codelife.cc/icons/taobao.svg" alt="">-->
       <!--        </div>-->
       <!--        <div class="text-black text-center text-sm overflow-ellipsis truncate w-1/2">-->
       <!--          翻译-->
@@ -60,7 +82,7 @@
         <div class="py-3 shortcut-box">
           <div class="w-10">图标</div>
           <div class="shortcut-icon-box">
-            <img class="shortcut-icon" src="https://www.jianfast.com/static/home/images/defaultsicon/null.png" alt="">
+            <img class="shortcut-icon" src="https://files.codelife.cc/user-website-icon/20230102/byOZIc4rKH0y94QBZx7mK1994.jpeg?x-oss-process=image/resize,limit_0,m_fill,w_200,h_200/quality,q_100" alt="">
           </div>
           <div class="shortcut-btn-box">
             <div class="shortcut-btn">
@@ -111,100 +133,150 @@ const {
   radius,
   opacity,
   gapX,
-  gapY
+  gapY,
+  maxWidth
 } = toRefs(props.toolSetting)
 
 const toolsArr = [
   {
     name: "秘塔2",
-    src: "https://files.codelife.cc/icons/xiezuocat.com.svg",
+    src: "https://files.codelife.cc/user-website-icon/20230102/byOZIc4rKH0y94QBZx7mK1994.jpeg?x-oss-process=image/resize,limit_0,m_fill,w_200,h_200/quality,q_100",
     type: "icon",
     url: "https://xiezuocat.com/#/?s=itab",
-    size: [1, 2]
+    grid: '1x1'
   },
   {
     name: "秘塔2",
-    src: "https://files.codelife.cc/icons/xiezuocat.com.svg",
+    src: "https://files.codelife.cc/user-website-icon/20230102/byOZIc4rKH0y94QBZx7mK1994.jpeg?x-oss-process=image/resize,limit_0,m_fill,w_200,h_200/quality,q_100",
     type: "icon",
     url: "https://xiezuocat.com/#/?s=itab",
-    size: [2, 1]
+    grid: '2x1'
   },
   {
     name: "秘塔2",
-    src: "https://files.codelife.cc/icons/xiezuocat.com.svg",
+    src: "https://files.codelife.cc/user-website-icon/20230102/byOZIc4rKH0y94QBZx7mK1994.jpeg?x-oss-process=image/resize,limit_0,m_fill,w_200,h_200/quality,q_100",
     type: "icon",
     url: "https://xiezuocat.com/#/?s=itab",
-    size: [2, 1]
+    grid: '2x1'
   },
   {
     name: "秘塔2",
-    src: "https://files.codelife.cc/icons/xiezuocat.com.svg",
+    src: "https://files.codelife.cc/user-website-icon/20230102/byOZIc4rKH0y94QBZx7mK1994.jpeg?x-oss-process=image/resize,limit_0,m_fill,w_200,h_200/quality,q_100",
     type: "icon",
     url: "https://xiezuocat.com/#/?s=itab",
-    size: [2, 2]
+    grid: '1x2'
   },
   {
     name: "秘塔2",
-    src: "https://files.codelife.cc/icons/xiezuocat.com.svg",
+    src: "https://files.codelife.cc/user-website-icon/20230102/byOZIc4rKH0y94QBZx7mK1994.jpeg?x-oss-process=image/resize,limit_0,m_fill,w_200,h_200/quality,q_100",
     type: "icon",
     url: "https://xiezuocat.com/#/?s=itab",
-    size: [1, 2]
+    grid: '2x1'
   },
   {
     name: "秘塔2",
-    src: "https://files.codelife.cc/icons/xiezuocat.com.svg",
+    src: "https://files.codelife.cc/user-website-icon/20230102/byOZIc4rKH0y94QBZx7mK1994.jpeg?x-oss-process=image/resize,limit_0,m_fill,w_200,h_200/quality,q_100",
     type: "icon",
     url: "https://xiezuocat.com/#/?s=itab",
-    size: [2, 1]
+    grid: '1x1'
   },
   {
     name: "秘塔2",
-    src: "https://files.codelife.cc/icons/xiezuocat.com.svg",
+    src: "https://files.codelife.cc/user-website-icon/20230102/byOZIc4rKH0y94QBZx7mK1994.jpeg?x-oss-process=image/resize,limit_0,m_fill,w_200,h_200/quality,q_100",
     type: "icon",
     url: "https://xiezuocat.com/#/?s=itab",
-    size: [1, 1]
+    grid: '2x2'
   },
   {
     name: "秘塔2",
-    src: "https://files.codelife.cc/icons/xiezuocat.com.svg",
+    src: "https://files.codelife.cc/user-website-icon/20230102/byOZIc4rKH0y94QBZx7mK1994.jpeg?x-oss-process=image/resize,limit_0,m_fill,w_200,h_200/quality,q_100",
     type: "icon",
     url: "https://xiezuocat.com/#/?s=itab",
-    size: [1, 1]
+    grid: '2x2'
   },
   {
     name: "秘塔2",
-    src: "https://files.codelife.cc/icons/xiezuocat.com.svg",
+    src: "https://files.codelife.cc/user-website-icon/20230102/byOZIc4rKH0y94QBZx7mK1994.jpeg?x-oss-process=image/resize,limit_0,m_fill,w_200,h_200/quality,q_100",
     type: "icon",
     url: "https://xiezuocat.com/#/?s=itab",
-    size: [1, 1]
+    grid: '2x2'
   },
   {
     name: "秘塔2",
-    src: "https://files.codelife.cc/icons/xiezuocat.com.svg",
+    src: "https://files.codelife.cc/user-website-icon/20230102/byOZIc4rKH0y94QBZx7mK1994.jpeg?x-oss-process=image/resize,limit_0,m_fill,w_200,h_200/quality,q_100",
     type: "icon",
     url: "https://xiezuocat.com/#/?s=itab",
-    size: [1, 1]
+    grid: '1x1'
   },
   {
     name: "秘塔2",
-    src: "https://files.codelife.cc/icons/xiezuocat.com.svg",
+    src: "https://files.codelife.cc/user-website-icon/20230102/byOZIc4rKH0y94QBZx7mK1994.jpeg?x-oss-process=image/resize,limit_0,m_fill,w_200,h_200/quality,q_100",
     type: "icon",
     url: "https://xiezuocat.com/#/?s=itab",
-    size: [1, 1]
+    grid: '1x1'
   },
   {
     name: "秘塔2",
-    src: "https://files.codelife.cc/icons/xiezuocat.com.svg",
+    src: "https://files.codelife.cc/user-website-icon/20230102/byOZIc4rKH0y94QBZx7mK1994.jpeg?x-oss-process=image/resize,limit_0,m_fill,w_200,h_200/quality,q_100",
     type: "icon",
     url: "https://xiezuocat.com/#/?s=itab",
-    size: [1, 1]
+    grid: '1x1'
   },
   {
     name: "秘塔2",
-    src: "https://files.codelife.cc/icons/xiezuocat.com.svg",
+    src: "https://files.codelife.cc/user-website-icon/20230102/byOZIc4rKH0y94QBZx7mK1994.jpeg?x-oss-process=image/resize,limit_0,m_fill,w_200,h_200/quality,q_100",
     type: "icon",
     url: "https://xiezuocat.com/#/?s=itab",
-    size: [1, 1]
+    grid: '1x1'
+  },
+  {
+    name: "秘塔2",
+    src: "https://files.codelife.cc/user-website-icon/20230102/byOZIc4rKH0y94QBZx7mK1994.jpeg?x-oss-process=image/resize,limit_0,m_fill,w_200,h_200/quality,q_100",
+    type: "icon",
+    url: "https://xiezuocat.com/#/?s=itab",
+    grid: '1x1'
+  },
+  {
+    name: "秘塔2",
+    src: "https://files.codelife.cc/user-website-icon/20230102/byOZIc4rKH0y94QBZx7mK1994.jpeg?x-oss-process=image/resize,limit_0,m_fill,w_200,h_200/quality,q_100",
+    type: "icon",
+    url: "https://xiezuocat.com/#/?s=itab",
+    grid: '1x1'
+  },
+  {
+    name: "秘塔2",
+    src: "https://files.codelife.cc/user-website-icon/20230102/byOZIc4rKH0y94QBZx7mK1994.jpeg?x-oss-process=image/resize,limit_0,m_fill,w_200,h_200/quality,q_100",
+    type: "icon",
+    url: "https://xiezuocat.com/#/?s=itab",
+    grid: '1x1'
+  },
+  {
+    name: "秘塔2",
+    src: "https://files.codelife.cc/user-website-icon/20230102/byOZIc4rKH0y94QBZx7mK1994.jpeg?x-oss-process=image/resize,limit_0,m_fill,w_200,h_200/quality,q_100",
+    type: "icon",
+    url: "https://xiezuocat.com/#/?s=itab",
+    grid: '1x1'
+  },
+  {
+    name: "秘塔2",
+    src: "https://files.codelife.cc/user-website-icon/20230102/byOZIc4rKH0y94QBZx7mK1994.jpeg?x-oss-process=image/resize,limit_0,m_fill,w_200,h_200/quality,q_100",
+    type: "icon",
+    url: "https://xiezuocat.com/#/?s=itab",
+    grid: '1x1'
+  },
+  {
+    name: "秘塔2",
+    src: "https://files.codelife.cc/user-website-icon/20230102/byOZIc4rKH0y94QBZx7mK1994.jpeg?x-oss-process=image/resize,limit_0,m_fill,w_200,h_200/quality,q_100",
+    type: "icon",
+    url: "https://xiezuocat.com/#/?s=itab",
+    grid: '1x1'
+  },
+  {
+    name: "秘塔2",
+    src: "https://files.codelife.cc/user-website-icon/20230102/byOZIc4rKH0y94QBZx7mK1994.jpeg?x-oss-process=image/resize,limit_0,m_fill,w_200,h_200/quality,q_100",
+    type: "icon",
+    url: "https://xiezuocat.com/#/?s=itab",
+    grid: '1x1'
   },
 ]
 //编辑弹框
@@ -271,7 +343,6 @@ watch(visible, (newValue, oldValue) => {
 <style scoped>
 .tool-box {
   max-height: 45%;
-  max-width: 800px;
   width: 95%;
   color: #fff;
   transition: .25s;
@@ -285,12 +356,10 @@ watch(visible, (newValue, oldValue) => {
 .tool-grid {
   position: relative;
   display: grid;
-  padding-top: 2vh;
   user-select: none;
   grid-auto-flow: dense;
   box-sizing: border-box;
   justify-content: center;
-  padding-bottom: 50px;
 }
 
 .tool-item {
@@ -298,7 +367,6 @@ watch(visible, (newValue, oldValue) => {
   position: relative;
   height: 100%;
   box-sizing: border-box;
-
 }
 
 .box {

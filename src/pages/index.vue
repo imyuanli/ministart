@@ -45,10 +45,11 @@ const commonSettings = reactive(
       },
       toolSetting: {
         size: 60,
-        radius: 30,
+        radius: 25,
         opacity: 100,
         gapX: 30,
         gapY: 30,
+        maxWidth:1200
       },
       // searchBox:{},
       baseSetting: {
