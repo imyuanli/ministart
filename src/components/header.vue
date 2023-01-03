@@ -95,16 +95,9 @@
       常规设置
     </template>
     <template #content>
-<!--      <SettingPanel-->
-<!--          :settingObj="baseSetting"-->
-<!--      >-->
-<!--        <template #panel-title>-->
-<!--          通用设置-->
-<!--        </template>-->
-<!--      </SettingPanel>-->
       <SettingPanel
           :settingObj="timeSetting"
-          mainSwitch="time"
+          settingName="timeSetting"
       >
         <template #panel-title>
           时间/日期
@@ -112,7 +105,7 @@
       </SettingPanel>
       <SettingPanel
           :settingObj="searchSetting"
-          mainSwitch="search"
+          settingName="searchSetting"
       >
         <template #panel-title>
           搜索栏
