@@ -1,9 +1,8 @@
 <template>
   <div
+      v-if="show"
       class="tool-box"
-      :style="{
-              maxWidth:`${maxWidth}px`,
-         }"
+      :style="{maxWidth:`${maxWidth}px`}"
   >
     <div
         class="tool-grid"
@@ -24,27 +23,22 @@
            :key="index"
       >
         <div class="flex-center flex-col w-full h-full">
-          <div class="bg-white rounded-md cursor-pointer w-full h-full flex-center"
-               :style="{
-                 opacity:opacity/100,
-                 borderRadius:`${radius}px`,
-                }"
+          <div
+              class="bg-white rounded-md cursor-pointer w-full h-full flex-center p-1"
+              :style="{opacity:opacity/100,borderRadius:`${radius}px`}"
           >
             <img
-                class="w-full h-full object-cover"
-                v-if="item.type=='icon'"
-                :src="item.src" alt=""
-                :style="{
-                  borderRadius:`${radius}px`,
-                }"
+                class="w-full h-full"
+                :class="[item.grid === '2x1'|| item.grid === '1x2'?'object-contain':'object-cover']"
+                v-if="item.type==='icon'"
+                :src="item.src"
+                :alt="item.name"
+                :style="{borderRadius:`${radius}px`}"
             >
-            <span v-if="item.type=='text'">{{ item.src }}</span>
+<!--            <span v-if="item.type==='text'" class="text-black text-xl">{{ item.src }}</span>-->
           </div>
-<!--          <div class="mt-1">-->
-<!--            {{ item.name }}-->
-<!--          </div>-->
         </div>
-        <div class="flex-center">{{item.name}}</div>
+        <div class="flex-center text-sm">{{ item.name }}</div>
       </div>
       <!--      <div class="flex-center flex-col">-->
       <!--        <div class="flex-center mb-1 customNav">-->
@@ -82,7 +76,7 @@
         <div class="py-3 shortcut-box">
           <div class="w-10">图标</div>
           <div class="shortcut-icon-box">
-            <img class="shortcut-icon" src="https://files.codelife.cc/user-website-icon/20230102/byOZIc4rKH0y94QBZx7mK1994.jpeg?x-oss-process=image/resize,limit_0,m_fill,w_200,h_200/quality,q_100" alt="">
+            <img class="shortcut-icon" src="https://www.jianfast.com/static/home/images/defaultsicon/null.png" alt="">
           </div>
           <div class="shortcut-btn-box">
             <div class="shortcut-btn">
@@ -129,6 +123,7 @@ const props = defineProps({
 })
 
 const {
+  show,
   size,
   radius,
   opacity,
@@ -140,144 +135,32 @@ const {
 const toolsArr = [
   {
     name: "秘塔2",
-    src: "https://files.codelife.cc/user-website-icon/20230102/byOZIc4rKH0y94QBZx7mK1994.jpeg?x-oss-process=image/resize,limit_0,m_fill,w_200,h_200/quality,q_100",
+    src: "https://www.jianfast.com/static/home/images/defaultsicon/null.png",
     type: "icon",
     url: "https://xiezuocat.com/#/?s=itab",
     grid: '1x1'
   },
   {
     name: "秘塔2",
-    src: "https://files.codelife.cc/user-website-icon/20230102/byOZIc4rKH0y94QBZx7mK1994.jpeg?x-oss-process=image/resize,limit_0,m_fill,w_200,h_200/quality,q_100",
+    src: "https://www.jianfast.com/static/home/images/defaultsicon/null.png",
     type: "icon",
     url: "https://xiezuocat.com/#/?s=itab",
     grid: '2x1'
   },
   {
     name: "秘塔2",
-    src: "https://files.codelife.cc/user-website-icon/20230102/byOZIc4rKH0y94QBZx7mK1994.jpeg?x-oss-process=image/resize,limit_0,m_fill,w_200,h_200/quality,q_100",
-    type: "icon",
-    url: "https://xiezuocat.com/#/?s=itab",
-    grid: '2x1'
-  },
-  {
-    name: "秘塔2",
-    src: "https://files.codelife.cc/user-website-icon/20230102/byOZIc4rKH0y94QBZx7mK1994.jpeg?x-oss-process=image/resize,limit_0,m_fill,w_200,h_200/quality,q_100",
+    src: "https://www.jianfast.com/static/home/images/defaultsicon/null.png",
     type: "icon",
     url: "https://xiezuocat.com/#/?s=itab",
     grid: '1x2'
   },
   {
     name: "秘塔2",
-    src: "https://files.codelife.cc/user-website-icon/20230102/byOZIc4rKH0y94QBZx7mK1994.jpeg?x-oss-process=image/resize,limit_0,m_fill,w_200,h_200/quality,q_100",
-    type: "icon",
-    url: "https://xiezuocat.com/#/?s=itab",
-    grid: '2x1'
-  },
-  {
-    name: "秘塔2",
-    src: "https://files.codelife.cc/user-website-icon/20230102/byOZIc4rKH0y94QBZx7mK1994.jpeg?x-oss-process=image/resize,limit_0,m_fill,w_200,h_200/quality,q_100",
-    type: "icon",
-    url: "https://xiezuocat.com/#/?s=itab",
-    grid: '1x1'
-  },
-  {
-    name: "秘塔2",
-    src: "https://files.codelife.cc/user-website-icon/20230102/byOZIc4rKH0y94QBZx7mK1994.jpeg?x-oss-process=image/resize,limit_0,m_fill,w_200,h_200/quality,q_100",
+    src: "https://www.jianfast.com/static/home/images/defaultsicon/null.png",
     type: "icon",
     url: "https://xiezuocat.com/#/?s=itab",
     grid: '2x2'
-  },
-  {
-    name: "秘塔2",
-    src: "https://files.codelife.cc/user-website-icon/20230102/byOZIc4rKH0y94QBZx7mK1994.jpeg?x-oss-process=image/resize,limit_0,m_fill,w_200,h_200/quality,q_100",
-    type: "icon",
-    url: "https://xiezuocat.com/#/?s=itab",
-    grid: '2x2'
-  },
-  {
-    name: "秘塔2",
-    src: "https://files.codelife.cc/user-website-icon/20230102/byOZIc4rKH0y94QBZx7mK1994.jpeg?x-oss-process=image/resize,limit_0,m_fill,w_200,h_200/quality,q_100",
-    type: "icon",
-    url: "https://xiezuocat.com/#/?s=itab",
-    grid: '2x2'
-  },
-  {
-    name: "秘塔2",
-    src: "https://files.codelife.cc/user-website-icon/20230102/byOZIc4rKH0y94QBZx7mK1994.jpeg?x-oss-process=image/resize,limit_0,m_fill,w_200,h_200/quality,q_100",
-    type: "icon",
-    url: "https://xiezuocat.com/#/?s=itab",
-    grid: '1x1'
-  },
-  {
-    name: "秘塔2",
-    src: "https://files.codelife.cc/user-website-icon/20230102/byOZIc4rKH0y94QBZx7mK1994.jpeg?x-oss-process=image/resize,limit_0,m_fill,w_200,h_200/quality,q_100",
-    type: "icon",
-    url: "https://xiezuocat.com/#/?s=itab",
-    grid: '1x1'
-  },
-  {
-    name: "秘塔2",
-    src: "https://files.codelife.cc/user-website-icon/20230102/byOZIc4rKH0y94QBZx7mK1994.jpeg?x-oss-process=image/resize,limit_0,m_fill,w_200,h_200/quality,q_100",
-    type: "icon",
-    url: "https://xiezuocat.com/#/?s=itab",
-    grid: '1x1'
-  },
-  {
-    name: "秘塔2",
-    src: "https://files.codelife.cc/user-website-icon/20230102/byOZIc4rKH0y94QBZx7mK1994.jpeg?x-oss-process=image/resize,limit_0,m_fill,w_200,h_200/quality,q_100",
-    type: "icon",
-    url: "https://xiezuocat.com/#/?s=itab",
-    grid: '1x1'
-  },
-  {
-    name: "秘塔2",
-    src: "https://files.codelife.cc/user-website-icon/20230102/byOZIc4rKH0y94QBZx7mK1994.jpeg?x-oss-process=image/resize,limit_0,m_fill,w_200,h_200/quality,q_100",
-    type: "icon",
-    url: "https://xiezuocat.com/#/?s=itab",
-    grid: '1x1'
-  },
-  {
-    name: "秘塔2",
-    src: "https://files.codelife.cc/user-website-icon/20230102/byOZIc4rKH0y94QBZx7mK1994.jpeg?x-oss-process=image/resize,limit_0,m_fill,w_200,h_200/quality,q_100",
-    type: "icon",
-    url: "https://xiezuocat.com/#/?s=itab",
-    grid: '1x1'
-  },
-  {
-    name: "秘塔2",
-    src: "https://files.codelife.cc/user-website-icon/20230102/byOZIc4rKH0y94QBZx7mK1994.jpeg?x-oss-process=image/resize,limit_0,m_fill,w_200,h_200/quality,q_100",
-    type: "icon",
-    url: "https://xiezuocat.com/#/?s=itab",
-    grid: '1x1'
-  },
-  {
-    name: "秘塔2",
-    src: "https://files.codelife.cc/user-website-icon/20230102/byOZIc4rKH0y94QBZx7mK1994.jpeg?x-oss-process=image/resize,limit_0,m_fill,w_200,h_200/quality,q_100",
-    type: "icon",
-    url: "https://xiezuocat.com/#/?s=itab",
-    grid: '1x1'
-  },
-  {
-    name: "秘塔2",
-    src: "https://files.codelife.cc/user-website-icon/20230102/byOZIc4rKH0y94QBZx7mK1994.jpeg?x-oss-process=image/resize,limit_0,m_fill,w_200,h_200/quality,q_100",
-    type: "icon",
-    url: "https://xiezuocat.com/#/?s=itab",
-    grid: '1x1'
-  },
-  {
-    name: "秘塔2",
-    src: "https://files.codelife.cc/user-website-icon/20230102/byOZIc4rKH0y94QBZx7mK1994.jpeg?x-oss-process=image/resize,limit_0,m_fill,w_200,h_200/quality,q_100",
-    type: "icon",
-    url: "https://xiezuocat.com/#/?s=itab",
-    grid: '1x1'
-  },
-  {
-    name: "秘塔2",
-    src: "https://files.codelife.cc/user-website-icon/20230102/byOZIc4rKH0y94QBZx7mK1994.jpeg?x-oss-process=image/resize,limit_0,m_fill,w_200,h_200/quality,q_100",
-    type: "icon",
-    url: "https://xiezuocat.com/#/?s=itab",
-    grid: '1x1'
-  },
+  }
 ]
 //编辑弹框
 const editDialogVisible = ref(false)

@@ -111,6 +111,14 @@
           搜索栏
         </template>
       </SettingPanel>
+      <SettingPanel
+          :settingObj="toolSetting"
+          settingName="toolSetting"
+      >
+        <template #panel-title>
+          快捷方式
+        </template>
+      </SettingPanel>
     </template>
   </MyDialog>
 </template>
@@ -122,7 +130,7 @@ import MyDialog from "./my-dialog.vue";
 const props = defineProps({
   commonSettings: Object
 })
-let {timeSetting, baseSetting, searchSetting} = toRefs(props.commonSettings)
+let {timeSetting, searchSetting, toolSetting} = toRefs(props.commonSettings)
 
 //个人信息
 // const infoDialogVisible = ref(false)

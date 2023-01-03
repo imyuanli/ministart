@@ -44,8 +44,9 @@ const commonSettings = reactive(
         blank: true,
       },
       toolSetting: {
+        show:true,
         size: 60,
-        radius: 25,
+        radius: 15,
         opacity: 100,
         gapX: 30,
         gapY: 30,
