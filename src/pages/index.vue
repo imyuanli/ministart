@@ -27,7 +27,7 @@ const imgUrl = ref('https://cn.bing.com/th?id=OHR.ChalkRock_ZH-CN2893565655_1920
 const commonSettings = reactive(
     {
       timeSetting: {
-        time: true,
+        show: true,
         month: true,
         week: true,
         lunar: true,
@@ -37,7 +37,7 @@ const commonSettings = reactive(
         color: "#ffffff",
       },
       searchSetting: {
-        search: true,
+        show: true,
         height: 46,
         radius: 30,
         opacity: 70,

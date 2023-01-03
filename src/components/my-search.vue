@@ -1,5 +1,5 @@
 <template>
-  <div v-if="search" class="search-box mb-6">
+  <div v-if="show" class="search-box mb-6">
     <div
         class="flex-center shadow-md mb-2"
         :style="{
@@ -75,7 +75,7 @@ const props = defineProps({
 })
 
 const {
-  search,
+  show,
   height,
   radius,
   opacity,

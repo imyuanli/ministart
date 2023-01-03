@@ -1,5 +1,5 @@
 <template>
-  <div v-if="time" class="flex-center flex-col mb-6">
+  <div v-if="show" class="flex-center flex-col mb-6">
     <div
         class="cursor-pointer hover:scale-125 duration-200"
         :style="{
@@ -29,7 +29,7 @@ const props = defineProps({
 })
 
 const {
-  time,
+  show,
   size,
   weight,
   family,
@@ -44,7 +44,7 @@ const nowMonth = ref()
 const nowWeek = ref()
 const nowLunar = ref()
 const getNowTime = () => {
-  if (time) {
+  if (show) {
     const d = dayjs()
     //时间
     nowTime.value = d.format("HH:mm")
