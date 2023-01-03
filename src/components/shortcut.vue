@@ -79,11 +79,11 @@
       <div class="flex justify-center items-start flex-col bg-white rounded-lg px-6 py-3 text-base prefix-text-color">
         <div class="py-3 shortcut-box">
           <div class="w-10">网址</div>
-          <MyInput/>
+          <MyInput  v-model="toolObj.url"/>
         </div>
         <div class="py-3 shortcut-box">
           <div class="w-10">名称</div>
-          <MyInput/>
+          <MyInput v-model="toolObj.name"/>
         </div>
         <div class="py-3 shortcut-box">
           <div class="w-10">图标</div>
@@ -100,7 +100,7 @@
           <div class="shortcut-box">
             <div class="w-10 mr-2">布局</div>
             <div class="shortcut-btn-box">
-              <el-radio-group>
+              <el-radio-group v-model="toolObj.grid">
                 <el-radio :label="'1x1'">1x1</el-radio>
                 <el-radio :label="'1x2'">1x2</el-radio>
                 <el-radio :label="'2x1'">2x1</el-radio>
@@ -114,8 +114,8 @@
     </template>
     <template #bottom>
       <el-button>取 消</el-button>
-      <el-button type="primary">确 定</el-button>
-      <el-button type="primary">更 新</el-button>
+      <el-button type="primary" @click="handleSaveTool">确 定</el-button>
+      <!--      <el-button type="primary">更 新</el-button>-->
     </template>
   </MyDialog>
   <div v-show="visible" :style="{left:left+'px',top:top+'px'}" class="contextmenu">
@@ -134,7 +134,7 @@
   </div>
 </template>
 <script setup>
-import {ref, toRefs, watch} from "vue";
+import {reactive, ref, toRefs, watch} from "vue";
 import MyInput from '../components/my-input.vue'
 import MyDialog from '../components/my-dialog.vue'
 
@@ -152,36 +152,56 @@ const {
   maxWidth
 } = toRefs(props.toolSetting)
 
-const toolsArr = [
-  {
-    name: "秘塔2",
-    src: "https://www.jianfast.com/static/home/images/defaultsicon/null.png",
-    type: "icon",
-    url: "https://xiezuocat.com/#/?s=itab",
-    grid: '1x1'
-  },
-  {
-    name: "秘塔2",
-    src: "https://www.jianfast.com/static/home/images/defaultsicon/null.png",
-    type: "icon",
-    url: "https://xiezuocat.com/#/?s=itab",
-    grid: '2x1'
-  },
-  {
-    name: "秘塔2",
-    src: "https://www.jianfast.com/static/home/images/defaultsicon/null.png",
-    type: "icon",
-    url: "https://xiezuocat.com/#/?s=itab",
-    grid: '1x2'
-  },
-  {
-    name: "秘塔2",
-    src: "https://www.jianfast.com/static/home/images/defaultsicon/null.png",
-    type: "icon",
-    url: "https://xiezuocat.com/#/?s=itab",
-    grid: '2x2'
-  }
-]
+
+//快捷方式
+const toolObj = reactive(
+    {
+      name: "",
+      url: "",
+      src: "",
+      type: "",
+      grid: ""
+    }
+)
+
+const toolsArr = reactive(
+    [
+      {
+        name: "秘塔2",
+        src: "https://www.jianfast.com/static/home/images/defaultsicon/null.png",
+        type: "icon",
+        url: "https://xiezuocat.com/#/?s=itab",
+        grid: '1x1'
+      },
+      {
+        name: "秘塔2",
+        src: "https://www.jianfast.com/static/home/images/defaultsicon/null.png",
+        type: "icon",
+        url: "https://xiezuocat.com/#/?s=itab",
+        grid: '2x1'
+      },
+      {
+        name: "秘塔2",
+        src: "https://www.jianfast.com/static/home/images/defaultsicon/null.png",
+        type: "icon",
+        url: "https://xiezuocat.com/#/?s=itab",
+        grid: '1x2'
+      },
+      {
+        name: "秘塔2",
+        src: "https://www.jianfast.com/static/home/images/defaultsicon/null.png",
+        type: "icon",
+        url: "https://xiezuocat.com/#/?s=itab",
+        grid: '2x2'
+      }
+    ]
+)
+
+const handleSaveTool = () => {
+  console.log(toolObj)
+}
+
+
 //编辑弹框
 const editDialogVisible = ref(false)
 const handleEditChange = () => editDialogVisible.value = false
