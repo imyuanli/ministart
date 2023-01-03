@@ -1,15 +1,22 @@
 <template>
   <div class="ml-6 w-full">
     <input
-        v-model="inputValue"
+        :value="modelValue"
         maxlength="8"
         class="my-input"
+        @input="handleChange"
     />
   </div>
 </template>
 
 <script setup>
-
+defineProps({
+  modelValue: String,
+})
+const emit = defineEmits(['update:modelValue'])
+const handleChange = (e) => {
+  emit('update:modelValue', e.target.value)
+}
 </script>
 
 <style scoped>
