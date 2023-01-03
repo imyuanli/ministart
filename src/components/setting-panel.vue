@@ -1,7 +1,7 @@
 <template>
   <div class="mb-3">
     <div class="ml-2 font-bold text-black mb-1">
-      <slot name="panel-title">panel-title</slot>
+      <slot name="panel-title"></slot>
     </div>
     <!--    主要开关，当主开关关闭其他数据隐藏-->
     <div v-if="!settingObj.show" class="bg-white rounded-md px-6 py-3">
@@ -19,7 +19,7 @@
         </div>
       </div>
     </div>
-<!--    具体设置-->
+    <!--    具体设置-->
     <div v-if="settingObj.show" class="bg-white rounded-md px-6 py-3">
       <div v-for="(item,index) in Object.keys(settingObj)" :key="index">
         <div class="flex justify-between py-3">
