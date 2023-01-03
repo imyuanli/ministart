@@ -21,6 +21,10 @@
                height:`${size*item.grid.split('x')[0]+ gapY*item.grid.split('x')[0]}px`
             }"
            :key="index"
+           @contextmenu.prevent="rightClick($event)"
+           @touchstart.prevent="touchStart($event)"
+           @touchmove="touchMove()"
+           @touchend="touchEnd()"
       >
         <div class="flex-center flex-col w-full h-full">
           <div
@@ -35,25 +39,33 @@
                 :alt="item.name"
                 :style="{borderRadius:`${radius}px`}"
             >
-<!--            <span v-if="item.type==='text'" class="text-black text-xl">{{ item.src }}</span>-->
           </div>
         </div>
         <div class="flex-center text-sm">{{ item.name }}</div>
       </div>
-      <!--      <div class="flex-center flex-col">-->
-      <!--        <div class="flex-center mb-1 customNav">-->
-      <!--          <img src="https://files.codelife.cc/icons/taobao.svg" alt="">-->
-      <!--        </div>-->
-      <!--        <div class="text-black text-center text-sm overflow-ellipsis truncate w-1/2">-->
-      <!--          翻译-->
-      <!--        </div>-->
-      <!--      </div>-->
-      <!--      <div :class="['flex-center customNav']"-->
-      <!--           @click="editDialogVisible = true">-->
-      <!--        <el-icon class="icon-plus">-->
-      <!--          <Plus/>-->
-      <!--        </el-icon>-->
-      <!--      </div>-->
+      <div class="tool-item"
+           :style="{
+               padding: `0 ${gapX/2}px ${gapY}px`,
+               width:`${size + gapY}px`,
+               height:`${size+ gapY}px`
+            }"
+      >
+        <div class="flex-center flex-col w-full h-full"
+             @click="editDialogVisible = true"
+        >
+          <div
+              class="bg-white rounded-md cursor-pointer w-full h-full flex-center p-1"
+              :style="{opacity:opacity/100,borderRadius:`${radius}px`}"
+          >
+            <div class="bg-blue-400 flex-center rounded-full">
+              <el-icon style="font-size: 40px">
+                <CirclePlus/>
+              </el-icon>
+            </div>
+          </div>
+        </div>
+        <div class="flex-center text-sm">添加</div>
+      </div>
     </div>
   </div>
   <MyDialog
@@ -61,7 +73,7 @@
       :handleChang="handleEditChange"
   >
     <template #title>
-      网站捷径设置
+      快捷导航设置
     </template>
     <template #content>
       <div class="flex justify-center items-start flex-col bg-white rounded-lg px-6 py-3 text-base prefix-text-color">
@@ -78,17 +90,25 @@
           <div class="shortcut-icon-box">
             <img class="shortcut-icon" src="https://www.jianfast.com/static/home/images/defaultsicon/null.png" alt="">
           </div>
-          <div class="shortcut-btn-box">
-            <div class="shortcut-btn">
-              智能
-            </div>
-            <div class="shortcut-btn">
-              文字
-            </div>
-            <div class="shortcut-btn">
-              默认
+          <div class="ml-3">
+            <el-button round>智能</el-button>
+            <el-button round>文字</el-button>
+            <el-button round>默认</el-button>
+          </div>
+        </div>
+        <div class="py-3 w-full flex flex-col">
+          <div class="shortcut-box">
+            <div class="w-10 mr-2">布局</div>
+            <div class="shortcut-btn-box">
+              <el-radio-group>
+                <el-radio :label="'1x1'">1x1</el-radio>
+                <el-radio :label="'1x2'">1x2</el-radio>
+                <el-radio :label="'2x1'">2x1</el-radio>
+                <el-radio :label="'2x2'">2x2</el-radio>
+              </el-radio-group>
             </div>
           </div>
+          <div class="text-xs text-gray-400">1 x 2表示图标将占一行两列</div>
         </div>
       </div>
     </template>
@@ -200,7 +220,7 @@ const touchStart = (e) => {
   return false;
 }
 //手释放，如果在500毫秒内就释放，则取消长按事件，此时可以执行onclick应该执行的事件
-const touchEnd = (item) => {
+const touchEnd = () => {
   clearTimeout(timeOutEvent); //清除定时器
   if (timeOutEvent !== 0) {
     //这里写要执行的内容（如onclick事件）
@@ -361,7 +381,7 @@ watch(visible, (newValue, oldValue) => {
 }
 
 .shortcut-btn-box {
-  width: 70%;
+  width: 100%;
   display: flex;
   align-items: center;
 }
