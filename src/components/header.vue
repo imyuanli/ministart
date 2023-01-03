@@ -32,9 +32,19 @@
       </template>
       <div>
         <div class="lip-btn" @click="commonDialogVisible = true">常规设置</div>
-        <!--        <el-divider style="margin: 5px"/>-->
-        <!--        <div class="lip-btn">捐助</div>-->
-        <!--        <div class="lip-btn">帮助和反馈</div>-->
+        <div class="lip-btn" @click="commonDialogVisible = true">时间/日期设置</div>
+        <div class="lip-btn" @click="commonDialogVisible = true">搜索栏设置</div>
+        <div class="lip-btn" @click="commonDialogVisible = true">快捷方式设置</div>
+        <el-divider style="margin: 5px"/>
+        <div class="lip-btn" @click="commonDialogVisible = true">搜索引擎偏好</div>
+        <div class="lip-btn" @click="commonDialogVisible = true">壁纸偏好</div>
+        <el-divider style="margin: 5px"/>
+        <div class="lip-btn" @click="commonDialogVisible = true">备份与恢复</div>
+        <div class="lip-btn" @click="commonDialogVisible = true">重置所有设置</div>
+        <el-divider style="margin: 5px"/>
+        <div class="lip-btn">捐助</div>
+        <div class="lip-btn">帮助和反馈</div>
+        <div class="lip-btn">关于</div>
         <el-divider style="margin: 5px"/>
         <div class="lip-btn">设为主页</div>
       </div>
@@ -87,6 +97,105 @@
   <!--    </template>-->
   <!--  </MyDialog>-->
   <!-- 常规设置 -->
+  <MyDialog
+      :dialogVisible="commonDialogVisible"
+      :handleChang="handleCommonChange"
+  >
+    <template #title>
+      时间/日期设置
+    </template>
+    <template #content>
+<!--      <SettingPanel-->
+<!--          :settingObj="timeSetting"-->
+<!--          settingName="timeSetting"-->
+<!--      />-->
+<!--      </SettingPanel>-->
+      <SettingPanel
+          :settingObj="searchSetting"
+          settingName="searchSetting"
+      >
+        <template #panel-title>
+          搜索栏
+        </template>
+      </SettingPanel>
+      <SettingPanel
+          :settingObj="toolSetting"
+          settingName="toolSetting"
+      >
+        <template #panel-title>
+          快捷方式
+        </template>
+      </SettingPanel>
+    </template>
+  </MyDialog>
+  <MyDialog
+      :dialogVisible="commonDialogVisible"
+      :handleChang="handleCommonChange"
+  >
+    <template #title>
+      常规设置
+    </template>
+    <template #content>
+      <SettingPanel
+          :settingObj="timeSetting"
+          settingName="timeSetting"
+      >
+        <template #panel-title>
+          时间/日期
+        </template>
+      </SettingPanel>
+      <SettingPanel
+          :settingObj="searchSetting"
+          settingName="searchSetting"
+      >
+        <template #panel-title>
+          搜索栏
+        </template>
+      </SettingPanel>
+      <SettingPanel
+          :settingObj="toolSetting"
+          settingName="toolSetting"
+      >
+        <template #panel-title>
+          快捷方式
+        </template>
+      </SettingPanel>
+    </template>
+  </MyDialog>
+  <MyDialog
+      :dialogVisible="commonDialogVisible"
+      :handleChang="handleCommonChange"
+  >
+    <template #title>
+      常规设置
+    </template>
+    <template #content>
+      <SettingPanel
+          :settingObj="timeSetting"
+          settingName="timeSetting"
+      >
+        <template #panel-title>
+          时间/日期
+        </template>
+      </SettingPanel>
+      <SettingPanel
+          :settingObj="searchSetting"
+          settingName="searchSetting"
+      >
+        <template #panel-title>
+          搜索栏
+        </template>
+      </SettingPanel>
+      <SettingPanel
+          :settingObj="toolSetting"
+          settingName="toolSetting"
+      >
+        <template #panel-title>
+          快捷方式
+        </template>
+      </SettingPanel>
+    </template>
+  </MyDialog>
   <MyDialog
       :dialogVisible="commonDialogVisible"
       :handleChang="handleCommonChange"
