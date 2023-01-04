@@ -79,29 +79,35 @@
     <template #content>
       <div class="flex justify-center items-start flex-col bg-white rounded-lg px-6 py-3 text-base prefix-text-color">
         <div class="py-3 shortcut-box">
-          <div class="w-10">名称</div>
+          <div>名称</div>
           <MyInput v-model="toolObj.name"/>
         </div>
         <div class="py-3 shortcut-box">
-          <div class="w-10">网址</div>
+          <div>网址</div>
           <MyInput v-model="toolObj.url"/>
         </div>
         <div class="py-3 shortcut-box">
-          <div class="w-10">图标</div>
-          <div class="shortcut-icon-box">
-            <div v-if="toolObj.type==='text'">{{ toolObj.src }}</div>
-            <img v-if="toolObj.type==='icon'" class="shortcut-icon" :src="toolObj.src" alt="">
-          </div>
-          <div class="ml-3">
-            <el-button size="small" round @click="getIcon">智能</el-button>
-            <el-button size="small" round @click="getText">文字</el-button>
-            <el-button size="small" round>默认</el-button>
+          <div class="flex-none">图标</div>
+          <div class="flex-center ml-3">
+            <div class="shortcut-icon-box">
+              <div v-if="toolObj.type==='text'">{{ toolObj.src }}</div>
+              <img v-if="toolObj.type==='icon'" class="shortcut-icon" :src="toolObj.src" alt="">
+            </div>
+            <div class="ml-3 flex flex-wrap justify-start">
+              <div class="m-1">
+                <el-button round @click="getIcon">智能</el-button>
+              </div>
+              <div class="m-1">
+                <el-button round @click="getText">文字</el-button>
+              </div>
+              <el-button class="m-1" round>默认</el-button>
+            </div>
           </div>
         </div>
         <div class="py-3 w-full flex flex-col">
           <div class="shortcut-box">
-            <div class="w-10 mr-2">布局</div>
-            <div class="shortcut-btn-box">
+            <div class="flex-none">布局</div>
+            <div class="ml-3">
               <el-radio-group v-model="toolObj.grid">
                 <el-radio :label="'1x1'">1x1</el-radio>
                 <el-radio :label="'1x2'">1x2</el-radio>
