@@ -3,7 +3,7 @@
     <div>
       Copyright © {{ new Date().getFullYear() }} 鸢离
     </div>
-    <div v-if="simple"  class="mt-1">
+    <div v-if="!simple"  class="mt-1">
       <a class="text" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=41052202001272">豫公安网备41052202001272</a>
       <el-divider direction="vertical"/>
       <a class="text" href="https://beian.miit.gov.cn/">冀ICP备2020030880号</a>

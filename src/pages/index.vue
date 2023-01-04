@@ -10,62 +10,65 @@
       <MySearch :searchSetting="commonSettings.searchSetting"/>
       <Shortcut :toolSetting="commonSettings.toolSetting"/>
     </div>
-    <MyFooter :simple="baseSetting.simpleFooter"/>
+    <MyFooter :simple="commonSettings.baseSetting.simpleFooter"/>
   </div>
 </template>
 
 <script setup>
-import {reactive, ref, toRefs, watch} from "vue";
+import {reactive, ref, watch} from "vue";
 import Header from "../components/header.vue";
 import MyTime from '../components/my-time.vue'
 import MySearch from '../components/my-search.vue'
-
 import MyFooter from "../components/my-footer.vue";
 import Shortcut from "../components/shortcut.vue";
+import store from "store";
+import _ from 'lodash'
 
 const imgUrl = ref('https://cn.bing.com/th?id=OHR.ChalkRock_ZH-CN2893565655_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&qlt=50')
+
+const defaultSet = {
+  baseSetting: {
+    simpleFooter: false
+  },
+  timeSetting: {
+    show: true,
+    month: true,
+    week: true,
+    lunar: true,
+    weight: true,
+    family: "Arial",
+    size: 40,
+    color: "#ffffff"
+  },
+  searchSetting: {
+    show: true,
+    height: 46,
+    radius: 30,
+    opacity: 70,
+    blank: true,
+  },
+  toolSetting: {
+    show: true,
+    size: 60,
+    radius: 15,
+    opacity: 100,
+    gapX: 30,
+    gapY: 30,
+    maxWidth: 1200
+  },
+}
 const commonSettings = reactive(
-    {
-      timeSetting: {
-        show: true,
-        month: true,
-        week: true,
-        lunar: true,
-        weight: true,
-        family: "Arial",
-        size: 40,
-        color: "#ffffff",
-      },
-      searchSetting: {
-        show: true,
-        height: 46,
-        radius: 30,
-        opacity: 70,
-        blank: true,
-      },
-      toolSetting: {
-        show:true,
-        size: 60,
-        radius: 15,
-        opacity: 100,
-        gapX: 30,
-        gapY: 30,
-        maxWidth:1200
-      },
-      // searchBox:{},
-      baseSetting: {
-        iconNewBlank: true,
-        searchNewBlank: true,
-        showWord: false,
-        simpleFooter: false,
-      }
-    }
+    store.get("commonSettings") ?
+        _.merge({}, defaultSet, store.get("commonSettings"))
+        :
+        {...defaultSet}
 )
-const {baseSetting} = toRefs(commonSettings)
+
+console.log(commonSettings)
+console.log(defaultSet)
 
 watch(commonSettings, (newData) => {
-  // console.log(commonSettings)
-  // store.set("commonSettings", newData)
+  store.set("commonSettings", newData)
 })
 
 // //输入框聚焦
