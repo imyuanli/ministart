@@ -39,6 +39,7 @@
                 :alt="item.name"
                 :style="{borderRadius:`${radius}px`}"
             >
+            <span class="text-black" v-if="item.type==='text'">{{ item.src }}</span>
           </div>
         </div>
         <div class="flex-center text-sm">{{ item.name }}</div>
@@ -92,16 +93,16 @@
             <img v-if="toolObj.type==='icon'" class="shortcut-icon" :src="toolObj.src" alt="">
           </div>
           <div class="ml-3">
-            <el-button round @click="getIcon">智能</el-button>
-            <el-button round @click="getText">文字</el-button>
-            <el-button round>默认</el-button>
+            <el-button size="small" round @click="getIcon">智能</el-button>
+            <el-button size="small" round @click="getText">文字</el-button>
+            <el-button size="small" round>默认</el-button>
           </div>
         </div>
         <div class="py-3 w-full flex flex-col">
           <div class="shortcut-box">
             <div class="w-10 mr-2">布局</div>
             <div class="shortcut-btn-box">
-              <el-radio-group v-model="toolObj.grid">
+              <el-radio-group  v-model="toolObj.grid">
                 <el-radio :label="'1x1'">1x1</el-radio>
                 <el-radio :label="'1x2'">1x2</el-radio>
                 <el-radio :label="'2x1'">2x1</el-radio>
@@ -159,8 +160,8 @@ const {
 const toolObj = reactive({
       name: "",
       url: "",
-      src: "空",
-      type: "text",
+      src: "https://www.jianfast.com/static/home/images/defaultsicon/null.png",
+      type: "icon",
       grid: "1x1"
     }
 )
@@ -196,8 +197,18 @@ const getText = () => {
   toolObj.src = toolObj?.name[0]
   toolObj.type = 'text'
 }
-//验证toolobj
-const judgeObj = () => {
+
+//重置toolobj
+const clearObj = () => {
+  toolObj.name = ""
+  toolObj.url = ""
+  toolObj.src = "空"
+  toolObj.type = "text"
+  toolObj.grid = "1x1"
+}
+
+//保存
+const handleSaveTool = () => {
   if (!toolObj?.name) {
     ElMessage({
       message: '未填写名称',
@@ -212,26 +223,26 @@ const judgeObj = () => {
     })
     return
   }
-}
-//重置toolobj 并关闭弹窗
-const clearObj = () => {
-  toolObj.name = ""
-  toolObj.url = ""
-  toolObj.src = "空"
-  toolObj.type = "text"
-  toolObj.grid = "1x1"
-}
-
-//保存
-const handleSaveTool = () => {
-  judgeObj()
   toolsArr.push({...toolObj})
   clearObj()
   handleEditClose()
 }
 //更新
 const handleUpdateTool = () => {
-  judgeObj()
+  if (!toolObj?.name) {
+    ElMessage({
+      message: '未填写名称',
+      type: 'warning',
+    })
+    return
+  }
+  if (!toolObj?.url) {
+    ElMessage({
+      message: '未填写网址',
+      type: 'warning',
+    })
+    return
+  }
   toolsArr[currentIndex.value] = {...toolObj}
   clearObj()
   handleEditClose()
