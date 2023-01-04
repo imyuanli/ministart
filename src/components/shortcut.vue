@@ -42,7 +42,7 @@
             <span class="text-black" v-if="item.type==='text'">{{ item.src }}</span>
           </div>
         </div>
-        <div class="flex-center text-sm">{{ item.name }}</div>
+        <div class="text-center text-sm mt-1 overflow-ellipsis truncate w-full">{{ item.name }}</div>
       </div>
       <div class="tool-item"
            :style="{
@@ -55,17 +55,17 @@
              @click="handleEditOpen"
         >
           <div
-              class="bg-white rounded-md cursor-pointer w-full h-full flex-center p-1"
+              class="bg-white rounded-md cursor-pointer w-full h-full flex-center  p-1"
               :style="{opacity:opacity/100,borderRadius:`${radius}px`}"
           >
             <div class="bg-blue-400 flex-center rounded-full">
-              <el-icon style="font-size: 40px">
+              <el-icon :style="{fontSize: `${size-5}px`}">
                 <CirclePlus/>
               </el-icon>
             </div>
           </div>
         </div>
-        <div class="flex-center text-sm">添加</div>
+        <div class="flex-center text-sm mt-1">添加</div>
       </div>
     </div>
   </div>
@@ -102,7 +102,7 @@
           <div class="shortcut-box">
             <div class="w-10 mr-2">布局</div>
             <div class="shortcut-btn-box">
-              <el-radio-group  v-model="toolObj.grid">
+              <el-radio-group v-model="toolObj.grid">
                 <el-radio :label="'1x1'">1x1</el-radio>
                 <el-radio :label="'1x2'">1x2</el-radio>
                 <el-radio :label="'2x1'">2x1</el-radio>
@@ -353,6 +353,7 @@ watch(visible, (newValue, oldValue) => {
 }
 
 .tool-grid {
+  padding-top: 2vh;
   position: relative;
   display: grid;
   user-select: none;
