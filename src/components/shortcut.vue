@@ -21,8 +21,8 @@
                height:`${size*item.grid.split('x')[0]+ gapY*item.grid.split('x')[0]}px`
             }"
            :key="index"
-           @contextmenu.prevent="rightClick($event)"
-           @touchstart.prevent="touchStart($event)"
+           @contextmenu.prevent="rightClick($event,index)"
+           @touchstart.prevent="touchStart($event,index)"
            @touchmove="touchMove()"
            @touchend="touchEnd()"
       >
@@ -51,7 +51,7 @@
             }"
       >
         <div class="flex-center flex-col w-full h-full"
-             @click="editDialogVisible = true"
+             @click="handleEditOpen"
         >
           <div
               class="bg-white rounded-md cursor-pointer w-full h-full flex-center p-1"
@@ -70,7 +70,7 @@
   </div>
   <MyDialog
       :dialogVisible="editDialogVisible"
-      :handleChang="handleEditChange"
+      :handleChang="handleEditClose"
   >
     <template #title>
       快捷导航设置
@@ -78,21 +78,22 @@
     <template #content>
       <div class="flex justify-center items-start flex-col bg-white rounded-lg px-6 py-3 text-base prefix-text-color">
         <div class="py-3 shortcut-box">
-          <div class="w-10">网址</div>
-          <MyInput  v-model="toolObj.url"/>
-        </div>
-        <div class="py-3 shortcut-box">
           <div class="w-10">名称</div>
           <MyInput v-model="toolObj.name"/>
         </div>
         <div class="py-3 shortcut-box">
+          <div class="w-10">网址</div>
+          <MyInput v-model="toolObj.url"/>
+        </div>
+        <div class="py-3 shortcut-box">
           <div class="w-10">图标</div>
           <div class="shortcut-icon-box">
-            <img class="shortcut-icon" src="https://www.jianfast.com/static/home/images/defaultsicon/null.png" alt="">
+            <div v-if="toolObj.type==='text'">{{ toolObj.src }}</div>
+            <img v-if="toolObj.type==='icon'" class="shortcut-icon" :src="toolObj.src" alt="">
           </div>
           <div class="ml-3">
-            <el-button round>智能</el-button>
-            <el-button round>文字</el-button>
+            <el-button round @click="getIcon">智能</el-button>
+            <el-button round @click="getText">文字</el-button>
             <el-button round>默认</el-button>
           </div>
         </div>
@@ -108,24 +109,24 @@
               </el-radio-group>
             </div>
           </div>
-          <div class="text-xs text-gray-400">1 x 2表示图标将占一行两列</div>
+          <div class="text-xs text-gray-400">1x2表示图标将占一行两列</div>
         </div>
       </div>
     </template>
     <template #bottom>
       <el-button>取 消</el-button>
-      <el-button type="primary" @click="handleSaveTool">确 定</el-button>
-      <!--      <el-button type="primary">更 新</el-button>-->
+      <el-button v-if="currentIndex === null" type="primary" @click="handleSaveTool">确 定</el-button>
+      <el-button v-if="currentIndex !== null" type="primary" @click="handleUpdateTool">更 新</el-button>
     </template>
   </MyDialog>
   <div v-show="visible" :style="{left:left+'px',top:top+'px'}" class="contextmenu">
-    <div class="menu edit-btn">
+    <div class="menu edit-btn" @click="handleEditTool">
       <el-icon class="menu-icon">
         <Edit/>
       </el-icon>
       <span>编辑</span>
     </div>
-    <div class="menu delete-btn">
+    <div class="menu delete-btn" @click="handleDelTool">
       <el-icon class="menu-icon delete-color">
         <Delete/>
       </el-icon>
@@ -137,6 +138,8 @@
 import {reactive, ref, toRefs, watch} from "vue";
 import MyInput from '../components/my-input.vue'
 import MyDialog from '../components/my-dialog.vue'
+import {ElMessage} from "element-plus";
+import store from 'store'
 
 const props = defineProps({
   toolSetting: Object
@@ -152,65 +155,124 @@ const {
   maxWidth
 } = toRefs(props.toolSetting)
 
-
 //快捷方式
-const toolObj = reactive(
-    {
+const toolObj = reactive({
       name: "",
       url: "",
-      src: "",
-      type: "",
-      grid: ""
+      src: "空",
+      type: "text",
+      grid: "1x1"
     }
 )
 
-const toolsArr = reactive(
-    [
-      {
-        name: "秘塔2",
-        src: "https://www.jianfast.com/static/home/images/defaultsicon/null.png",
-        type: "icon",
-        url: "https://xiezuocat.com/#/?s=itab",
-        grid: '1x1'
-      },
-      {
-        name: "秘塔2",
-        src: "https://www.jianfast.com/static/home/images/defaultsicon/null.png",
-        type: "icon",
-        url: "https://xiezuocat.com/#/?s=itab",
-        grid: '2x1'
-      },
-      {
-        name: "秘塔2",
-        src: "https://www.jianfast.com/static/home/images/defaultsicon/null.png",
-        type: "icon",
-        url: "https://xiezuocat.com/#/?s=itab",
-        grid: '1x2'
-      },
-      {
-        name: "秘塔2",
-        src: "https://www.jianfast.com/static/home/images/defaultsicon/null.png",
-        type: "icon",
-        url: "https://xiezuocat.com/#/?s=itab",
-        grid: '2x2'
-      }
-    ]
+//快捷导航arr
+const toolsArr = reactive(store.get("toolsArr") ?
+    store.get("toolsArr")
+    :
+    []
 )
 
-const handleSaveTool = () => {
-  console.log(toolObj)
+//获取网站图标
+const getIcon = () => {
+  if (!toolObj?.url) {
+    ElMessage({
+      message: '请先填写网址',
+      type: 'warning',
+    })
+    return
+  }
+  toolObj.src = 'https://www.jianfast.com/static/home/images/defaultsicon/null.png'
+  toolObj.type = 'icon'
+}
+//图标是文字
+const getText = () => {
+  if (!toolObj?.name) {
+    ElMessage({
+      message: '请先填写网站名称',
+      type: 'warning',
+    })
+    return
+  }
+  toolObj.src = toolObj?.name[0]
+  toolObj.type = 'text'
+}
+//验证toolobj
+const judgeObj = () => {
+  if (!toolObj?.name) {
+    ElMessage({
+      message: '未填写名称',
+      type: 'warning',
+    })
+    return
+  }
+  if (!toolObj?.url) {
+    ElMessage({
+      message: '未填写网址',
+      type: 'warning',
+    })
+    return
+  }
+}
+//重置toolobj 并关闭弹窗
+const clearObj = () => {
+  toolObj.name = ""
+  toolObj.url = ""
+  toolObj.src = "空"
+  toolObj.type = "text"
+  toolObj.grid = "1x1"
 }
 
+//保存
+const handleSaveTool = () => {
+  judgeObj()
+  toolsArr.push({...toolObj})
+  clearObj()
+  handleEditClose()
+}
+//更新
+const handleUpdateTool = () => {
+  judgeObj()
+  toolsArr[currentIndex.value] = {...toolObj}
+  clearObj()
+  handleEditClose()
+}
+
+//编辑
+const handleEditTool = () => {
+  let obj = {...toolsArr[currentIndex.value]}
+  toolObj.name = obj.name
+  toolObj.url = obj.url
+  toolObj.src = obj.src
+  toolObj.type = obj.type
+  toolObj.grid = obj.grid
+  handleEditOpen()
+}
+
+//删除 tool
+const handleDelTool = () => {
+  toolsArr.splice(currentIndex.value, 1)
+}
+//持久化存储
+watch(toolsArr, (newTool) => {
+  store.set("toolsArr", newTool)
+})
 
 //编辑弹框
 const editDialogVisible = ref(false)
-const handleEditChange = () => editDialogVisible.value = false
+const handleEditOpen = () => editDialogVisible.value = true
+const handleEditClose = () => {
+  editDialogVisible.value = false
+  currentIndex.value = null
+  clearObj()
+}
 
 //右键弹窗
 const visible = ref(false)
 const top = ref(0)
 const left = ref(0)
 
+//当前操作的index
+const currentIndex = ref(null)
 //打开menu
 const openMenu = (x, y) => {
   left.value = x;
@@ -218,23 +280,26 @@ const openMenu = (x, y) => {
   visible.value = true;
 }
 //右键打开
-const rightClick = (e) => {
+const rightClick = (e, index) => {
   openMenu(e.pageX, e.pageY)
+  currentIndex.value = index
 }
 //关闭
 const closeMenu = () => {
   top.value = 0;
   left.value = 0;
   visible.value = false;
+  // currentIndex.value = null
 }
 //移动端长按
 let timeOutEvent
 //长按事件（起始）
-const touchStart = (e) => {
+const touchStart = (e, index) => {
   timeOutEvent = setTimeout(() => {
     //真正长按后应该执行的内容
     timeOutEvent = 0;
     const touches = e.touches[0]
+    currentIndex.value = index
     openMenu(touches.pageX, touches.pageY)
   }, 500); //这里设置定时器，定义长按500毫秒触发长按事件
   return false;
