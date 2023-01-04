@@ -1,5 +1,5 @@
 <template>
-  <div class="ml-6 w-full">
+  <div class="ml-3 w-full">
     <input
         :value="modelValue"
         maxlength="8"
