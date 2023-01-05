@@ -1,5 +1,5 @@
 <template>
-  <div v-if="dialogVisible" class="dialog-box">
+  <div class="dialog-box">
     <el-dialog
         v-model="getShow"
         width="30%"
