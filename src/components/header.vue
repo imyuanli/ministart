@@ -31,7 +31,7 @@
         </el-icon>
       </template>
       <div>
-<!--        <div class="lip-btn" @click="commonDialogVisible = true">常规设置</div>-->
+        <div class="lip-btn" @click="commonDialogVisible = true">常规设置</div>
         <div class="lip-btn" @click="timeDialogVisible = true">时间/日期设置</div>
         <div class="lip-btn" @click="searchDialogVisible = true">搜索栏设置</div>
         <div class="lip-btn" @click="toolDialogVisible = true">快捷方式设置</div>
@@ -98,6 +98,19 @@
   <!--  </MyDialog>-->
   <!-- 时间设置 -->
   <MyDialog
+      v-model:dialogVisible="commonDialogVisible"
+  >
+    <template #title>
+      常规设置
+    </template>
+    <template #content>
+      <SettingPanel
+          :settingObj="baseSetting"
+          settingName="baseSetting"
+      />
+    </template>
+  </MyDialog>
+  <MyDialog
       v-model:dialogVisible="timeDialogVisible"
   >
     <template #title>
@@ -145,7 +158,7 @@ import MyDialog from "./my-dialog.vue";
 const props = defineProps({
   commonSettings: Object
 })
-let {timeSetting, searchSetting, toolSetting} = toRefs(props.commonSettings)
+let {baseSetting,timeSetting, searchSetting, toolSetting} = toRefs(props.commonSettings)
 
 //个人信息
 // const infoDialogVisible = ref(false)
