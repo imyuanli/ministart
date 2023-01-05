@@ -1,11 +1,11 @@
 <template>
-  <div class="dialog-box">
+  <div v-if="dialogVisible" class="dialog-box">
     <el-dialog
-        v-model="visible"
+        v-model="getShow"
         width="30%"
         align-center
         class="rounded-lg"
-        @close="handleChang"
+        @close="handleChange"
         :close-on-click-modal="false"
     >
       <template #header="{ close, titleId, titleClass }">
@@ -22,24 +22,33 @@
 </template>
 
 <script setup>
-import {ref, watch} from "vue";
+import {computed} from "vue";
 
 //接收的参数
 const props = defineProps({
-  dialogVisible: Boolean,
-  handleChang: Function
+  dialogVisible: {
+    type: Boolean,
+    default: false
+  },
 })
-//监听传入的数据
-const visible = ref(false)
-watch(props, (newData, oldData) => {
-  visible.value = newData.dialogVisible
+
+const emit = defineEmits(['update:dialogVisible'])
+const handleChange = () => {
+  emit('update:dialogVisible', false)
+}
+
+const getShow = computed({
+  get: () => props.dialogVisible,
+  set: (val) => {
+    emit('update:dialogVisible', val)
+  }
 })
 </script>
 
 <style scoped>
 .dialog-box:deep(.el-dialog) {
-  max-width: 600px;
-  width: 90%;
+  max-width: 650px;
+  width: 92%;
   background-color: #F1F0F5 !important;
   border-radius: 10px;
   overflow: hidden;
@@ -48,7 +57,7 @@ watch(props, (newData, oldData) => {
 
 :deep(.el-dialog__body) {
   padding: 35px;
-  max-height: 350px;
+  max-height: 380px;
   overflow: auto;
 }
 
