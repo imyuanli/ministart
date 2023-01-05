@@ -98,8 +98,7 @@
   <!--  </MyDialog>-->
   <!-- 时间设置 -->
   <MyDialog
-      :dialogVisible="timeDialogVisible"
-      :handleChang="handleTimeChange"
+      v-model:dialogVisible="timeDialogVisible"
   >
     <template #title>
       时间/日期设置
@@ -112,8 +111,7 @@
     </template>
   </MyDialog>
   <MyDialog
-      :dialogVisible="searchDialogVisible"
-      :handleChang="handleSearchChange"
+      v-model:dialogVisible="searchDialogVisible"
   >
     <template #title>
       搜索栏设置
@@ -126,8 +124,7 @@
     </template>
   </MyDialog>
   <MyDialog
-      :dialogVisible="toolDialogVisible"
-      :handleChang="handleToolChange"
+      v-model:dialogVisible="toolDialogVisible"
   >
     <template #title>
       快捷方式设置
@@ -194,17 +191,12 @@ const handleChange = (index, value) => {
 }
 //常规设置
 const commonDialogVisible = ref(false)
-const handleCommonChange = () => commonDialogVisible.value = false
-
-//时间设置
+//时间弹窗
 const timeDialogVisible = ref(false)
-const handleTimeChange = () => timeDialogVisible.value = false
-
+//搜索框弹窗
 const searchDialogVisible = ref(false)
-const handleSearchChange = () => searchDialogVisible.value = false
-
+//快捷导航弹窗
 const toolDialogVisible = ref(false)
-const handleToolChange = () => toolDialogVisible.value = false
 
 </script>
 
