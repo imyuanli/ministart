@@ -176,8 +176,395 @@ const toolObj = reactive({
 const toolsArr = reactive(store.get("toolsArr") ?
     store.get("toolsArr")
     :
-    []
+    [
+      {
+        name: "秘塔2",
+        src: "https://www.jianfast.com/static/home/images/defaultsicon/null.png",
+        type: "icon",
+        url: "https://xiezuocat.com/#/?s=itab",
+        grid: '1x1'
+      },
+      {
+        name: "秘塔2",
+        src: "https://www.jianfast.com/static/home/images/defaultsicon/null.png",
+        type: "icon",
+        url: "https://xiezuocat.com/#/?s=itab",
+        grid: '2x1'
+      },
+      {
+        name: "秘塔2",
+        src: "https://www.jianfast.com/static/home/images/defaultsicon/null.png",
+        type: "icon",
+        url: "https://xiezuocat.com/#/?s=itab",
+        grid: '2x1'
+      },
+      {
+        name: "秘塔2",
+        src: "https://www.jianfast.com/static/home/images/defaultsicon/null.png",
+        type: "icon",
+        url: "https://xiezuocat.com/#/?s=itab",
+        grid: '2x1'
+      },
+      {
+        name: "秘塔2",
+        src: "https://www.jianfast.com/static/home/images/defaultsicon/null.png",
+        type: "icon",
+        url: "https://xiezuocat.com/#/?s=itab",
+        grid: '2x1'
+      },
+      {
+        name: "秘塔2",
+        src: "https://www.jianfast.com/static/home/images/defaultsicon/null.png",
+        type: "icon",
+        url: "https://xiezuocat.com/#/?s=itab",
+        grid: '2x1'
+      },
+      {
+        name: "秘塔2",
+        src: "https://www.jianfast.com/static/home/images/defaultsicon/null.png",
+        type: "icon",
+        url: "https://xiezuocat.com/#/?s=itab",
+        grid: '2x1'
+      },
+      {
+        name: "秘塔2",
+        src: "https://www.jianfast.com/static/home/images/defaultsicon/null.png",
+        type: "icon",
+        url: "https://xiezuocat.com/#/?s=itab",
+        grid: '2x1'
+      },
+      {
+        name: "秘塔2",
+        src: "https://www.jianfast.com/static/home/images/defaultsicon/null.png",
+        type: "icon",
+        url: "https://xiezuocat.com/#/?s=itab",
+        grid: '2x1'
+      },
+      {
+        name: "秘塔2",
+        src: "https://www.jianfast.com/static/home/images/defaultsicon/null.png",
+        type: "icon",
+        url: "https://xiezuocat.com/#/?s=itab",
+        grid: '2x1'
+      },
+      {
+        name: "秘塔2",
+        src: "https://www.jianfast.com/static/home/images/defaultsicon/null.png",
+        type: "icon",
+        url: "https://xiezuocat.com/#/?s=itab",
+        grid: '2x1'
+      },
+      {
+        name: "秘塔2",
+        src: "https://www.jianfast.com/static/home/images/defaultsicon/null.png",
+        type: "icon",
+        url: "https://xiezuocat.com/#/?s=itab",
+        grid: '2x1'
+      },
+      {
+        name: "秘塔2",
+        src: "https://www.jianfast.com/static/home/images/defaultsicon/null.png",
+        type: "icon",
+        url: "https://xiezuocat.com/#/?s=itab",
+        grid: '2x1'
+      },
+      {
+        name: "秘塔2",
+        src: "https://www.jianfast.com/static/home/images/defaultsicon/null.png",
+        type: "icon",
+        url: "https://xiezuocat.com/#/?s=itab",
+        grid: '2x1'
+      },
+      {
+        name: "秘塔2",
+        src: "https://www.jianfast.com/static/home/images/defaultsicon/null.png",
+        type: "icon",
+        url: "https://xiezuocat.com/#/?s=itab",
+        grid: '2x1'
+      },
+      {
+        name: "秘塔2",
+        src: "https://www.jianfast.com/static/home/images/defaultsicon/null.png",
+        type: "icon",
+        url: "https://xiezuocat.com/#/?s=itab",
+        grid: '2x1'
+      },
+      {
+        name: "秘塔2",
+        src: "https://www.jianfast.com/static/home/images/defaultsicon/null.png",
+        type: "icon",
+        url: "https://xiezuocat.com/#/?s=itab",
+        grid: '2x1'
+      },
+      {
+        name: "秘塔2",
+        src: "https://www.jianfast.com/static/home/images/defaultsicon/null.png",
+        type: "icon",
+        url: "https://xiezuocat.com/#/?s=itab",
+        grid: '2x1'
+      },
+      {
+        name: "秘塔2",
+        src: "https://www.jianfast.com/static/home/images/defaultsicon/null.png",
+        type: "icon",
+        url: "https://xiezuocat.com/#/?s=itab",
+        grid: '2x1'
+      },
+      {
+        name: "秘塔2",
+        src: "https://www.jianfast.com/static/home/images/defaultsicon/null.png",
+        type: "icon",
+        url: "https://xiezuocat.com/#/?s=itab",
+        grid: '2x1'
+      },
+      {
+        name: "秘塔2",
+        src: "https://www.jianfast.com/static/home/images/defaultsicon/null.png",
+        type: "icon",
+        url: "https://xiezuocat.com/#/?s=itab",
+        grid: '2x1'
+      },
+      {
+        name: "秘塔2",
+        src: "https://www.jianfast.com/static/home/images/defaultsicon/null.png",
+        type: "icon",
+        url: "https://xiezuocat.com/#/?s=itab",
+        grid: '2x1'
+      },
+      {
+        name: "秘塔2",
+        src: "https://www.jianfast.com/static/home/images/defaultsicon/null.png",
+        type: "icon",
+        url: "https://xiezuocat.com/#/?s=itab",
+        grid: '2x1'
+      },
+      {
+        name: "秘塔2",
+        src: "https://www.jianfast.com/static/home/images/defaultsicon/null.png",
+        type: "icon",
+        url: "https://xiezuocat.com/#/?s=itab",
+        grid: '2x1'
+      },
+      {
+        name: "秘塔2",
+        src: "https://www.jianfast.com/static/home/images/defaultsicon/null.png",
+        type: "icon",
+        url: "https://xiezuocat.com/#/?s=itab",
+        grid: '2x1'
+      },
+      {
+        name: "秘塔2",
+        src: "https://www.jianfast.com/static/home/images/defaultsicon/null.png",
+        type: "icon",
+        url: "https://xiezuocat.com/#/?s=itab",
+        grid: '2x1'
+      },
+      {
+        name: "秘塔2",
+        src: "https://www.jianfast.com/static/home/images/defaultsicon/null.png",
+        type: "icon",
+        url: "https://xiezuocat.com/#/?s=itab",
+        grid: '2x1'
+      },
+      {
+        name: "秘塔2",
+        src: "https://www.jianfast.com/static/home/images/defaultsicon/null.png",
+        type: "icon",
+        url: "https://xiezuocat.com/#/?s=itab",
+        grid: '2x1'
+      },
+      {
+        name: "秘塔2",
+        src: "https://www.jianfast.com/static/home/images/defaultsicon/null.png",
+        type: "icon",
+        url: "https://xiezuocat.com/#/?s=itab",
+        grid: '2x1'
+      },
+      {
+        name: "秘塔2",
+        src: "https://www.jianfast.com/static/home/images/defaultsicon/null.png",
+        type: "icon",
+        url: "https://xiezuocat.com/#/?s=itab",
+        grid: '2x1'
+      },
+      {
+        name: "秘塔2",
+        src: "https://www.jianfast.com/static/home/images/defaultsicon/null.png",
+        type: "icon",
+        url: "https://xiezuocat.com/#/?s=itab",
+        grid: '2x1'
+      },
+      {
+        name: "秘塔2",
+        src: "https://www.jianfast.com/static/home/images/defaultsicon/null.png",
+        type: "icon",
+        url: "https://xiezuocat.com/#/?s=itab",
+        grid: '2x1'
+      },
+      {
+        name: "秘塔2",
+        src: "https://www.jianfast.com/static/home/images/defaultsicon/null.png",
+        type: "icon",
+        url: "https://xiezuocat.com/#/?s=itab",
+        grid: '2x1'
+      },
+      {
+        name: "秘塔2",
+        src: "https://www.jianfast.com/static/home/images/defaultsicon/null.png",
+        type: "icon",
+        url: "https://xiezuocat.com/#/?s=itab",
+        grid: '2x1'
+      },
+      {
+        name: "秘塔2",
+        src: "https://www.jianfast.com/static/home/images/defaultsicon/null.png",
+        type: "icon",
+        url: "https://xiezuocat.com/#/?s=itab",
+        grid: '2x1'
+      },
+      {
+        name: "秘塔2",
+        src: "https://www.jianfast.com/static/home/images/defaultsicon/null.png",
+        type: "icon",
+        url: "https://xiezuocat.com/#/?s=itab",
+        grid: '2x1'
+      },
+      {
+        name: "秘塔2",
+        src: "https://www.jianfast.com/static/home/images/defaultsicon/null.png",
+        type: "icon",
+        url: "https://xiezuocat.com/#/?s=itab",
+        grid: '2x1'
+      },
+      {
+        name: "秘塔2",
+        src: "https://www.jianfast.com/static/home/images/defaultsicon/null.png",
+        type: "icon",
+        url: "https://xiezuocat.com/#/?s=itab",
+        grid: '2x1'
+      },
+      {
+        name: "秘塔2",
+        src: "https://www.jianfast.com/static/home/images/defaultsicon/null.png",
+        type: "icon",
+        url: "https://xiezuocat.com/#/?s=itab",
+        grid: '2x1'
+      },
+      {
+        name: "秘塔2",
+        src: "https://www.jianfast.com/static/home/images/defaultsicon/null.png",
+        type: "icon",
+        url: "https://xiezuocat.com/#/?s=itab",
+        grid: '2x1'
+      },
+      {
+        name: "秘塔2",
+        src: "https://www.jianfast.com/static/home/images/defaultsicon/null.png",
+        type: "icon",
+        url: "https://xiezuocat.com/#/?s=itab",
+        grid: '2x1'
+      },
+      {
+        name: "秘塔2",
+        src: "https://www.jianfast.com/static/home/images/defaultsicon/null.png",
+        type: "icon",
+        url: "https://xiezuocat.com/#/?s=itab",
+        grid: '2x1'
+      },
+      {
+        name: "秘塔2",
+        src: "https://www.jianfast.com/static/home/images/defaultsicon/null.png",
+        type: "icon",
+        url: "https://xiezuocat.com/#/?s=itab",
+        grid: '2x1'
+      },
+      {
+        name: "秘塔2",
+        src: "https://www.jianfast.com/static/home/images/defaultsicon/null.png",
+        type: "icon",
+        url: "https://xiezuocat.com/#/?s=itab",
+        grid: '1x2'
+      },
+      {
+        name: "秘塔2",
+        src: "https://www.jianfast.com/static/home/images/defaultsicon/null.png",
+        type: "icon",
+        url: "https://xiezuocat.com/#/?s=itab",
+        grid: '1x2'
+      },
+      {
+        name: "秘塔2",
+        src: "https://www.jianfast.com/static/home/images/defaultsicon/null.png",
+        type: "icon",
+        url: "https://xiezuocat.com/#/?s=itab",
+        grid: '1x2'
+      },
+      {
+        name: "秘塔2",
+        src: "https://www.jianfast.com/static/home/images/defaultsicon/null.png",
+        type: "icon",
+        url: "https://xiezuocat.com/#/?s=itab",
+        grid: '1x2'
+      },
+      {
+        name: "秘塔2",
+        src: "https://www.jianfast.com/static/home/images/defaultsicon/null.png",
+        type: "icon",
+        url: "https://xiezuocat.com/#/?s=itab",
+        grid: '1x2'
+      },
+      {
+        name: "秘塔2",
+        src: "https://www.jianfast.com/static/home/images/defaultsicon/null.png",
+        type: "icon",
+        url: "https://xiezuocat.com/#/?s=itab",
+        grid: '1x2'
+      },
+      {
+        name: "秘塔2",
+        src: "https://www.jianfast.com/static/home/images/defaultsicon/null.png",
+        type: "icon",
+        url: "https://xiezuocat.com/#/?s=itab",
+        grid: '2x2'
+      },
+      {
+        name: "秘塔2",
+        src: "https://www.jianfast.com/static/home/images/defaultsicon/null.png",
+        type: "icon",
+        url: "https://xiezuocat.com/#/?s=itab",
+        grid: '2x2'
+      },
+      {
+        name: "秘塔2",
+        src: "https://www.jianfast.com/static/home/images/defaultsicon/null.png",
+        type: "icon",
+        url: "https://xiezuocat.com/#/?s=itab",
+        grid: '2x2'
+      },
+      {
+        name: "秘塔2",
+        src: "https://www.jianfast.com/static/home/images/defaultsicon/null.png",
+        type: "icon",
+        url: "https://xiezuocat.com/#/?s=itab",
+        grid: '2x2'
+      },
+      {
+        name: "秘塔2",
+        src: "https://www.jianfast.com/static/home/images/defaultsicon/null.png",
+        type: "icon",
+        url: "https://xiezuocat.com/#/?s=itab",
+        grid: '2x2'
+      },
+      {
+        name: "秘塔2",
+        src: "https://www.jianfast.com/static/home/images/defaultsicon/null.png",
+        type: "icon",
+        url: "https://xiezuocat.com/#/?s=itab",
+        grid: '2x2'
+      }
+    ]
 )
+
 
 //获取网站图标
 const getIcon = () => {
@@ -347,11 +734,18 @@ watch(visible, (newValue, oldValue) => {
 
 <style scoped>
 .tool-box {
-  max-height: 45%;
+  max-height: 55%;
   width: 95%;
   color: #fff;
   transition: .25s;
   overflow-y: auto;
+}
+
+/*屏幕小于768的时候*/
+@media (max-width: 640px) {
+  .tool-box {
+    max-height: 45%;
+  }
 }
 
 .tool-box::-webkit-scrollbar {
@@ -359,7 +753,6 @@ watch(visible, (newValue, oldValue) => {
 }
 
 .tool-grid {
-  padding-top: 2vh;
   position: relative;
   display: grid;
   user-select: none;
@@ -373,43 +766,6 @@ watch(visible, (newValue, oldValue) => {
   position: relative;
   height: 100%;
   box-sizing: border-box;
-}
-
-.box {
-  background: red;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  height: 100%;
-}
-
-.customNav {
-  width: 70px;
-  height: 70px;
-  margin: 5px;
-  border-radius: 15px;
-  text-align: center;
-  background-color: #fff;
-  cursor: pointer;
-  transition: background-color .35s;
-}
-
-.customNav:hover {
-  background: rgb(235, 235, 235);
-}
-
-/*屏幕小于768的时候*/
-@media (max-width: 640px) {
-  .customNav {
-    width: 60px;
-    height: 60px;
-  }
-}
-
-.icon-plus {
-  color: rgba(0, 0, 0, .5);
-  font-size: 32px;
 }
 
 .contextmenu {
@@ -481,24 +837,5 @@ watch(visible, (newValue, oldValue) => {
 .shortcut-icon {
   width: 35px;
   height: 35px;
-}
-
-.shortcut-btn-box {
-  width: 100%;
-  display: flex;
-  align-items: center;
-}
-
-.shortcut-btn {
-  font-size: 14px;
-  color: #4d4d4d;
-  width: 100%;
-  border-radius: 50px;
-  text-align: center;
-  border: 1px solid #f2f2f2;
-  margin: 5px;
-  cursor: pointer;
-  padding: 3px;
-  background-color: #f2f2f2;
 }
 </style>

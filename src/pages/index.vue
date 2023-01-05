@@ -1,15 +1,13 @@
 <template>
-  <div class="relative w-full h-screen min-h-screen flex-center">
+  <div class="relative w-full h-screen min-h-screen flex justify-start items-center flex-col pt-9 md:pt-14">
     <div
         class="back-img"
         :style="{backgroundImage:`url(${imgUrl})`}"
     />
     <Header :commonSettings="commonSettings"/>
-    <div class="main ">
-      <MyTime :timeSetting="commonSettings.timeSetting"/>
-      <MySearch :searchSetting="commonSettings.searchSetting"/>
-      <Shortcut :toolSetting="commonSettings.toolSetting"/>
-    </div>
+    <MyTime :timeSetting="commonSettings.timeSetting"/>
+    <MySearch :searchSetting="commonSettings.searchSetting"/>
+    <Shortcut :toolSetting="commonSettings.toolSetting"/>
     <MyFooter :simple="commonSettings.baseSetting.simpleFooter"/>
   </div>
 </template>
@@ -139,15 +137,5 @@ watch(commonSettings, (newData) => {
 
 .cover-image {
   background-image: radial-gradient(rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.5) 100%), radial-gradient(rgba(0, 0, 0, 0) 33%, rgba(0, 0, 0, 0.3) 166%);
-}
-
-.main {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  position: absolute;
-  top: 60px;
 }
 </style>
