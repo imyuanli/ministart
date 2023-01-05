@@ -1,4 +1,11 @@
 export const SET_INFO = {
+    baseSetting:{
+        simpleFooter: {
+            intro: "更简洁的页脚信息",
+            tips: "",
+            type: "switch",
+        },
+    },
     //时间
     timeSetting: {
         show: {

@@ -64,9 +64,6 @@ const commonSettings = reactive(
         {...defaultSet}
 )
 
-console.log(commonSettings)
-console.log(defaultSet)
-
 watch(commonSettings, (newData) => {
   store.set("commonSettings", newData)
 })
