@@ -28,7 +28,7 @@
     </div>
     <div
         v-show="searchVisible"
-        class="p-2 flex justify-start items-center flex-wrap fadeInDown"
+        class="p-2 flex justify-start items-center flex-wrap fadeInDown absolute search-box z-10"
         :style="{
               borderRadius:radius+'px',
               backgroundColor:`rgba(255,255,255,${opacity/100})`,
