@@ -1,5 +1,5 @@
 <template>
-  <div class="relative w-full h-screen min-h-screen flex justify-start items-center flex-col pt-9 md:pt-14">
+  <div class="relative w-full h-screen min-h-screen flex justify-start items-center flex-col pt-12 md:pt-16">
     <div
         class="back-img"
         :style="{backgroundImage:`url(${imgUrl})`}"
