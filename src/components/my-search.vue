@@ -12,7 +12,7 @@
           class="search-btn left-2"
           @click.stop="searchVisible = !searchVisible"
       >
-        <img class="search-btn-eng" :src="searchEngines[currentIndex].icon" alt="">
+        <img class="search-btn-eng" :src="searchEngines[currentEngIndex].icon" alt="">
       </div>
       <input
           class="input-box"
@@ -70,6 +70,8 @@
 <script setup>
 //选中的searchEngines
 import {reactive, ref, toRefs, watch} from "vue";
+import store from "store";
+
 const props = defineProps({
   searchSetting: Object
 })
@@ -117,9 +119,10 @@ const searchEngines = reactive([
   },
 
 ])
-const currentIndex = ref(0)
+const currentEngIndex = ref(store.get('currentEngIndex') ? store.get('currentEngIndex') : 0)
+
 const selectCurrent = (index) => {
-  currentIndex.value = index
+  currentEngIndex.value = index
   closeSearch()
 }
 
@@ -129,7 +132,7 @@ const searchData = () => {
   let value = ""
   value = inputValue.value.replaceAll('&', '%26')
   value = inputValue.value.replaceAll('#', '%23')
-  let res = searchEngines[currentIndex.value]?.target + value
+  let res = searchEngines[currentEngIndex.value]?.target + value
   if (blank.value) {
     window.open(res)
   } else {
@@ -144,6 +147,11 @@ watch(searchVisible, (newValue, oldValue) => {
   } else {
     document.body.removeEventListener('click', closeSearch)
   }
+})
+
+//
+watch(currentEngIndex, (newData) => {
+  store.set("currentEngIndex", newData)
 })
 </script>
 
