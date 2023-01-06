@@ -2,7 +2,6 @@
   <div class="relative w-full h-screen min-h-screen flex justify-start items-center flex-col pt-12 md:pt-16">
     <div
         class="back-img"
-        :style="{backgroundImage:`url(${imgUrl})`}"
     />
     <Header :commonSettings="commonSettings"/>
     <MyTime :timeSetting="commonSettings.timeSetting"/>
@@ -22,7 +21,6 @@ import Shortcut from "../components/shortcut.vue";
 import store from "store";
 import _ from 'lodash'
 
-const imgUrl = ref('https://cn.bing.com/th?id=OHR.ChalkRock_ZH-CN2893565655_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&qlt=50')
 
 const defaultSet = {
   baseSetting: {
@@ -108,6 +106,8 @@ watch(commonSettings, (newData) => {
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
+  background-image: url("https://api.paugram.com/bing/");
+
 }
 
 .back-img:after {
