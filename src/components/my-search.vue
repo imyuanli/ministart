@@ -51,7 +51,7 @@
       </div>
       <div
           class="menu-item"
-          @click="searchDialogVisible = true"
+          @click="enginesDialogVisible = true"
       >
         <div class="flex-center flex-col">
           <div class="p-2 bg-white rounded-md flex-center mb-1">
@@ -60,13 +60,13 @@
             </el-icon>
           </div>
           <div>
-            设置
+            搜索引擎偏好
           </div>
         </div>
       </div>
     </div>
     <MyDialog
-        v-model:dialogVisible="searchDialogVisible"
+        v-model:dialogVisible="enginesDialogVisible"
     >
       <template #title>
         搜索引擎偏好设置
@@ -107,10 +107,17 @@
 </template>
 
 <script setup>
-import {reactive, ref, toRefs, watch} from "vue";
+import {reactive, ref, toRefs, watch, getCurrentInstance, onMounted} from "vue";
 import store from "store";
 import MyDialog from '../components/my-dialog.vue'
 import {DEFAULT_ENGINES} from "../utils/index.js";
+//全局事件总线
+let {proxy} = getCurrentInstance()
+onMounted(() => {
+  proxy.$mitt.on('enginesDialogVisible', (res) => {
+    enginesDialogVisible.value = res
+  })
+})
 
 const props = defineProps({
   searchSetting: Object
@@ -133,7 +140,7 @@ const searchEngines = reactive(
 )
 
 //选择显示多少搜索引擎
-const searchDialogVisible = ref(false)
+const enginesDialogVisible = ref(false)
 //选中的searchEngines
 const checkEngList = ref(
     store.get('checkEngList') ?

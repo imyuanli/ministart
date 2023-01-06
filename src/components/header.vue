@@ -35,8 +35,8 @@
         <div class="lip-btn" @click="timeDialogVisible = true">时间/日期设置</div>
         <div class="lip-btn" @click="searchDialogVisible = true">搜索栏设置</div>
         <div class="lip-btn" @click="toolDialogVisible = true">快捷方式设置</div>
-        <!--        <el-divider style="margin: 5px"/>-->
-        <!--        <div class="lip-btn" @click="commonDialogVisible = true">搜索引擎偏好</div>-->
+        <el-divider style="margin: 5px"/>
+        <div class="lip-btn" @click="sendEnginesDialogVisible">搜索引擎偏好</div>
         <!--        <div class="lip-btn" @click="commonDialogVisible = true">壁纸偏好</div>-->
         <!--        <el-divider style="margin: 5px"/>-->
         <!--        <div class="lip-btn" @click="commonDialogVisible = true">备份与恢复</div>-->
@@ -151,14 +151,14 @@
   </MyDialog>
 </template>
 <script setup>
-import {ref, toRefs} from 'vue'
+import {ref, toRefs, getCurrentInstance} from 'vue'
 import SettingPanel from "./setting-panel.vue";
 import MyDialog from "./my-dialog.vue";
 
 const props = defineProps({
   commonSettings: Object
 })
-let {baseSetting,timeSetting, searchSetting, toolSetting} = toRefs(props.commonSettings)
+let {baseSetting, timeSetting, searchSetting, toolSetting} = toRefs(props.commonSettings)
 
 //个人信息
 // const infoDialogVisible = ref(false)
@@ -211,6 +211,11 @@ const searchDialogVisible = ref(false)
 //快捷导航弹窗
 const toolDialogVisible = ref(false)
 
+//搜索引擎偏好
+let {proxy} = getCurrentInstance()
+const sendEnginesDialogVisible= () => {
+  proxy.$mitt.emit('enginesDialogVisible', true)
+}
 </script>
 
 <style scoped>
