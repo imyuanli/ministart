@@ -233,7 +233,7 @@ watch(currentEngIndex, (newData) => {
 }
 
 .search-btn-eng {
-  width: 18px;
+  width: 22px;
   height: auto;
 }
 
