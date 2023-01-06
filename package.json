@@ -16,6 +16,7 @@
     "element-plus": "^2.2.27",
     "element-ui": "^2.15.12",
     "lodash": "^4.17.21",
+    "mitt": "^3.0.0",
     "postcss": "^8.4.20",
     "solarlunar-es": "^1.0.9",
     "store": "^2.0.12",
