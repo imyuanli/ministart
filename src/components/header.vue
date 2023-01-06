@@ -37,6 +37,7 @@
         <div class="lip-btn" @click="toolDialogVisible = true">快捷方式设置</div>
         <el-divider style="margin: 5px"/>
         <div class="lip-btn" @click="sendEnginesDialogVisible">搜索引擎偏好</div>
+        <el-divider style="margin: 5px"/>
         <!--        <div class="lip-btn" @click="commonDialogVisible = true">壁纸偏好</div>-->
         <!--        <el-divider style="margin: 5px"/>-->
         <!--        <div class="lip-btn" @click="commonDialogVisible = true">备份与恢复</div>-->
@@ -44,7 +45,12 @@
         <!--        <el-divider style="margin: 5px"/>-->
         <!--        <div class="lip-btn">捐助</div>-->
         <!--        <div class="lip-btn">帮助和反馈</div>-->
-        <!--        <div class="lip-btn">关于</div>-->
+        <div class="lip-btn" @click="aboutDialogVisible= true">
+          <div class="flex flex-col justify-start">
+            <div class="mr-1">关于</div>
+            <div class="scale-75 text-gray-500">v{{config.version}} Beta</div>
+          </div>
+        </div>
         <!--        <el-divider style="margin: 5px"/>-->
         <!--        <div class="lip-btn">设为主页</div>-->
       </div>
@@ -149,11 +155,24 @@
       />
     </template>
   </MyDialog>
+  <MyDialog
+      v-model:dialogVisible="aboutDialogVisible"
+  >
+    <template #title>
+      关于Mini起始页
+    </template>
+    <template #content>
+      <div>
+        欢迎使用 <span class="primary-color">Mini起始页</span>
+      </div>
+    </template>
+  </MyDialog>
 </template>
 <script setup>
 import {ref, toRefs, getCurrentInstance} from 'vue'
 import SettingPanel from "./setting-panel.vue";
 import MyDialog from "./my-dialog.vue";
+import config from "../../package.json";
 
 const props = defineProps({
   commonSettings: Object
@@ -213,9 +232,12 @@ const toolDialogVisible = ref(false)
 
 //搜索引擎偏好
 let {proxy} = getCurrentInstance()
-const sendEnginesDialogVisible= () => {
+const sendEnginesDialogVisible = () => {
   proxy.$mitt.emit('enginesDialogVisible', true)
 }
+
+//关于
+const aboutDialogVisible = ref(false)
 </script>
 
 <style scoped>

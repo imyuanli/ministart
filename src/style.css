@@ -13,6 +13,9 @@ body {
     align-items: center;
 }
 
+.primary-color {
+    color: #1890ff
+}
 
 :root {
     --primary-color: #1890ff;
@@ -40,7 +43,7 @@ body {
     --sidebar-width: 50px;
     --sidebar-opacity: 0.5;
     --wall-mask: 0;
-    --wall-blur:0;
+    --wall-blur: 0;
 }
 
 
