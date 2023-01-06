@@ -12,7 +12,7 @@
           class="search-btn left-2"
           @click.stop="searchVisible = !searchVisible"
       >
-        <img class="search-btn-eng" :src="searchEngines[currentEngIndex]?.icon" alt="">
+        <img class="search-btn-eng" :src="getEngItem()?.icon" alt="">
       </div>
       <input
           class="input-box"
@@ -28,25 +28,30 @@
     </div>
     <div
         v-show="searchVisible"
-        class="p-2 flex justify-start items-center flex-wrap fadeInDown absolute search-box z-20 rounded-lg bg-white grid grid-cols-4 md:grid-cols-6"
+        class="p-2 flex justify-start items-center flex-wrap fadeInDown absolute search-box z-20 rounded-lg bg-white grid grid-cols-4 md:grid-cols-6 sm:grid-cols-5"
     >
-      <div
-          class="menu-item"
-          v-for="(item,index) in searchEngines"
-          :key="index"
-          @click="selectCurrent(index)"
-      >
-        <div class="flex-center flex-col">
-          <div class="p-2 bg-white rounded-md flex-center mb-1">
-            <img class="menu-img" :src="item.icon" alt="">
-          </div>
-          <div>
-            {{ item.name }}
+      <div v-for="check in checkEngList">
+        <div v-for="(item,index) in searchEngines">
+          <div
+              class="menu-item"
+              v-if="item?.id ===check"
+              :key="index"
+              @click="selectCurrent(item?.id)"
+          >
+            <div class="flex-center flex-col">
+              <div class="p-2 bg-white rounded-md flex-center mb-1">
+                <img class="menu-img" :src="item.icon" alt="">
+              </div>
+              <div>
+                {{ item.name }}
+              </div>
+            </div>
           </div>
         </div>
       </div>
       <div
           class="menu-item"
+          @click="searchDialogVisible = true"
       >
         <div class="flex-center flex-col">
           <div class="p-2 bg-white rounded-md flex-center mb-1">
@@ -60,19 +65,56 @@
         </div>
       </div>
     </div>
+    <MyDialog
+        v-model:dialogVisible="searchDialogVisible"
+    >
+      <template #title>
+        搜索引擎偏好设置
+      </template>
+      <template #content>
+        <div class="rounded-md bg-white px-3 py-3">
+          <el-checkbox-group class="grid grid-cols-1 sm:grid-cols-2 gap-2" v-model="checkEngList" :min="1" :max="6">
+            <div v-for="item in DEFAULT_ENGINES"
+                 class="w-full p-3 flex cursor-pointer bg-gray-100 hover:bg-gray-200 duration-200 truncate overflow-ellipsis"
+            >
+              <el-tooltip
+                  class="box-item"
+                  effect="light"
+                  content="该搜索引擎正在被使用，无法操作"
+                  placement="top"
+                  :disabled="currentEngId !== item.id"
+              >
+                <el-checkbox :disabled="currentEngId === item.id" class="w-full" :label="item.id">
+                  <div class="flex w-full">
+                    <img class="menu-img mr-3" :src="item.icon" alt="">
+                    <div class="w-full">
+                      <div class="mb-1 w-full">
+                        {{ item.name }}
+                      </div>
+                      <div class="inline-block truncate overflow-ellipsis w-44" style="font-size:12px">
+                        {{ item.target }}
+                      </div>
+                    </div>
+                  </div>
+                </el-checkbox>
+              </el-tooltip>
+            </div>
+          </el-checkbox-group>
+        </div>
+      </template>
+    </MyDialog>
   </div>
 </template>
 
 <script setup>
-//选中的searchEngines
 import {reactive, ref, toRefs, watch} from "vue";
 import store from "store";
-import {IMG_URL} from "../utils/index.js";
+import MyDialog from '../components/my-dialog.vue'
+import {DEFAULT_ENGINES} from "../utils/index.js";
 
 const props = defineProps({
   searchSetting: Object
 })
-
 const {
   show,
   height,
@@ -81,108 +123,48 @@ const {
   blank,
 } = toRefs(props.searchSetting)
 
-//搜索引擎弹窗
+//所有的搜索引擎
+//todo 可以用户自定义搜索引擎?暂时这么写吧
+const searchEngines = reactive(
+    store.get('searchEngines') ?
+        store.get('searchEngines')
+        :
+        DEFAULT_ENGINES
+)
+
+//选择显示多少搜索引擎
+const searchDialogVisible = ref(false)
+//选中的searchEngines
+const checkEngList = ref(
+    store.get('checkEngList') ?
+        store.get('checkEngList')
+        :
+        ['baidu', 'google', 'bing']
+)
+//存到本地
+watch(checkEngList, (newData) => {
+  store.set('checkEngList', newData)
+})
+
+//搜索引擎的下滑选择
 const searchVisible = ref(false)
 const closeSearch = () => {
   searchVisible.value = false
 }
+const currentEngId = ref(store.get('currentEngId') ? store.get('currentEngId') : 'baidu')
+
+//通过id获取对应的搜索item
+const getEngItem = () => searchEngines.find(item => item.id === currentEngId.value)
 
 //选择搜索引擎
-const searchEngines = reactive([
-  {
-    name: "百度",
-    target: "https://www.baidu.com/s?&tn=68018901_2_oem_dgie=utf-8&wd=",
-    icon: `${IMG_URL}/baidu.svg`
-  },
-  {
-    name: "谷歌",
-    target: "https://www.google.com/search?q=",
-    icon: `${IMG_URL}/google.svg`
-  },
-  {
-    name: "必应",
-    target: "https://cn.bing.com/search?q=",
-    icon: `${IMG_URL}/bing.svg`
-  },
-  {
-    name: "360",
-    target: "https://www.so.com/s?q=",
-    icon: `${IMG_URL}/360.svg`
-  },
-  {
-    name: "搜狗",
-    target: "https://www.sogou.com/web?query=",
-    icon: `${IMG_URL}/sougou.svg`
-  },
-  {
-    name: "F搜",
-    target: "https://fsoufsou.com/search?q=",
-    icon: `${IMG_URL}/fsou.svg`
-  },
-  {
-    name: "DuckDuckGo",
-    target: "https://duckduckgo.com/?q=",
-    icon: `${IMG_URL}/duckduckgo.svg`
-  },
-  {
-    name: "Yahoo",
-    target: "https://hk.search.yahoo.com/search?p=",
-    icon: `${IMG_URL}/yahoo.svg`
-  },
-  {
-    name: "CSDN",
-    target: "https://so.csdn.net/so/search?q=",
-    icon: `${IMG_URL}/csdn.ico`
-  },
-  {
-    name: "GitHub",
-    target: "https://github.com/search?q=",
-    icon: `${IMG_URL}/github.svg`
-  },
-  {
-    name: "StackOverflow",
-    target: "https://stackoverflow.com/nocaptcha?s=",
-    icon: `${IMG_URL}/stackoverflow.svg`
-  },
-  {
-    name: "开发者搜索",
-    target: "https://kaifa.baidu.com/searchPage?wd=",
-    icon: `${IMG_URL}/kaifabaidu.svg`
-  },
-  {
-    name: "MDN",
-    target: "https://developer.mozilla.org/zh-CN/search?q=",
-    icon: `${IMG_URL}/mdn.svg`
-  },
-  {
-    name: "知乎",
-    target: "https://www.zhihu.com/search?type=content&q=",
-    icon: `${IMG_URL}/zhihu.svg`
-  },
-])
-const currentEngIndex = ref(store.get('currentEngIndex') ? store.get('currentEngIndex') : 0)
-
-const selectCurrent = (index) => {
-  currentEngIndex.value = index
+const selectCurrent = (id) => {
+  currentEngId.value = id
   closeSearch()
 }
-
-//搜索
-const inputValue = ref("")
-const searchData = () => {
-  let value = ""
-  value = inputValue.value.replaceAll('&', '%26')
-  value = inputValue.value.replaceAll('#', '%23')
-  let res = searchEngines[currentEngIndex.value]?.target + value
-  if (blank.value) {
-    window.open(res)
-  } else {
-    window.location.href = res
-  }
-}
-
+//选择的搜索引擎
+watch(currentEngId, newData => store.set("currentEngId", newData))
 //关闭选择搜索引擎的弹窗
-watch(searchVisible, (newValue, oldValue) => {
+watch(searchVisible, (newValue) => {
   if (newValue) {
     document.body.addEventListener('click', closeSearch)
   } else {
@@ -190,10 +172,19 @@ watch(searchVisible, (newValue, oldValue) => {
   }
 })
 
-//
-watch(currentEngIndex, (newData) => {
-  store.set("currentEngIndex", newData)
-})
+//搜索
+const inputValue = ref("")
+const searchData = () => {
+  let value = ""
+  value = inputValue.value.replaceAll('&', '%26')
+  value = inputValue.value.replaceAll('#', '%23')
+  let res = getEngItem()?.target + value
+  if (blank.value) {
+    window.open(res)
+  } else {
+    window.location.href = res
+  }
+}
 </script>
 
 <style scoped>
@@ -241,7 +232,7 @@ watch(currentEngIndex, (newData) => {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 6px 10px;
+  padding: 6px 0;
   border-radius: 5px;
   color: black;
   font-size: 12px;
@@ -257,6 +248,7 @@ watch(currentEngIndex, (newData) => {
   width: 20px;
   height: auto;
   font-size: 20px;
+  object-fit: contain;
 }
 
 .focus-input {
