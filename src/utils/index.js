@@ -1,3 +1,5 @@
+export const IMG_URL = '//cdn.imyuanli.cn/mini/'
+
 export const SET_INFO = {
     baseSetting:{
         simpleFooter: {

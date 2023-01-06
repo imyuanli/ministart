@@ -12,7 +12,7 @@
           class="search-btn left-2"
           @click.stop="searchVisible = !searchVisible"
       >
-        <img class="search-btn-eng" :src="searchEngines[currentEngIndex].icon" alt="">
+        <img class="search-btn-eng" :src="searchEngines[currentEngIndex]?.icon" alt="">
       </div>
       <input
           class="input-box"
@@ -28,11 +28,7 @@
     </div>
     <div
         v-show="searchVisible"
-        class="p-2 flex justify-start items-center flex-wrap fadeInDown absolute search-box z-10"
-        :style="{
-              borderRadius:radius+'px',
-              backgroundColor:`rgba(255,255,255,${opacity/100})`,
-            }"
+        class="p-2 flex justify-start items-center flex-wrap fadeInDown absolute search-box z-20 rounded-lg bg-white grid grid-cols-4 md:grid-cols-6"
     >
       <div
           class="menu-item"
@@ -71,6 +67,7 @@
 //选中的searchEngines
 import {reactive, ref, toRefs, watch} from "vue";
 import store from "store";
+import {IMG_URL} from "../utils/index.js";
 
 const props = defineProps({
   searchSetting: Object
@@ -94,30 +91,74 @@ const closeSearch = () => {
 const searchEngines = reactive([
   {
     name: "百度",
-    target: "https://www.baidu.com/s?wd=",
-    icon: 'https://www.baidu.com/favicon.ico'
-  },
-  {
-    name: "必应",
-    target: "https://cn.bing.com/search?q=",
-    icon: 'https://www.jianfast.com/static/home/images/searchChoice/bing.svg'
+    target: "https://www.baidu.com/s?&tn=68018901_2_oem_dgie=utf-8&wd=",
+    icon: `${IMG_URL}/baidu.svg`
   },
   {
     name: "谷歌",
     target: "https://www.google.com/search?q=",
-    icon: 'https://www.jianfast.com/static/home/images/searchChoice/google.svg'
+    icon: `${IMG_URL}/google.svg`
+  },
+  {
+    name: "必应",
+    target: "https://cn.bing.com/search?q=",
+    icon: `${IMG_URL}/bing.svg`
   },
   {
     name: "360",
     target: "https://www.so.com/s?q=",
-    icon: 'https://s2.ssl.qhimg.com/static/121a1737750aa53d.ico'
+    icon: `${IMG_URL}/360.svg`
   },
   {
     name: "搜狗",
     target: "https://www.sogou.com/web?query=",
-    icon: 'https://www.sogou.com/images/logo/new/favicon.ico'
+    icon: `${IMG_URL}/sougou.svg`
   },
-
+  {
+    name: "F搜",
+    target: "https://fsoufsou.com/search?q=",
+    icon: `${IMG_URL}/fsou.svg`
+  },
+  {
+    name: "DuckDuckGo",
+    target: "https://duckduckgo.com/?q=",
+    icon: `${IMG_URL}/duckduckgo.svg`
+  },
+  {
+    name: "Yahoo",
+    target: "https://hk.search.yahoo.com/search?p=",
+    icon: `${IMG_URL}/yahoo.svg`
+  },
+  {
+    name: "CSDN",
+    target: "https://so.csdn.net/so/search?q=",
+    icon: `${IMG_URL}/csdn.ico`
+  },
+  {
+    name: "GitHub",
+    target: "https://github.com/search?q=",
+    icon: `${IMG_URL}/github.svg`
+  },
+  {
+    name: "StackOverflow",
+    target: "https://stackoverflow.com/nocaptcha?s=",
+    icon: `${IMG_URL}/stackoverflow.svg`
+  },
+  {
+    name: "开发者搜索",
+    target: "https://kaifa.baidu.com/searchPage?wd=",
+    icon: `${IMG_URL}/kaifabaidu.svg`
+  },
+  {
+    name: "MDN",
+    target: "https://developer.mozilla.org/zh-CN/search?q=",
+    icon: `${IMG_URL}/mdn.svg`
+  },
+  {
+    name: "知乎",
+    target: "https://www.zhihu.com/search?type=content&q=",
+    icon: `${IMG_URL}/zhihu.svg`
+  },
 ])
 const currentEngIndex = ref(store.get('currentEngIndex') ? store.get('currentEngIndex') : 0)
 
