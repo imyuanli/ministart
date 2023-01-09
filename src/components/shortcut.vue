@@ -77,7 +77,7 @@
       快捷导航设置
     </template>
     <template #content>
-      <div class="flex justify-center items-start flex-col bg-white rounded-lg px-6 py-3 text-base prefix-text-color">
+      <div v-loading="loading" class="flex justify-center items-start flex-col bg-white rounded-lg px-6 py-3 text-base prefix-text-color">
         <div class="py-3 shortcut-box">
           <div>名称</div>
           <MyInput v-model="toolObj.name"/>
@@ -100,7 +100,7 @@
               <div class="m-1">
                 <el-button round @click="getText">文字</el-button>
               </div>
-              <el-button class="m-1" round>默认</el-button>
+              <el-button class="m-1"  @click="getDefault" round>默认</el-button>
             </div>
           </div>
         </div>
@@ -121,7 +121,7 @@
       </div>
     </template>
     <template #bottom>
-      <el-button>取 消</el-button>
+      <el-button @click="handleEditClose">取 消</el-button>
       <el-button v-if="currentIndex === null" type="primary" @click="handleSaveTool">确 定</el-button>
       <el-button v-if="currentIndex !== null" type="primary" @click="handleUpdateTool">更 新</el-button>
     </template>
@@ -147,6 +147,7 @@ import MyInput from '../components/my-input.vue'
 import MyDialog from '../components/my-dialog.vue'
 import {ElMessage} from "element-plus";
 import store from 'store'
+import {get_url_icon} from "../service/service.js";
 
 const props = defineProps({
   toolSetting: Object
@@ -179,6 +180,7 @@ const toolsArr = reactive(store.get("toolsArr") ?
     []
 )
 
+const loading=ref(false)
 
 //获取网站图标
 const getIcon = () => {
@@ -189,8 +191,16 @@ const getIcon = () => {
     })
     return
   }
-  toolObj.src = 'https://www.jianfast.com/static/home/images/defaultsicon/null.png'
-  toolObj.type = 'icon'
+  loading.value = true
+  get_url_icon({url:toolObj?.url}).then(
+      (res)=>{
+       if(res){
+         toolObj.src = res
+         toolObj.type = 'icon'
+         loading.value = false
+       }
+    }
+  )
 }
 //图标是文字
 const getText = () => {
@@ -204,7 +214,11 @@ const getText = () => {
   toolObj.src = toolObj?.name[0]
   toolObj.type = 'text'
 }
-
+//默认
+const getDefault=()=>{
+  toolObj.src = 'https://www.jianfast.com/static/home/images/defaultsicon/null.png'
+  toolObj.type = 'icon'
+}
 //重置toolobj
 const clearObj = () => {
   toolObj.name = ""

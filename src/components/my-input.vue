@@ -2,7 +2,6 @@
   <div class="ml-3 flex-auto">
     <input
         :value="modelValue"
-        maxlength="8"
         class="my-input"
         @input="handleChange"
     />
