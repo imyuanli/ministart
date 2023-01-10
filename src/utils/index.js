@@ -1,4 +1,4 @@
-export const IMG_URL = '//oss-sand.vercel.app/mini'
+export const IMG_URL = 'https://qiniu.imyuanli.cn/mini'
 
 export const SET_INFO = {
     baseSetting: {
