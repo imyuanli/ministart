@@ -75,35 +75,33 @@
         搜索引擎偏好设置
       </template>
       <template #content>
-        <div class="rounded-md bg-white px-3 py-3">
-          <el-checkbox-group class="grid grid-cols-1 sm:grid-cols-2 gap-2" v-model="checkEngList" :min="1" :max="6">
-            <div v-for="item in DEFAULT_ENGINES"
-                 class="w-full p-3 flex cursor-pointer bg-gray-100 hover:bg-gray-200 duration-200 truncate overflow-ellipsis"
+        <el-checkbox-group class="grid grid-cols-1 sm:grid-cols-2 gap-3" v-model="checkEngList" :min="1" :max="6">
+          <div v-for="item in DEFAULT_ENGINES"
+               class="w-full p-3 flex cursor-pointer bg-gray-100 hover:bg-gray-200 duration-200 truncate overflow-ellipsis"
+          >
+            <el-tooltip
+                class="box-item"
+                effect="light"
+                content="该搜索引擎正在被使用，无法操作"
+                placement="top"
+                :disabled="currentEngId !== item.id"
             >
-              <el-tooltip
-                  class="box-item"
-                  effect="light"
-                  content="该搜索引擎正在被使用，无法操作"
-                  placement="top"
-                  :disabled="currentEngId !== item.id"
-              >
-                <el-checkbox :disabled="currentEngId === item.id" class="w-full" :label="item.id">
-                  <div class="flex w-full">
-                    <img class="menu-img mr-3" :src="IMG_URL+item.icon" alt="">
-                    <div class="w-full">
-                      <div class="mb-1 w-full">
-                        {{ item.name }}
-                      </div>
-                      <div class="inline-block truncate overflow-ellipsis w-44" style="font-size:12px">
-                        {{ item.target }}
-                      </div>
+              <el-checkbox :disabled="currentEngId === item.id" class="w-full" :label="item.id">
+                <div class="flex w-full">
+                  <img class="menu-img mr-3" :src="IMG_URL+item.icon" alt="">
+                  <div class="w-full">
+                    <div class="mb-1 w-full">
+                      {{ item.name }}
+                    </div>
+                    <div class="inline-block truncate overflow-ellipsis w-44" style="font-size:12px">
+                      {{ item.target }}
                     </div>
                   </div>
-                </el-checkbox>
-              </el-tooltip>
-            </div>
-          </el-checkbox-group>
-        </div>
+                </div>
+              </el-checkbox>
+            </el-tooltip>
+          </div>
+        </el-checkbox-group>
       </template>
     </MyDialog>
   </div>

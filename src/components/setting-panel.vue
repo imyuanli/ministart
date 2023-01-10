@@ -5,21 +5,19 @@
     </div>
     <!--    主要开关，当主开关关闭其他数据隐藏-->
     <div v-if="settingObj.show!==undefined">
-      <div v-if="!settingObj.show" class="bg-white rounded-md px-6 py-3">
+      <div v-if="!settingObj.show">
         <PanelContent :info="setInfo['show']" :settingObj="settingObj" :item="'show'"/>
       </div>
       <!--    具体设置-->
-      <div v-if="settingObj.show" class="bg-white rounded-md px-6 py-3">
+      <div v-if="settingObj.show">
         <div v-for="(item,index) in Object.keys(settingObj)" :key="index">
           <PanelContent :info="setInfo[item]" :settingObj="settingObj" :item="item"/>
         </div>
       </div>
     </div>
     <div v-else>
-      <div class="bg-white rounded-md px-6 py-3">
-        <div v-for="(item,index) in Object.keys(settingObj)" :key="index">
-          <PanelContent :info="setInfo[item]" :settingObj="settingObj" :item="item"/>
-        </div>
+      <div v-for="(item,index) in Object.keys(settingObj)" :key="index">
+        <PanelContent :info="setInfo[item]" :settingObj="settingObj" :item="item"/>
       </div>
     </div>
   </div>
