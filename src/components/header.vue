@@ -37,8 +37,8 @@
         <div class="lip-btn" @click="toolDialogVisible = true">快捷方式设置</div>
         <el-divider style="margin: 5px"/>
         <div class="lip-btn" @click="sendEnginesDialogVisible">搜索引擎偏好</div>
+        <div class="lip-btn" @click="pictureDialogVisible = true">壁纸偏好</div>
         <el-divider style="margin: 5px"/>
-        <!--        <div class="lip-btn" @click="commonDialogVisible = true">壁纸偏好</div>-->
         <!--        <el-divider style="margin: 5px"/>-->
         <!--        <div class="lip-btn" @click="commonDialogVisible = true">备份与恢复</div>-->
         <!--        <div class="lip-btn" @click="commonDialogVisible = true">重置所有设置</div>-->
@@ -49,7 +49,7 @@
           <div class="flex justify-start">
             <div>关于</div>
             <div class="ml-1">
-              <span class="scale-75 text-gray-500">v{{config.version}} Beta</span>
+              <span class="scale-75 text-gray-500">v{{ config.version }} Beta</span>
             </div>
           </div>
         </div>
@@ -104,7 +104,7 @@
   <!--      </div>-->
   <!--    </template>-->
   <!--  </MyDialog>-->
-  <!-- 时间设置 -->
+  <!--  常规-->
   <MyDialog
       v-model:dialogVisible="commonDialogVisible"
   >
@@ -118,6 +118,8 @@
       />
     </template>
   </MyDialog>
+
+  <!--  时间-->
   <MyDialog
       v-model:dialogVisible="timeDialogVisible"
   >
@@ -131,6 +133,8 @@
       />
     </template>
   </MyDialog>
+
+  <!--  搜索-->
   <MyDialog
       v-model:dialogVisible="searchDialogVisible"
   >
@@ -144,6 +148,8 @@
       />
     </template>
   </MyDialog>
+
+  <!--  快捷方式-->
   <MyDialog
       v-model:dialogVisible="toolDialogVisible"
   >
@@ -157,6 +163,40 @@
       />
     </template>
   </MyDialog>
+
+  <!--  壁纸-->
+  <MyDialog
+      v-model:dialogVisible="pictureDialogVisible"
+  >
+    <template #title>
+      壁纸偏好
+    </template>
+    <template #content>
+      <div>
+        <div>自定义</div>
+        <div>
+          <div></div>
+          <div></div>
+        </div>
+      </div>
+      <div>
+        <div>自定义</div>
+        <div>
+          <div></div>
+          <div></div>
+        </div>
+      </div>
+      <div>
+        <div>自定义</div>
+        <div>
+          <div></div>
+          <div></div>
+        </div>
+      </div>
+    </template>
+  </MyDialog>
+
+  <!--  关于-->
   <MyDialog
       v-model:dialogVisible="aboutDialogVisible"
   >
@@ -237,6 +277,8 @@ let {proxy} = getCurrentInstance()
 const sendEnginesDialogVisible = () => {
   proxy.$mitt.emit('enginesDialogVisible', true)
 }
+//壁纸
+const pictureDialogVisible = ref(false)
 
 //关于
 const aboutDialogVisible = ref(false)
