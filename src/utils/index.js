@@ -7,6 +7,11 @@ export const SET_INFO = {
             tips: "",
             type: "switch",
         },
+        showGreeting: {
+            intro: "显示问候",
+            tips: "",
+            type: "switch",
+        },
     },
     //时间
     timeSetting: {
