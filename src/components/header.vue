@@ -46,9 +46,11 @@
         <!--        <div class="lip-btn">捐助</div>-->
         <!--        <div class="lip-btn">帮助和反馈</div>-->
         <div class="lip-btn" @click="aboutDialogVisible= true">
-          <div class="flex flex-col justify-start">
-            <div class="mr-1">关于</div>
-            <div class="scale-75 text-gray-500">v{{config.version}} Beta</div>
+          <div class="flex justify-start">
+            <div>关于</div>
+            <div class="ml-1">
+              <span class="scale-75 text-gray-500">v{{config.version}} Beta</span>
+            </div>
           </div>
         </div>
         <!--        <el-divider style="margin: 5px"/>-->
