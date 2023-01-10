@@ -13,7 +13,9 @@
           <slot name="title"></slot>
         </div>
       </template>
-      <slot name="content"></slot>
+      <div class="bg-white rounded-md px-4 py-3">
+        <slot name="content"></slot>
+      </div>
       <template #footer>
         <slot name="bottom"></slot>
       </template>
