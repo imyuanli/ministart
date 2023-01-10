@@ -39,7 +39,10 @@
                 :alt="item.name"
                 :style="{borderRadius:`${radius}px`}"
             >
-            <span class="text-black" v-if="item.type==='text'">{{ item.src }}</span>
+            <div class="text-black bg-primary-color rounded-full flex-center text-white text-xl font-bold"
+                 v-if="item.type==='text'">
+              <span class="px-2.5 py-1.5">{{ item.src }}</span>
+            </div>
           </div>
         </div>
         <div class="text-center text-sm mt-1 overflow-ellipsis truncate w-full">{{ item.name }}</div>
@@ -59,7 +62,7 @@
               :style="{opacity:opacity/100,borderRadius:`${radius}px`}"
           >
             <div class="bg-blue-400 flex-center rounded-full">
-              <el-icon :style="{fontSize: `${size-5}px`}">
+              <el-icon :style="{fontSize: `${size-8}px`}">
                 <CirclePlus/>
               </el-icon>
             </div>
@@ -77,7 +80,8 @@
       快捷导航设置
     </template>
     <template #content>
-      <div v-loading="loading" class="flex justify-center items-start flex-col bg-white rounded-lg px-6 py-3 text-base prefix-text-color">
+      <div v-loading="loading"
+           class="flex justify-center items-start flex-col bg-white rounded-lg px-6 py-3 text-base prefix-text-color">
         <div class="py-3 shortcut-box">
           <div>名称</div>
           <MyInput v-model="toolObj.name"/>
@@ -90,7 +94,7 @@
           <div class="flex-none">图标</div>
           <div class="flex-center ml-3">
             <div class="shortcut-icon-box">
-              <div v-if="toolObj.type==='text'">{{ toolObj.src }}</div>
+              <div class="font-bold" v-if="toolObj.type==='text'">{{ toolObj.src }}</div>
               <img v-if="toolObj.type==='icon'" class="shortcut-icon" :src="toolObj.src" alt="">
             </div>
             <div class="ml-3 flex flex-wrap justify-start">
@@ -100,7 +104,7 @@
               <div class="m-1">
                 <el-button round @click="getText">文字</el-button>
               </div>
-              <el-button class="m-1"  @click="getDefault" round>默认</el-button>
+              <el-button class="m-1" @click="getDefault" round>默认</el-button>
             </div>
           </div>
         </div>
@@ -180,7 +184,7 @@ const toolsArr = reactive(store.get("toolsArr") ?
     []
 )
 
-const loading=ref(false)
+const loading = ref(false)
 
 //获取网站图标
 const getIcon = () => {
@@ -192,14 +196,14 @@ const getIcon = () => {
     return
   }
   loading.value = true
-  get_url_icon({url:toolObj?.url}).then(
-      (res)=>{
-       if(res){
-         toolObj.src = res
-         toolObj.type = 'icon'
-         loading.value = false
-       }
-    }
+  get_url_icon({url: toolObj?.url}).then(
+      (res) => {
+        if (res) {
+          toolObj.src = res
+          toolObj.type = 'icon'
+          loading.value = false
+        }
+      }
   )
 }
 //图标是文字
@@ -215,7 +219,7 @@ const getText = () => {
   toolObj.type = 'text'
 }
 //默认
-const getDefault=()=>{
+const getDefault = () => {
   toolObj.src = 'https://www.jianfast.com/static/home/images/defaultsicon/null.png'
   toolObj.type = 'icon'
 }
@@ -367,6 +371,7 @@ watch(visible, (newValue, oldValue) => {
   color: #fff;
   transition: .25s;
   overflow-y: auto;
+  padding-top: 2vh;
 }
 
 /*屏幕小于768的时候*/

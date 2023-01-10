@@ -17,6 +17,10 @@ body {
     color: #1890ff
 }
 
+.bg-primary-color{
+    background-color: #1890ff;
+}
+
 :root {
     --primary-color: #1890ff;
     --search-height: 46px;
