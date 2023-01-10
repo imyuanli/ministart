@@ -12,7 +12,7 @@
           class="search-btn left-2"
           @click.stop="searchVisible = !searchVisible"
       >
-        <img class="search-btn-eng" :src="getEngItem()?.icon" alt="">
+        <img class="search-btn-eng" :src="IMG_URL+getEngItem()?.icon" alt="">
       </div>
       <input
           class="input-box"
@@ -40,7 +40,7 @@
           >
             <div class="flex-center flex-col">
               <div class="p-2 bg-white rounded-md flex-center mb-1">
-                <img class="menu-img" :src="item.icon" alt="">
+                <img class="menu-img" :src="IMG_URL+item?.icon" alt="">
               </div>
               <div>
                 {{ item.name }}
@@ -86,7 +86,7 @@
               >
                 <el-checkbox :disabled="currentEngId === item.id" class="w-full" :label="item.id">
                   <div class="flex w-full">
-                    <img class="menu-img mr-3" :src="item.icon" alt="">
+                    <img class="menu-img mr-3" :src="IMG_URL+item.icon" alt="">
                     <div class="w-full">
                       <div class="mb-1 w-full">
                         {{ item.name }}
@@ -110,7 +110,7 @@
 import {reactive, ref, toRefs, watch, getCurrentInstance, onMounted} from "vue";
 import store from "store";
 import MyDialog from '../components/my-dialog.vue'
-import {DEFAULT_ENGINES} from "../utils/index.js";
+import {IMG_URL, DEFAULT_ENGINES} from "../utils/index.js";
 //全局事件总线
 let {proxy} = getCurrentInstance()
 onMounted(() => {

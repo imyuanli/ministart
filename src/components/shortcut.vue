@@ -152,6 +152,7 @@ import MyDialog from '../components/my-dialog.vue'
 import {ElMessage} from "element-plus";
 import store from 'store'
 import {get_url_icon} from "../service/service.js";
+import {IMG_URL} from "../utils/index.js";
 
 const props = defineProps({
   toolSetting: Object
@@ -171,7 +172,7 @@ const {
 const toolObj = reactive({
       name: "",
       url: "",
-      src: "https://www.jianfast.com/static/home/images/defaultsicon/null.png",
+      src: `${IMG_URL}default.png`,
       type: "icon",
       grid: "1x1"
     }
@@ -220,14 +221,14 @@ const getText = () => {
 }
 //默认
 const getDefault = () => {
-  toolObj.src = 'https://www.jianfast.com/static/home/images/defaultsicon/null.png'
+  toolObj.src = `${IMG_URL}default.png`
   toolObj.type = 'icon'
 }
 //重置toolobj
 const clearObj = () => {
   toolObj.name = ""
   toolObj.url = ""
-  toolObj.src = "https://www.jianfast.com/static/home/images/defaultsicon/null.png"
+  toolObj.src = `${IMG_URL}default.png`
   toolObj.type = "icon"
   toolObj.grid = "1x1"
 }

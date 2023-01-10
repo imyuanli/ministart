@@ -1,4 +1,4 @@
-export const IMG_URL = 'https://qiniu.imyuanli.cn/mini'
+export const IMG_URL = 'https://qiniu.imyuanli.cn/mini/'
 
 export const SET_INFO = {
     baseSetting: {
@@ -166,84 +166,84 @@ export const DEFAULT_ENGINES = [
         id: 'baidu',
         name: "百度",
         target: "https://www.baidu.com/s?&tn=68018901_2_oem_dgie=utf-8&wd=",
-        icon: `${IMG_URL}/baidu.svg`
+        icon: `baidu.svg`
     },
     {
         id: 'google',
         name: "谷歌",
         target: "https://www.google.com/search?q=",
-        icon: `${IMG_URL}/google.svg`
+        icon: `google.svg`
     },
     {
         id: "bing",
         name: "必应",
         target: "https://cn.bing.com/search?q=",
-        icon: `${IMG_URL}/bing.svg`
+        icon: `bing.svg`
     },
     {
         id: '360',
         name: "360",
         target: "https://www.so.com/s?q=",
-        icon: `${IMG_URL}/360.svg`
+        icon: `360.svg`
     },
     {
         id: 'sougou',
         name: "搜狗",
         target: "https://www.sogou.com/web?query=",
-        icon: `${IMG_URL}/sougou.svg`
+        icon: `sougou.svg`
     },
     {
         id: 'fsou',
         name: "F搜",
         target: "https://fsoufsou.com/search?q=",
-        icon: `${IMG_URL}/fsou.svg`
+        icon: `fsou.svg`
     },
     {
         id: 'duck',
         name: "DuckDuckGo",
         target: "https://duckduckgo.com/?q=",
-        icon: `${IMG_URL}/duckduckgo.svg`
+        icon: `duckduckgo.svg`
     },
     {
         id: 'yahoo',
         name: "Yahoo",
         target: "https://hk.search.yahoo.com/search?p=",
-        icon: `${IMG_URL}/yahoo.svg`
+        icon: `yahoo.svg`
     },
     {
         id: 'csdn',
         name: "CSDN",
         target: "https://so.csdn.net/so/search?q=",
-        icon: `${IMG_URL}/csdn.ico`
+        icon: `csdn.ico`
     },
     {
         id: 'github',
         name: "GitHub",
         target: "https://github.com/search?q=",
-        icon: `${IMG_URL}/github.svg`
+        icon: `github.svg`
     },
     {
         id: 'stack',
         name: "StackOverflow",
         target: "https://stackoverflow.com/nocaptcha?s=",
-        icon: `${IMG_URL}/stackoverflow.svg`
+        icon: `stackoverflow.svg`
     },
     {
         id: 'kaifa',
         name: "开发者搜索",
         target: "https://kaifa.baidu.com/searchPage?wd=",
-        icon: `${IMG_URL}/kaifabaidu.svg`
+        icon: `kaifabaidu.svg`
     },
     {
         id: 'mdn',
         name: "MDN",
         target: "https://developer.mozilla.org/zh-CN/search?q=",
-        icon: `${IMG_URL}/mdn.svg`
+        icon: `mdn.svg`
     },
     {
         id: 'zhihu',
         name: "知乎",
         target: "https://www.zhihu.com/search?type=content&q=",
-        icon: `${IMG_URL}/zhihu.svg`
+        icon: `zhihu.svg`
     },
 ]
