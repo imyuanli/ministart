@@ -313,7 +313,7 @@ const currentIndex = ref(null)
 //打开menu
 const openMenu = (x, y) => {
   left.value = x;
-  top.value = y - 60;
+  top.value = y ;
   visible.value = true;
 }
 //右键打开
@@ -372,7 +372,6 @@ watch(visible, (newValue, oldValue) => {
   color: #fff;
   transition: .25s;
   overflow-y: auto;
-  padding-top: 2vh;
 }
 
 /*屏幕小于768的时候*/
