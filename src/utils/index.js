@@ -142,14 +142,14 @@ export const SET_INFO = {
             max: 100,
         },
         gapX: {
-            intro: "列间距",
+            intro: "行间距",
             tips: "",
             type: "slider",
             min: 0,
             max: 100,
         },
         gapY: {
-            intro: "行间距",
+            intro: "列间距",
             tips: "",
             type: "slider",
             min: 0,

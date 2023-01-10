@@ -8,17 +8,17 @@
         class="tool-grid"
         :style="{
               gridTemplateColumns:`repeat(auto-fill,${size+gapY}px)`,
-              gridTemplateRows:`repeat(auto-fill,${size+gapX}px)`,
+              gridTemplateRows:`repeat(auto-fill,${size+gapX+23}px)`,
          }"
     >
       <div class="tool-item"
            v-for="(item,index) in toolsArr"
            :style="{
-               padding: `0 ${gapX/2}px ${gapY}px`,
+               padding: `0 ${gapY/2}px ${gapX}px`,
                gridColumn: `span ${item.grid.split('x')[1]}`,
                gridRow: `span ${item.grid.split('x')[0]}`,
                width:`${size*item.grid.split('x')[1] + gapY*item.grid.split('x')[1]}px`,
-               height:`${size*item.grid.split('x')[0]+ gapY*item.grid.split('x')[0]}px`
+               height:`${size*item.grid.split('x')[0]+ gapX*item.grid.split('x')[0]}px`
             }"
            :key="index"
            @contextmenu.prevent="rightClick($event,index)"
@@ -26,32 +26,33 @@
            @touchmove="touchMove()"
            @touchend="touchEnd()"
       >
-        <div class="flex-center flex-col w-full h-full">
-          <div
-              class="bg-white rounded-md cursor-pointer w-full h-full flex-center p-1"
-              :style="{opacity:opacity/100,borderRadius:`${radius}px`}"
+        <div
+            class="bg-white rounded-md cursor-pointer w-full h-full flex-center p-1"
+            :style="{opacity:opacity/100,borderRadius:`${radius}px`}"
+        >
+          <img
+              class="w-full h-full"
+              :class="[item.grid === '2x1'|| item.grid === '1x2'?'object-contain':'object-cover']"
+              v-if="item.type==='icon'"
+              :src="item.src"
+              :alt="item.name"
+              :style="{borderRadius:`${radius}px`}"
           >
-            <img
-                class="w-full h-full"
-                :class="[item.grid === '2x1'|| item.grid === '1x2'?'object-contain':'object-cover']"
-                v-if="item.type==='icon'"
-                :src="item.src"
-                :alt="item.name"
-                :style="{borderRadius:`${radius}px`}"
-            >
-            <div class="text-black bg-primary-color rounded-full flex-center text-white text-xl font-bold"
-                 v-if="item.type==='text'">
-              <span class="px-2.5 py-1.5">{{ item.src }}</span>
-            </div>
+          <div class="text-black bg-primary-color rounded-full flex-center text-white text-xl font-bold"
+               v-if="item.type==='text'"
+          >
+            <span class="px-2.5 py-1.5">{{ item.src }}</span>
           </div>
         </div>
         <div class="text-center text-sm mt-1 overflow-ellipsis truncate w-full">{{ item.name }}</div>
       </div>
       <div class="tool-item"
            :style="{
-               padding: `0 ${gapX/2}px ${gapY}px`,
+               padding: `0 ${gapY/2}px ${gapX}px`,
+               gridColumn: `span 1`,
+               gridRow: `span 1`,
                width:`${size + gapY}px`,
-               height:`${size+ gapY}px`
+               height:`${size+ gapX}px`
             }"
       >
         <div class="flex-center flex-col w-full h-full"
@@ -80,8 +81,7 @@
       快捷导航设置
     </template>
     <template #content>
-      <div v-loading="loading"
-           class="flex justify-center items-start flex-col bg-white rounded-lg px-6 py-3 text-base prefix-text-color">
+      <div v-loading="loading" class="flex justify-center items-start flex-col text-base prefix-text-color">
         <div class="py-3 shortcut-box">
           <div>名称</div>
           <MyInput v-model="toolObj.name"/>
@@ -313,7 +313,7 @@ const currentIndex = ref(null)
 //打开menu
 const openMenu = (x, y) => {
   left.value = x;
-  top.value = y ;
+  top.value = y;
   visible.value = true;
 }
 //右键打开
