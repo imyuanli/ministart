@@ -12,7 +12,7 @@
 </template>
 
 <script setup>
-import {reactive, ref, watch} from "vue";
+import {reactive, onMounted, watch, h} from "vue";
 import Header from "../components/header.vue";
 import MyTime from '../components/my-time.vue'
 import MySearch from '../components/my-search.vue'
@@ -20,11 +20,40 @@ import MyFooter from "../components/my-footer.vue";
 import Shortcut from "../components/shortcut.vue";
 import store from "store";
 import _ from 'lodash'
+import {ElMessage, ElNotification} from "element-plus";
 
+onMounted(() => {
+  if (commonSettings.baseSetting.showGreeting) {
+    ElNotification({
+      message: getGreetText(),
+      duration:3000
+    })
+  }
+})
+const getGreetText = () => {
+  var dd = new Date();
+  var hour = dd.getHours();//获取当前时
+  if (hour > 0 && hour <= 6) {
+    return "还没休息啊，夜猫子，该休息了";
+  } else if (hour > 6 && hour <= 9) {
+    return "上午好";
+  } else if (hour > 9 && hour <= 12) {
+    return "早上好";
+  } else if (hour > 12 && hour <= 15) {
+    return "中午好";
+  } else if (hour > 15 && hour <= 18) {
+    return "下午好";
+  } else if (hour > 18 && hour <= 21) {
+    return "傍晚好";
+  } else if (hour > 21 && hour <= 24) {
+    return "晚上好";
+  }
+}
 
 const defaultSet = {
   baseSetting: {
-    simpleFooter: false
+    simpleFooter: false,
+    showGreeting: false
   },
   timeSetting: {
     show: true,
