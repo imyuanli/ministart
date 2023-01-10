@@ -1,8 +1,8 @@
 <template>
-  <div class="flex justify-between py-3">
+  <div v-if="info?.type"  class="flex justify-between py-3">
     <div class="flex-1 flex justify-center items-start flex-col">
       <div class="text-md text-black">
-        {{ info.intro }}
+        {{ info?.intro }}
       </div>
       <div class="text-xs text-gray-400">
         {{ info?.tips }}
