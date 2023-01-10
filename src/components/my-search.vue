@@ -33,12 +33,15 @@
       <div v-for="check in checkEngList">
         <div v-for="(item,index) in searchEngines">
           <div
-              class="menu-item"
+              class="menu-item relative"
               v-if="item?.id ===check"
               :key="index"
               @click="selectCurrent(item?.id)"
           >
             <div class="flex-center flex-col">
+              <div v-if="currentEngId === item.id" class="absolute right-1 top-1">
+                <el-icon><Select style="color:#1890ff;font-size: 28px" /></el-icon>
+              </div>
               <div class="p-2 bg-white rounded-md flex-center mb-1">
                 <img class="menu-img" :src="IMG_URL+item?.icon" alt="">
               </div>
