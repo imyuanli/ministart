@@ -197,8 +197,8 @@ const searchData = () => {
 
 <style scoped>
 .search-box {
-  max-width: 530px;
-  width: 90%;
+  max-width: 600px;
+  width: 92%;
   overflow: hidden;
 }
 
