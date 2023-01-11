@@ -15,10 +15,8 @@
            v-for="(item,index) in toolsArr"
            :style="{
                padding: `0 ${gapY/2}px ${gapX}px`,
-               gridColumn: `span ${item.grid.split('x')[1]}`,
-               gridRow: `span ${item.grid.split('x')[0]}`,
-               width:`${size*item.grid.split('x')[1] + gapY*item.grid.split('x')[1]}px`,
-               height:`${size*item.grid.split('x')[0]+ gapX*item.grid.split('x')[0]}px`
+               width:`${size + gapY}px`,
+               height:`${size+ gapX}px`
             }"
            :key="index"
            @contextmenu.prevent="rightClick($event,index)"
@@ -27,12 +25,11 @@
            @touchend="touchEnd()"
       >
         <div
-            class="bg-white rounded-md cursor-pointer w-full h-full flex-center p-1"
+            class="rounded-md cursor-pointer w-full h-full flex-center"
             :style="{opacity:opacity/100,borderRadius:`${radius}px`}"
         >
           <img
-              class="w-full h-full"
-              :class="[item.grid === '2x1'|| item.grid === '1x2'?'object-contain':'object-cover']"
+              class="w-full h-full object-cover"
               v-if="item.type==='icon'"
               :src="item.src"
               :alt="item.name"
@@ -59,7 +56,7 @@
              @click="handleEditOpen"
         >
           <div
-              class="bg-white rounded-md cursor-pointer w-full h-full flex-center  p-1"
+              class="rounded-md cursor-pointer w-full h-full flex-center"
               :style="{opacity:opacity/100,borderRadius:`${radius}px`}"
           >
             <div class="bg-blue-400 flex-center rounded-full">
@@ -69,7 +66,6 @@
             </div>
           </div>
         </div>
-        <div class="flex-center text-sm mt-1">添加</div>
       </div>
     </div>
   </div>
@@ -107,20 +103,6 @@
               <el-button class="m-1" @click="getDefault" round>默认</el-button>
             </div>
           </div>
-        </div>
-        <div class="py-3 w-full flex flex-col">
-          <div class="shortcut-box">
-            <div class="flex-none">布局</div>
-            <div class="ml-3">
-              <el-radio-group v-model="toolObj.grid">
-                <el-radio :label="'1x1'">1x1</el-radio>
-                <el-radio :label="'1x2'">1x2</el-radio>
-                <el-radio :label="'2x1'">2x1</el-radio>
-                <el-radio :label="'2x2'">2x2</el-radio>
-              </el-radio-group>
-            </div>
-          </div>
-          <div class="text-xs text-gray-400">1x2表示图标将占一行两列</div>
         </div>
       </div>
     </template>
@@ -174,7 +156,6 @@ const toolObj = reactive({
       url: "",
       src: `${IMG_URL}default.png`,
       type: "icon",
-      grid: "1x1"
     }
 )
 
@@ -230,7 +211,6 @@ const clearObj = () => {
   toolObj.url = ""
   toolObj.src = `${IMG_URL}default.png`
   toolObj.type = "icon"
-  toolObj.grid = "1x1"
 }
 
 //保存
@@ -281,7 +261,6 @@ const handleEditTool = () => {
   toolObj.url = obj.url
   toolObj.src = obj.src
   toolObj.type = obj.type
-  toolObj.grid = obj.grid
   handleEditOpen()
 }
 

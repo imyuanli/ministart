@@ -74,12 +74,12 @@ const defaultSet = {
   },
   toolSetting: {
     show: true,
-    size: 60,
+    size: 70,
     radius: 15,
     opacity: 100,
-    gapX: 30,
-    gapY: 30,
-    maxWidth: 1200
+    gapX: 35,
+    gapY: 35,
+    maxWidth: 1000
   },
 }
 const commonSettings = reactive(
