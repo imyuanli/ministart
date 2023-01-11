@@ -25,7 +25,7 @@
            @touchend="touchEnd()"
       >
         <div
-            class="rounded-md cursor-pointer w-full h-full flex-center"
+            class="bg-white p-1 rounded-md cursor-pointer w-full h-full flex-center"
             :style="{opacity:opacity/100,borderRadius:`${radius}px`}"
         >
           <img
@@ -41,7 +41,7 @@
             <span class="px-2.5 py-1.5">{{ item.src }}</span>
           </div>
         </div>
-        <div class="text-center text-sm mt-1 overflow-ellipsis truncate w-full">{{ item.name }}</div>
+        <div class="text-center text-md font-semibold mt-1 overflow-ellipsis truncate w-full">{{ item.name }}</div>
       </div>
       <div class="tool-item"
            :style="{
@@ -56,7 +56,7 @@
              @click="handleEditOpen"
         >
           <div
-              class="rounded-md cursor-pointer w-full h-full flex-center"
+              class="rounded-md cursor-pointer w-full h-full flex-center bg-white p-1"
               :style="{opacity:opacity/100,borderRadius:`${radius}px`}"
           >
             <div class="bg-blue-400 flex-center rounded-full">

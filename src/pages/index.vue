@@ -74,12 +74,12 @@ const defaultSet = {
   },
   toolSetting: {
     show: true,
-    size: 70,
+    size: 60,
     radius: 15,
     opacity: 100,
-    gapX: 35,
-    gapY: 35,
-    maxWidth: 1000
+    gapX: 30,
+    gapY: 30,
+    maxWidth: 900
   },
 }
 const commonSettings = reactive(
@@ -146,8 +146,8 @@ watch(commonSettings, (newData) => {
   top: 0;
   width: 100%;
   height: 100%;
-  backdrop-filter: blur(var(--wall-blur));
-  background-color: rgba(0, 0, 0, var(--wall-mask));
+  backdrop-filter: blur(10px);
+  /*background-color: rgba(0, 0, 0, 0.15);*/
 }
 
 .cover {
