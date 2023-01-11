@@ -1,5 +1,5 @@
 <template>
-  <div class="relative w-full h-screen min-h-screen flex justify-start items-center flex-col pt-12 md:pt-16">
+  <div class="relative w-full h-screen min-h-screen flex justify-start items-center flex-col pt-20">
     <div
         class="back-img"
     />
@@ -67,9 +67,9 @@ const defaultSet = {
   },
   searchSetting: {
     show: true,
-    height: 46,
-    radius: 30,
-    opacity: 70,
+    height: 50,
+    radius: 15,
+    opacity: 100,
     blank: true,
   },
   toolSetting: {
