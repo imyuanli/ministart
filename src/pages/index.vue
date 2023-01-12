@@ -1,5 +1,5 @@
 <template>
-  <div class="relative w-full h-screen min-h-screen flex justify-start items-center flex-col pt-20"
+  <div class="relative w-full h-screen min-h-screen flex justify-start items-center flex-col pt-28"
        @click.self="handleClickClose">
     <div class="back-img duration-150" :class="[isFocus ? 'scale-105':'']"/>
     <div v-show="isFocus" class="cover duration-150"/>

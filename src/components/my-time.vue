@@ -1,5 +1,5 @@
 <template>
-  <div v-if="show" class="flex-center flex-col mb-6">
+  <div v-if="show" class="flex-center flex-col mb-9">
     <div
         class="cursor-pointer hover:scale-125 duration-200"
         :style="{
