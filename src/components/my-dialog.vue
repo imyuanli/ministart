@@ -13,7 +13,7 @@
           <slot name="title"></slot>
         </div>
       </template>
-      <div class="bg-white rounded-md px-4 py-3">
+      <div class="bg-white rounded-md p-3">
         <slot name="content"></slot>
       </div>
       <template #footer>
