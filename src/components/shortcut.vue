@@ -8,7 +8,7 @@
         class="tool-grid"
         :style="{
               gridTemplateColumns:`repeat(auto-fill,${size+gapY}px)`,
-              gridTemplateRows:`repeat(auto-fill,${size+gapX+23}px)`,
+              gridTemplateRows:`repeat(auto-fill,${size+gapX+30}px)`,
          }"
     >
       <div class="tool-item"
