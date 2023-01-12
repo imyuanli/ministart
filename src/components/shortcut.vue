@@ -5,7 +5,8 @@
       :style="{maxWidth:`${maxWidth}px`}"
   >
     <div
-        class="tool-grid"
+        v-show="!isFocus"
+        class="tool-grid duration-200"
         :style="{
               gridTemplateColumns:`repeat(auto-fill,${size+gapY}px)`,
               gridTemplateRows:`repeat(auto-fill,${size+gapX+30}px)`,
@@ -137,7 +138,8 @@ import {get_url_icon} from "../service/service.js";
 import {IMG_URL} from "../utils/index.js";
 
 const props = defineProps({
-  toolSetting: Object
+  toolSetting: Object,
+  isFocus: Boolean
 })
 
 const {

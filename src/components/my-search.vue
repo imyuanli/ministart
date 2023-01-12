@@ -5,7 +5,7 @@
         :style="{
               height:height+'px',
               borderRadius:radius+'px',
-              backgroundColor:`rgba(255,255,255,${opacity/100})`,
+              backgroundColor:isFocus?'#fff':`rgba(255,255,255,${opacity/100})`,
             }"
     >
       <div
@@ -19,6 +19,7 @@
           placeholder="搜索"
           v-model="inputValue"
           @keydown.enter="searchData"
+          @click="handleClickOpen"
       />
       <div class="search-btn right-2" @click="searchData">
         <el-icon class="primary-color" style="font-size: 18px">
@@ -40,7 +41,7 @@
           >
             <div class="flex-center flex-col">
               <div v-if="currentEngId === item.id" class="absolute right-1 top-1">
-                <el-icon><Select style="color:#1890ff;font-size: 28px" /></el-icon>
+                <el-icon><Select style="color:#1890ff;font-size: 28px"/></el-icon>
               </div>
               <div class="p-2 bg-white rounded-md flex-center mb-1">
                 <img class="menu-img" :src="IMG_URL+item?.icon" alt="">
@@ -121,7 +122,9 @@ onMounted(() => {
 })
 
 const props = defineProps({
-  searchSetting: Object
+  searchSetting: Object,
+  isFocus: Boolean,
+  handleClickOpen: Function
 })
 const {
   show,

@@ -1,18 +1,22 @@
 <template>
-  <div class="relative w-full h-screen min-h-screen flex justify-start items-center flex-col pt-20">
-    <div
-        class="back-img"
-    />
+  <div class="relative w-full h-screen min-h-screen flex justify-start items-center flex-col pt-20"
+       @click.self="handleClickClose">
+    <div class="back-img duration-150" :class="[isFocus ? 'scale-105':'']"/>
+    <div v-show="isFocus" class="cover duration-150"/>
     <Header :commonSettings="commonSettings"/>
     <MyTime :timeSetting="commonSettings.timeSetting"/>
-    <MySearch :searchSetting="commonSettings.searchSetting"/>
-    <Shortcut :toolSetting="commonSettings.toolSetting"/>
+    <MySearch
+        :searchSetting="commonSettings.searchSetting"
+        :isFocus="isFocus"
+        :handleClickOpen="handleClickOpen"
+    />
+    <Shortcut :toolSetting="commonSettings.toolSetting" :isFocus="isFocus"/>
     <MyFooter :simple="commonSettings.baseSetting.simpleFooter"/>
   </div>
 </template>
 
 <script setup>
-import {reactive, onMounted, watch, h} from "vue";
+import {reactive, onMounted, watch, h, ref} from "vue";
 import Header from "../components/header.vue";
 import MyTime from '../components/my-time.vue'
 import MySearch from '../components/my-search.vue'
@@ -26,7 +30,7 @@ onMounted(() => {
   if (commonSettings.baseSetting.showGreeting) {
     ElNotification({
       message: getGreetText(),
-      duration:3000
+      duration: 3000
     })
   }
 })
@@ -90,33 +94,14 @@ watch(commonSettings, (newData) => {
   store.set("commonSettings", newData)
 })
 
-// //输入框聚焦
-// const isFocus = ref(false)
-// const handleClickOpen = () => {
-//   isFocus.value = true
-// }
-// const handleClickClose = () => {
-//   isFocus.value = false
-// }
-//
-// const options = [
-//   {
-//     value: 'simple',
-//     label: '极简模式',
-//   },
-//   {
-//     value: 'normal',
-//     label: '标准模式',
-//   },
-//   {
-//     value: 'dark',
-//     label: '暗黑模式',
-//   },
-//   // {
-//   //   value: 'flow',
-//   //   label: '流畅模式',
-//   // }
-// ]
+//输入框聚焦
+const isFocus = ref(false)
+const handleClickOpen = () => {
+  isFocus.value = true
+}
+const handleClickClose = () => {
+  isFocus.value = false
+}
 
 </script>
 
@@ -155,13 +140,6 @@ watch(commonSettings, (newData) => {
   width: 100%;
   height: 100%;
   transition: .25s;
-}
-
-.cover-background {
-  background: #f7f7f7;
-}
-
-.cover-image {
   background-image: radial-gradient(rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.5) 100%), radial-gradient(rgba(0, 0, 0, 0) 33%, rgba(0, 0, 0, 0.3) 166%);
 }
 </style>
