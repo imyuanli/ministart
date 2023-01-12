@@ -11,10 +11,10 @@
     >
       {{ nowTime }}
     </div>
-    <div class="text-white">
-      <span v-show="month" class="m-1">{{ nowMonth }}</span>
-      <span v-show="week" class="m-1">{{ nowWeek }}</span>
-      <span v-show="lunar" class="m-1">{{ nowLunar }}</span>
+    <div class="text-white" v-show="date">
+      <span class="m-1">{{ nowMonth }}</span>
+      <span class="m-1">{{ nowWeek }}</span>
+      <span class="m-1">{{ nowLunar }}</span>
     </div>
   </div>
 </template>
@@ -34,9 +34,7 @@ const {
   weight,
   family,
   color,
-  month,
-  week,
-  lunar,
+  date
 } = toRefs(props.timeSetting)
 
 const nowTime = ref()

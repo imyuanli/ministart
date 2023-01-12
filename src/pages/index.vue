@@ -57,11 +57,8 @@ const defaultSet = {
   },
   timeSetting: {
     show: true,
-    month: true,
-    week: true,
-    lunar: true,
+    date: true,
     weight: true,
-    family: "Arial",
     size: 40,
     color: "#ffffff"
   },
