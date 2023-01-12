@@ -68,14 +68,14 @@ const defaultSet = {
   },
   searchSetting: {
     show: true,
-    height: 50,
+    height: 55,
     radius: 15,
     opacity: 100,
     blank: true,
   },
   toolSetting: {
     show: true,
-    size: 60,
+    size: 80,
     radius: 15,
     opacity: 100,
     gapX: 30,

@@ -55,7 +55,7 @@ export const SET_INFO = {
             tips: "",
             type: "slider",
             min: 36,
-            max: 60,
+            max: 80,
         },
         radius: {
             intro: "搜索框圆角",
@@ -87,8 +87,8 @@ export const SET_INFO = {
             intro: "图标大小",
             tips: "",
             type: "slider",
-            min: 30,
-            max: 90,
+            min: 40,
+            max: 120,
         },
         radius: {
             intro: "图标圆角",
