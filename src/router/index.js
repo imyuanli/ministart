@@ -10,9 +10,14 @@ const routes = [
     },
     {
         path: '/test',
-        name: 'dd',
+        name: 'fad',
         component: _import('test'),
-    }
+    },
+    {
+        path: '/dad',
+        name: 'dd',
+        component: _import('dadtest'),
+    },
 ];
 const router = createRouter({
     history: createWebHistory(),
