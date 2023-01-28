@@ -7,6 +7,7 @@
         class="rounded-lg"
         @close="handleChange"
         :close-on-click-modal="false"
+        close-on-press-escape
     >
       <template #header="{ close, titleId, titleClass }">
         <div class="text-xl text-black font-semibold truncate overflow-ellipsis  flex-center">
