@@ -4,76 +4,80 @@
       class="tool-box"
       :style="{maxWidth:`${maxWidth}px`}"
   >
-    <div
+    <draggable
+        :list="toolsArr"
+        item-key="index"
+        animation="500"
         v-show="!isFocus"
         class="tool-grid duration-200"
         :style="{
-              gridTemplateColumns:`repeat(auto-fill,${size+gapY}px)`,
-              gridTemplateRows:`repeat(auto-fill,${size+gapX+30}px)`,
-         }"
+                  gridTemplateColumns:`repeat(auto-fill,${size+gapY}px)`,
+                  gridTemplateRows:`repeat(auto-fill,${size+gapX+30}px)`,
+             }"
     >
-      <div class="tool-item"
-           v-for="(item,index) in toolsArr"
-           :style="{
-               padding: `0 ${gapY/2}px ${gapX}px`,
-               width:`${size + gapY}px`,
-               height:`${size+ gapX}px`
-            }"
-           :key="index"
-           @contextmenu.prevent="rightClick($event,index)"
-           @touchstart.prevent="touchStart($event,index)"
-           @touchmove="touchMove()"
-           @touchend="touchEnd()"
-      >
+      <template #item="{element,index}">
         <div
-            class="bg-white p-1 rounded-md cursor-pointer w-full h-full flex-center"
-            :style="{opacity:opacity/100,borderRadius:`${radius}px`}"
-        >
-          <img
-              class="w-full h-full object-cover"
-              v-if="item.type==='icon'"
-              :src="item.src"
-              :alt="item.name"
-              :style="{borderRadius:`${radius}px`}"
-          >
-          <div class="text-black bg-primary-color rounded-full flex-center text-white text-xl font-bold"
-               v-if="item.type==='text'"
-          >
-            <span class="px-2.5 py-1.5">{{ item.src }}</span>
-          </div>
-        </div>
-        <div class="text-center text-md font-semibold mt-1 overflow-ellipsis truncate w-full">{{ item.name }}</div>
-      </div>
-      <div class="tool-item"
-           :style="{
-               padding: `0 ${gapY/2}px ${gapX}px`,
-               gridColumn: `span 1`,
-               gridRow: `span 1`,
-               width:`${size + gapY}px`,
-               height:`${size+ gapX}px`
-            }"
-      >
-        <div class="flex-center flex-col w-full h-full"
-             @click="handleEditOpen"
+            class="tool-item"
+            :style="{
+                         padding: `0 ${gapY/2}px ${gapX}px`,
+                         width:`${size + gapY}px`,
+                         height:`${size+ gapX}px`
+                      }"
+            :key="index"
+            @contextmenu.prevent="rightClick($event,index)"
+            @touchstart.prevent="touchStart($event,index)"
+            @touchmove="touchMove()"
+            @touchend="touchEnd()"
         >
           <div
-              class="rounded-md cursor-pointer w-full h-full flex-center bg-white p-1"
+              class="bg-white p-1 rounded-md cursor-pointer w-full h-full flex-center"
               :style="{opacity:opacity/100,borderRadius:`${radius}px`}"
           >
-            <div class="bg-blue-400 flex-center rounded-full">
-              <el-icon :style="{fontSize: `${size-8}px`}">
-                <CirclePlus/>
-              </el-icon>
+            <img
+                class="w-full h-full object-cover"
+                v-if="element.type==='icon'"
+                :src="element.src"
+                :alt="element.name"
+                :style="{borderRadius:`${radius}px`}"
+            >
+            <div class="text-black bg-primary-color rounded-full flex-center text-white text-xl font-bold"
+                 v-if="element.type==='text'"
+            >
+              <span class="px-2.5 py-1.5">{{ element.src }}</span>
+            </div>
+          </div>
+          <div class="text-center text-md font-semibold mt-1 overflow-ellipsis truncate w-full">{{ element.name }}</div>
+        </div>
+      </template>
+      <template #footer>
+        <div class="tool-item"
+             :style="{
+                       padding: `0 ${gapY/2}px ${gapX}px`,
+                       gridColumn: `span 1`,
+                       gridRow: `span 1`,
+                       width:`${size + gapY}px`,
+                       height:`${size+ gapX}px`
+                    }"
+        >
+          <div class="flex-center flex-col w-full h-full"
+               @click="handleEditOpen"
+          >
+            <div
+                class="rounded-md cursor-pointer w-full h-full flex-center bg-white p-1"
+                :style="{opacity:opacity/100,borderRadius:`${radius}px`}"
+            >
+              <div class="bg-blue-400 flex-center rounded-full">
+                <el-icon :style="{fontSize: `${size-8}px`}">
+                  <CirclePlus/>
+                </el-icon>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    </div>
+      </template>
+    </draggable>
   </div>
-  <MyDialog
-      :dialogVisible="editDialogVisible"
-      :handleChang="handleEditClose"
-  >
+  <MyDialog v-model:dialogVisible="editDialogVisible">
     <template #title>
       快捷导航设置
     </template>
@@ -136,6 +140,7 @@ import {ElMessage} from "element-plus";
 import store from 'store'
 import {get_url_icon} from "../service/service.js";
 import {IMG_URL} from "../utils/index.js";
+import draggable from 'vuedraggable'
 
 const props = defineProps({
   toolSetting: Object,
