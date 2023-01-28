@@ -929,11 +929,6 @@ run-parallel@^1.1.9:
   dependencies:
     queue-microtask "^1.2.2"
 
-smooth-dnd@^0.12.1:
-  version "0.12.1"
-  resolved "https://registry.yarnpkg.com/smooth-dnd/-/smooth-dnd-0.12.1.tgz#cdb44c972355659e32770368b29b6a80e0ed96f1"
-  integrity sha512-Dndj/MOG7VP83mvzfGCLGzV2HuK1lWachMtWl/Iuk6zV7noDycIBnflwaPuDzoaapEl3Pc4+ybJArkkx9sxPZg==
-
 solarlunar-es@^1.0.9:
   version "1.0.9"
   resolved "https://registry.yarnpkg.com/solarlunar-es/-/solarlunar-es-1.0.9.tgz#fdd29efbf28afa0f649f19732c9ed01a2dd3c7b7"
@@ -1046,13 +1041,6 @@ vue-router@^4.1.6:
   integrity sha512-DYWYwsG6xNPmLq/FmZn8Ip+qrhFEzA14EI12MsMgVxvHFDYvlr4NXpVF5hrRH1wVcDP8fGi5F4rxuJSl8/r+EQ==
   dependencies:
     "@vue/devtools-api" "^6.4.5"
-
-vue3-smooth-dnd@^0.0.2:
-  version "0.0.2"
-  resolved "https://registry.yarnpkg.com/vue3-smooth-dnd/-/vue3-smooth-dnd-0.0.2.tgz#779c885754466b55930de8bfd0a13adc889782d7"
-  integrity sha512-5OlpoZ1fmpA1CcjvRwJ9P3MEPZ0nnnYuIf/9zMGKF8i7jTE6fQX3oeY0jDHNtOjuCmvTSbc0AYq18M9QIF32Ew==
-  dependencies:
-    smooth-dnd "^0.12.1"
 
 vue@^3.2.45:
   version "3.2.45"
