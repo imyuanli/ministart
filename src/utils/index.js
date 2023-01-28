@@ -215,3 +215,33 @@ export const DEFAULT_ENGINES = [
         icon: `zhihu.svg`
     },
 ]
+
+
+//图标
+
+export const ICON_BOX=[
+    'HomeFilled',
+    'ShoppingCart',
+    'HelpFilled',
+    'Film',
+    'Picture',
+    'SwitchFilled',
+    'MagicStick',
+    'TrophyBase',
+    'Notebook',
+    'Star',
+    'EditPen',
+    'EditPen',
+    'HomeFilled',
+    'ShoppingCart',
+    'HelpFilled',
+    'Film',
+    'Picture',
+    'SwitchFilled',
+    'MagicStick',
+    'TrophyBase',
+    'Notebook',
+    'Star',
+    'EditPen',
+    'EditPen',
+]

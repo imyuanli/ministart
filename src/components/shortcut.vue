@@ -1,82 +1,145 @@
 <template>
-  <div
-      v-if="show"
-      class="tool-box"
-      :style="{maxWidth:`${maxWidth}px`}"
-  >
-    <draggable
-        :list="toolsArr"
-        item-key="index"
-        animation="500"
-        v-show="!isFocus"
-        class="tool-grid duration-200"
-        :style="{
-                  gridTemplateColumns:`repeat(auto-fill,${size+gapY}px)`,
-                  gridTemplateRows:`repeat(auto-fill,${size+gapX+30}px)`,
-             }"
-    >
-      <template #item="{element,index}">
+  <div v-show="!isFocus" class="absolute right-2 z-50 top-1/2 -translate-y-1/2 sidebar-box">
+    <div class="sidebar py-3 px-1 relative">
+      <div class="icon-box" :class="iconBoxCss">
+        <el-icon :style="{fontSize}">
+          <Avatar/>
+        </el-icon>
+      </div>
+      <el-divider style="margin: 12px 0"/>
+      <div class="sidebar-content">
         <div
-            class="tool-item"
-            :style="{
+            v-for="(item,index) in navList"
+            class="icon-box mb-2"
+            :class="[workIndex==index && 'bg-white-26',iconBoxCss]"
+            @click="changeWorkIndex(index)"
+        >
+          <el-tooltip
+              class="box-item"
+              effect="dark"
+              :content="item.name"
+              placement="left"
+              :key="index"
+          >
+            <el-icon :style="{fontSize}">
+              <component :is="item.icon"></component>
+            </el-icon>
+          </el-tooltip>
+        </div>
+      </div>
+      <div class="absolute bottom-3 px-1">
+        <el-divider style="margin: 12px 0"/>
+        <el-popover
+            placement="left"
+            :width="200"
+            trigger="click"
+            popper-class="my-popper"
+        >
+          <template #reference>
+            <div class="icon-box mb-2" :class="iconBoxCss">
+              <el-icon style="font-size:21px">
+                <CirclePlus/>
+              </el-icon>
+            </div>
+          </template>
+          <div>
+            <el-input/>
+            <div class="grid grid-cols-5 gap-3 my-2">
+              <el-icon v-for="item in ICON_BOX" size="22px" class="cursor-pointer">
+                <component :is="item"></component>
+              </el-icon>
+            </div>
+            <el-button class="w-full">添加分类</el-button>
+          </div>
+        </el-popover>
+      </div>
+    </div>
+    <!--      <div class="flex-center cursor-pointer mt-1">-->
+    <!--        <div class="more-btn flex-center rounded-md">-->
+    <!--          <el-icon style="color: rgba(255,255,255,.8)">-->
+    <!--            <More/>-->
+    <!--          </el-icon>-->
+    <!--        </div>-->
+    <!--      </div>-->
+  </div>
+    <div
+        v-if="show"
+        class="tool-box"
+        :style="{maxWidth:`${maxWidth}px`}"
+    >
+      <draggable
+          :list="navList[workIndex].children"
+          item-key="index"
+          animation="500"
+          v-show="!isFocus"
+          class="tool-grid duration-200"
+          :style="{
+                    gridTemplateColumns:`repeat(auto-fill,${size+gapY}px)`,
+                    gridTemplateRows:`repeat(auto-fill,${size+gapX+30}px)`,
+               }"
+      >
+        <template #item="{element,index}">
+          <div
+              class="tool-item"
+              :style="{
+                           padding: `0 ${gapY/2}px ${gapX}px`,
+                           width:`${size + gapY}px`,
+                           height:`${size+ gapX}px`
+                        }"
+              :key="index"
+              @contextmenu.prevent="rightClick($event,index)"
+              @touchstart.prevent="touchStart($event,index)"
+              @touchmove="touchMove()"
+              @touchend="touchEnd()"
+          >
+            <div
+                class="bg-white p-1 rounded-md cursor-pointer w-full h-full flex-center"
+                :style="{opacity:opacity/100,borderRadius:`${radius}px`}"
+            >
+              <img
+                  class="w-full h-full object-cover"
+                  v-if="element.type==='icon'"
+                  :src="element.src"
+                  :alt="element.name"
+                  :style="{borderRadius:`${radius}px`}"
+              >
+              <div class="text-black bg-primary-color rounded-full flex-center text-white text-xl font-bold"
+                   v-if="element.type==='text'"
+              >
+                <span class="px-2.5 py-1.5">{{ element.src }}</span>
+              </div>
+            </div>
+            <div class="text-center text-md font-semibold mt-1 overflow-ellipsis truncate w-full">{{ element.name }}</div>
+          </div>
+        </template>
+        <template #footer>
+          <div class="tool-item"
+               :style="{
                          padding: `0 ${gapY/2}px ${gapX}px`,
+                         gridColumn: `span 1`,
+                         gridRow: `span 1`,
                          width:`${size + gapY}px`,
                          height:`${size+ gapX}px`
                       }"
-            :key="index"
-            @contextmenu.prevent="rightClick($event,index)"
-            @touchstart.prevent="touchStart($event,index)"
-            @touchmove="touchMove()"
-            @touchend="touchEnd()"
-        >
-          <div
-              class="bg-white p-1 rounded-md cursor-pointer w-full h-full flex-center"
-              :style="{opacity:opacity/100,borderRadius:`${radius}px`}"
           >
-            <img
-                class="w-full h-full object-cover"
-                v-if="element.type==='icon'"
-                :src="element.src"
-                :alt="element.name"
-                :style="{borderRadius:`${radius}px`}"
+            <div class="flex-center flex-col w-full h-full"
+                 @click="handleEditOpen"
             >
-            <div class="text-black bg-primary-color rounded-full flex-center text-white text-xl font-bold"
-                 v-if="element.type==='text'"
-            >
-              <span class="px-2.5 py-1.5">{{ element.src }}</span>
-            </div>
-          </div>
-          <div class="text-center text-md font-semibold mt-1 overflow-ellipsis truncate w-full">{{ element.name }}</div>
-        </div>
-      </template>
-      <template #footer>
-        <div class="tool-item"
-             :style="{
-                       padding: `0 ${gapY/2}px ${gapX}px`,
-                       gridColumn: `span 1`,
-                       gridRow: `span 1`,
-                       width:`${size + gapY}px`,
-                       height:`${size+ gapX}px`
-                    }"
-        >
-          <div class="flex-center flex-col w-full h-full"
-               @click="handleEditOpen"
-          >
-            <div
-                class="rounded-md cursor-pointer w-full h-full flex-center bg-white p-1"
-                :style="{opacity:opacity/100,borderRadius:`${radius}px`}"
-            >
-              <div class="bg-blue-400 flex-center rounded-full">
-                <el-icon :style="{fontSize: `${size-8}px`}">
-                  <CirclePlus/>
-                </el-icon>
+              <div
+                  class="rounded-md cursor-pointer w-full h-full flex-center bg-white p-1"
+                  :style="{opacity:opacity/100,borderRadius:`${radius}px`}"
+              >
+                <div class="bg-blue-400 flex-center rounded-full">
+                  <el-icon :style="{fontSize: `${size-8}px`}">
+                    <CirclePlus/>
+                  </el-icon>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      </template>
-    </draggable>
-  </div>
+        </template>
+      </draggable>
+    </div>
   <MyDialog v-model:dialogVisible="editDialogVisible">
     <template #title>
       快捷导航设置
@@ -139,7 +202,7 @@ import MyDialog from '../components/my-dialog.vue'
 import {ElMessage} from "element-plus";
 import store from 'store'
 import {get_url_icon} from "../service/service.js";
-import {IMG_URL} from "../utils/index.js";
+import {IMG_URL, ICON_BOX} from "../utils/index.js";
 import draggable from 'vuedraggable'
 
 const props = defineProps({
@@ -159,19 +222,79 @@ const {
 
 //快捷方式
 const toolObj = reactive({
-      name: "",
-      url: "",
-      src: `${IMG_URL}default.png`,
-      type: "icon",
-    }
+  name: "",
+  url: "",
+  src: `${IMG_URL}default.png`,
+  type: "icon",
+})
+
+//侧边栏css
+const iconBoxCss = 'cursor-pointer flex-center flex-col p-2 rounded-md'
+const fontSize = '18px'
+
+//默认的工作区
+const workIndex = ref(0)
+const changeWorkIndex = index => workIndex.value = index
+const navList = reactive(
+    [
+      {
+        children: [
+          {
+            "name": "gitee",
+            "url": "https://gitee.com/",
+            "src": "https://api.qqsuu.cn/api/dm-get?url=https%3A%2F%2Fgitee.com%2F",
+            "type": "icon"
+          },
+          {
+            "name": "ele",
+            "url": "https://element-plus.gitee.io",
+            "src": "https://qiniu.imyuanli.cn/mini/default.png",
+            "type": "icon"
+          },
+          {
+            "name": "csdn",
+            "url": "https://blog.csdn.net/JAMBO808/article/details/123942817",
+            "src": "https://api.qqsuu.cn/api/dm-get?url=https%3A%2F%2Fblog.csdn.net%2FJAMBO808%2Farticle%2Fdetails%2F123942817",
+            "type": "icon"
+          },
+          {
+            "name": "123",
+            "url": "https://github.com/SortableJS/vue.draggable.next",
+            "src": "https://api.qqsuu.cn/api/dm-get?url=https%3A%2F%2Fgithub.com%2FSortableJS%2Fvue.draggable.next",
+            "type": "icon"
+          }],
+        icon: 'HomeFilled',
+        name: "主页"
+      },
+      {
+        children: [
+          {
+            "name": "csdn",
+            "url": "https://blog.csdn.net/JAMBO808/article/details/123942817",
+            "src": "https://api.qqsuu.cn/api/dm-get?url=https%3A%2F%2Fblog.csdn.net%2FJAMBO808%2Farticle%2Fdetails%2F123942817",
+            "type": "icon"
+          }
+        ],
+        icon: 'Cpu',
+        name: "程序员"
+      },
+      {
+        children: [
+          {
+            "name": "gitee",
+            "url": "https://gitee.com/",
+            "src": "https://api.qqsuu.cn/api/dm-get?url=https%3A%2F%2Fgitee.com%2F",
+            "type": "icon"
+          }
+        ],
+        icon: 'EditPen',
+        name: "设计"
+      },
+    ]
 )
 
-//快捷导航arr
-const toolsArr = reactive(store.get("toolsArr") ?
-    store.get("toolsArr")
-    :
-    []
-)
+//添加新的工作区
+
 
 const loading = ref(false)
 
@@ -236,7 +359,7 @@ const handleSaveTool = () => {
     })
     return
   }
-  toolsArr.push({...toolObj})
+  navList[workIndex.value].children.push({...toolObj})
   clearObj()
   handleEditClose()
 }
@@ -256,14 +379,14 @@ const handleUpdateTool = () => {
     })
     return
   }
-  toolsArr[currentIndex.value] = {...toolObj}
+  navList[workIndex.value].children[currentIndex.value] = {...toolObj}
   clearObj()
   handleEditClose()
 }
 
 //编辑
 const handleEditTool = () => {
-  let obj = {...toolsArr[currentIndex.value]}
+  let obj = {...navList[workIndex.value].children[currentIndex.value]}
   toolObj.name = obj.name
   toolObj.url = obj.url
   toolObj.src = obj.src
@@ -273,11 +396,12 @@ const handleEditTool = () => {
 
 //删除 tool
 const handleDelTool = () => {
-  toolsArr.splice(currentIndex.value, 1)
+  navList[workIndex.value].children.splice(currentIndex.value, 1)
 }
+
 //持久化存储
-watch(toolsArr, (newTool) => {
-  store.set("toolsArr", newTool)
+watch(navList, (newTool) => {
+  store.set("navList", newTool)
 })
 
 //编辑弹框
@@ -457,5 +581,53 @@ watch(visible, (newValue, oldValue) => {
 .shortcut-icon {
   width: 35px;
   height: 35px;
+}
+
+
+/*工作区*/
+.sidebar-box {
+  height: clamp(min(480px, 80%), 600px, 85%);
+  width: 48px;
+}
+
+.sidebar {
+  height: 100%;
+  background: rgba(0, 0, 0, .4);
+  color: white;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  flex-direction: column;
+  border-color: rgba(255, 255, 255, .1);
+  border-radius: 10px;
+}
+
+.sidebar-content {
+  overflow: auto;
+}
+
+.sidebar-content::-webkit-scrollbar {
+  display: none;
+}
+
+.more-btn {
+  width: 50%;
+}
+
+.more-btn:hover {
+  background-color: rgba(0, 0, 0, .4);
+}
+
+.icon-box:hover {
+  background-color: #ffffff26;
+  transition: 300ms;
+}
+
+.bg-white-26 {
+  background-color: #ffffff26;
+}
+
+.my-popper.is-light {
+  background-color:red !important;
 }
 </style>
