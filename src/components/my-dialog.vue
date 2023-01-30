@@ -35,9 +35,10 @@ const props = defineProps({
   },
 })
 
-const emit = defineEmits(['update:dialogVisible'])
+const emit = defineEmits(['update:dialogVisible','closeDialog'])
 const handleChange = () => {
   emit('update:dialogVisible', false)
+  emit('closeDialog')
 }
 
 const getShow = computed({
