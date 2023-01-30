@@ -7,17 +7,7 @@ const routes = [
         path: '/',
         name: 'index',
         component: _import('index'),
-    },
-    {
-        path: '/test',
-        name: 'fad',
-        component: _import('test'),
-    },
-    {
-        path: '/dad',
-        name: 'dd',
-        component: _import('dadtest'),
-    },
+    }
 ];
 const router = createRouter({
     history: createWebHistory(),
