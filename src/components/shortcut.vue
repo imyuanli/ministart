@@ -1,5 +1,5 @@
 <template>
-  <div v-show="!isFocus" class="absolute left-2 z-50 top-1/2 -translate-y-1/2 sidebar-box md:block hidden">
+  <div v-show="!isFocus" class="absolute left-2 z-50 top-1/2 -translate-y-1/2 sidebar-box">
     <div class="sidebar py-3 px-1 relative">
       <div class="icon-box" :class="iconBoxCss">
         <el-icon :style="{fontSize}">
@@ -8,19 +8,19 @@
       </div>
       <el-divider style="margin: 12px 0"/>
       <draggable
-          :list="navList"
+          :list="workAreaList"
           item-key="index"
           animation="500"
-          class="sidebar-content"
-
+          class="sidebar-content flex-grow"
+          delay="100"
       >
         <template #item="{element,index}">
           <div
               class="icon-box mb-2"
-              :class="[workId === element.id && 'bg-white-26',iconBoxCss]"
-              @click="workId = element.id"
+              :class="[workAreaId === element.id && 'bg-white-26',iconBoxCss]"
+              @click="workAreaId = element.id"
               :key="element.id"
-              @contextmenu.prevent="rightWorkClick(element.id)"
+              @contextmenu.prevent="rightWorkClick($event,element.id)"
           >
             <el-tooltip
                 class="box-item"
@@ -36,109 +36,104 @@
           </div>
         </template>
       </draggable>
-      <div class="relative px-1">
-        <el-divider style="margin: 12px 0"/>
-        <div class="popover-box">
-          <el-popover
-              placement="left"
-              :width="200"
-              trigger="click"
-              popper-class="my-popper"
-              :show-arrow="false"
-              ref="popoverRef"
-          >
-            <template #reference>
-              <div class="icon-box" :class="iconBoxCss">
-                <el-icon style="font-size:21px">
-                  <CirclePlus/>
+      <el-divider style="margin: 12px 0"/>
+      <div class="popover-box">
+        <el-popover
+            placement="left"
+            :width="200"
+            popper-class="my-popper"
+            :show-arrow="false"
+            :visible="popoverVisible"
+        >
+          <template #reference>
+            <div class="icon-box" :class="iconBoxCss" @click.stop="openPopover">
+              <el-icon style="font-size:21px">
+                <CirclePlus/>
+              </el-icon>
+            </div>
+          </template>
+          <div @click.stop>
+            <el-input
+                maxlength='6'
+                clearable
+                v-model="newWorkAreaData.name"
+                show-word-limit
+            />
+            <div class="grid grid-cols-5 gap-3 my-3">
+              <div
+                  v-for="item in ICON_BOX"
+                  class="cursor-pointer p-1 flex-center rounded-md duration-200"
+                  :class="[newWorkAreaData.icon === item && 'bg-white']"
+                  @click="newWorkAreaData.icon = item"
+              >
+                <el-icon
+                    size="22px"
+                >
+                  <component :is="item"></component>
                 </el-icon>
               </div>
-            </template>
-            <div>
-              <el-input
-                  maxlength='6'
-                  clearable
-                  v-model="newWorkArea.name"
-                  show-word-limit
-              />
-              <div class="grid grid-cols-5 gap-3 my-3">
-                <div
-                    v-for="item in ICON_BOX"
-                    class="cursor-pointer p-1 flex-center rounded-md duration-200"
-                    :class="[newWorkArea.icon === item && 'bg-white']"
-                    @click="newWorkArea.icon = item"
-                >
-                  <el-icon
-                      size="22px"
-                  >
-                    <component :is="item"></component>
-                  </el-icon>
-                </div>
-              </div>
-              <el-button
-                  type="primary"
-                  class="w-full"
-                  @click="handleCreateWork"
-              >
-                添加分类
-              </el-button>
             </div>
-          </el-popover>
-        </div>
+            <el-button
+                v-if="!currentWorkAreaId"
+                type="primary"
+                class="w-full"
+                @click="handleAddWorkArea"
+            >
+              添加工作区
+            </el-button>
+            <el-button
+                v-if="currentWorkAreaId"
+                type="primary"
+                class="w-full"
+                @click="handleUpdateWorkArea"
+            >
+              更新工作区
+            </el-button>
+          </div>
+        </el-popover>
       </div>
     </div>
-    <!--      <div class="flex-center cursor-pointer mt-1">-->
-    <!--        <div class="more-btn flex-center rounded-md">-->
-    <!--          <el-icon style="color: rgba(255,255,255,.8)">-->
-    <!--            <More/>-->
-    <!--          </el-icon>-->
-    <!--        </div>-->
-    <!--      </div>-->
+    <div class="flex-center cursor-pointer mt-1">
+      <div class="more-btn flex-center rounded-md">
+        <el-icon style="color: rgba(255,255,255,.8)">
+          <More/>
+        </el-icon>
+      </div>
+    </div>
   </div>
-<!--  &lt;!&ndash;  工作区&ndash;&gt;-->
-<!--  <div v-show="workVisible" :style="{left:workLeft+'px',top:workTop+'px'}" class="contextmenu">-->
-<!--    <div class="menu edit-btn" @click="handleEditWork">-->
-<!--      <el-icon class="menu-icon">-->
-<!--        <Edit/>-->
-<!--      </el-icon>-->
-<!--      <span>编辑</span>-->
-<!--    </div>-->
-<!--    <div class="menu delete-btn" @click="handleDelWork">-->
-<!--      <el-icon class="menu-icon delete-color">-->
-<!--        <Delete/>-->
-<!--      </el-icon>-->
-<!--      <span class="delete-color">删除</span>-->
-<!--    </div>-->
-<!--  </div>-->
+  <RightPopover
+      v-model:rightVisible="workVisible"
+      :left="wLeft"
+      :top="wTop"
+      @handleDelete="handleDelWorkArea"
+      @handleEdit="handleWorkEdit"
+      v-model:currentId="currentWorkAreaId"
+  />
   <div
       v-if="show"
       class="tool-box"
       :style="{maxWidth:`${maxWidth}px`}"
   >
     <draggable
-        :list="getNavListChild()"
+        :list="getWorkArea()?.children"
         item-key="index"
         animation="500"
         v-show="!isFocus"
         class="tool-grid duration-200"
         :style="{
-                    gridTemplateColumns:`repeat(auto-fill,${size+gapY}px)`,
-                    gridTemplateRows:`repeat(auto-fill,${size+gapX+30}px)`,
-               }"
+                      gridTemplateColumns:`repeat(auto-fill,${size+gapY}px)`,
+                      gridTemplateRows:`repeat(auto-fill,${size+gapX+30}px)`,
+                 }"
     >
-      <template #item="{element,index}">
+      <template #item="{element}">
         <div
             class="tool-item"
-            :style="{
-                           padding: `0 ${gapY/2}px ${gapX}px`,
-                           width:`${size + gapY}px`,
-                           height:`${size+ gapX}px`
-                        }"
-            :key="index"
-            @contextmenu.prevent="rightClick($event,index)"
-            @touchstart.prevent="touchStart($event,index)"
-            @touchmove="touchMove()"
-            @touchend="touchEnd()"
+            :style="{padding: `0 ${gapY/2}px ${gapX}px`,
+                     width:`${size + gapY}px`,
+                     height:`${size+ gapX}px`
+                     }"
+            :key="element.id"
+            @contextmenu.prevent="rightClick($event,element.id)"
         >
           <div
               class="bg-white p-1 rounded-md cursor-pointer w-full h-full flex-center"
@@ -163,15 +158,15 @@
       <template #footer>
         <div class="tool-item"
              :style="{
-                         padding: `0 ${gapY/2}px ${gapX}px`,
-                         gridColumn: `span 1`,
-                         gridRow: `span 1`,
-                         width:`${size + gapY}px`,
-                         height:`${size+ gapX}px`
-                      }"
+                           padding: `0 ${gapY/2}px ${gapX}px`,
+                           gridColumn: `span 1`,
+                           gridRow: `span 1`,
+                           width:`${size + gapY}px`,
+                           height:`${size+ gapX}px`
+                        }"
         >
           <div class="flex-center flex-col w-full h-full"
-               @click="handleEditOpen"
+               @click="openDialog"
           >
             <div
                 class="rounded-md cursor-pointer w-full h-full flex-center bg-white p-1"
@@ -188,7 +183,10 @@
       </template>
     </draggable>
   </div>
-  <MyDialog v-model:dialogVisible="editDialogVisible">
+  <MyDialog
+      v-model:dialogVisible="editDialogVisible"
+      @closeDialog="closeDialog"
+  >
     <template #title>
       快捷导航设置
     </template>
@@ -196,18 +194,18 @@
       <div v-loading="loading" class="flex justify-center items-start flex-col text-base prefix-text-color">
         <div class="py-3 shortcut-box">
           <div>名称</div>
-          <MyInput v-model="toolObj.name"/>
+          <MyInput v-model="shortcutData.name"/>
         </div>
         <div class="py-3 shortcut-box">
           <div>网址</div>
-          <MyInput v-model="toolObj.url"/>
+          <MyInput v-model="shortcutData.url"/>
         </div>
         <div class="py-3 shortcut-box">
           <div class="flex-none">图标</div>
           <div class="flex-center ml-3">
             <div class="shortcut-icon-box">
-              <div class="font-bold" v-if="toolObj.type==='text'">{{ toolObj.src }}</div>
-              <img v-if="toolObj.type==='icon'" class="shortcut-icon" :src="toolObj.src" alt="">
+              <div class="font-bold" v-if="shortcutData.type==='text'">{{ shortcutData.src }}</div>
+              <img v-if="shortcutData.type==='icon'" class="shortcut-icon" :src="shortcutData.src" alt="">
             </div>
             <div class="ml-3 flex flex-wrap justify-start">
               <div class="m-1">
@@ -223,28 +221,22 @@
       </div>
     </template>
     <template #bottom>
-      <el-button @click="handleEditClose">取 消</el-button>
-      <el-button v-if="currentIndex === null" type="primary" @click="handleSaveTool">确 定</el-button>
-      <el-button v-if="currentIndex !== null" type="primary" @click="handleUpdateTool">更 新</el-button>
+      <el-button @click="closeDialog">取 消</el-button>
+      <el-button v-if="!currentShortcutId" type="primary" @click="handleAddShortcut">确 定</el-button>
+      <el-button v-if="currentShortcutId" type="primary" @click="handleUpdateShortcut">更 新</el-button>
     </template>
   </MyDialog>
-  <div v-show="visible" :style="{left:left+'px',top:top+'px'}" class="contextmenu">
-    <div class="menu edit-btn" @click="handleEditTool">
-      <el-icon class="menu-icon">
-        <Edit/>
-      </el-icon>
-      <span>编辑</span>
-    </div>
-    <div class="menu delete-btn" @click="handleDelTool">
-      <el-icon class="menu-icon delete-color">
-        <Delete/>
-      </el-icon>
-      <span class="delete-color">删除</span>
-    </div>
-  </div>
+  <RightPopover
+      v-model:rightVisible="visible"
+      :left="left"
+      :top="top"
+      v-model:currentId="currentShortcutId"
+      @handleDelete="handleDelShortcut"
+      @handleEdit="handleEditShortcut"
+  />
 </template>
 <script setup>
-import {reactive, ref, toRefs, watch} from "vue";
+import {reactive, ref, toRefs, unref, watch} from "vue";
 import MyInput from '../components/my-input.vue'
 import MyDialog from '../components/my-dialog.vue'
 import RightPopover from '../components/right-popover.vue'
@@ -255,12 +247,16 @@ import {IMG_URL, ICON_BOX} from "../utils/index.js";
 import draggable from 'vuedraggable'
 import {v4 as uid} from 'uuid'
 
-
+//传参
 const props = defineProps({
   toolSetting: Object,
   isFocus: Boolean
 })
+//侧边栏css
+const iconBoxCss = 'cursor-pointer flex-center flex-col p-2 rounded-md'
+const fontSize = '18px'
 
+//接收的参数进行转化
 const {
   show,
   size,
@@ -271,140 +267,146 @@ const {
   maxWidth
 } = toRefs(props.toolSetting)
 
-//快捷方式
-const toolObj = reactive({
-  name: "",
-  url: "",
-  src: `${IMG_URL}default.png`,
-  type: "icon",
-})
-
-//侧边栏css
-const iconBoxCss = 'cursor-pointer flex-center flex-col p-2 rounded-md'
-const fontSize = '18px'
-
-//默认的工作区
-const workId = ref(
-    store.get('workId') ?
-        store.get('workId')
+//工作区
+// region
+//默认的工作区id
+const workAreaId = ref(
+    store.get('workAreaId') ?
+        store.get('workAreaId')
         :
         'zhuye'
 )
-
-const navList = reactive(
-    store.get('navList') ?
-        store.get('navList')
+//工作区列表
+const workAreaList = reactive(
+    store.get('workAreaList') ?
+        store.get('workAreaList')
         :
         [
           {
             id: 'zhuye',
             name: "主页",
             icon: 'HomeFilled',
-            children: [
-              {
-                "name": "gitee",
-                "url": "https://gitee.com/",
-                "src": "https://api.qqsuu.cn/api/dm-get?url=https%3A%2F%2Fgitee.com%2F",
-                "type": "icon"
-              },
-              {
-                "name": "ele",
-                "url": "https://element-plus.gitee.io",
-                "src": "https://qiniu.imyuanli.cn/mini/default.png",
-                "type": "icon"
-              },
-              {
-                "name": "csdn",
-                "url": "https://blog.csdn.net/JAMBO808/article/details/123942817",
-                "src": "https://api.qqsuu.cn/api/dm-get?url=https%3A%2F%2Fblog.csdn.net%2FJAMBO808%2Farticle%2Fdetails%2F123942817",
-                "type": "icon"
-              },
-              {
-                "name": "123",
-                "url": "https://github.com/SortableJS/vue.draggable.next",
-                "src": "https://api.qqsuu.cn/api/dm-get?url=https%3A%2F%2Fgithub.com%2FSortableJS%2Fvue.draggable.next",
-                "type": "icon"
-              }],
-          },
-          {
-            id: 'chengxuyuan',
-            name: "程序员",
-            icon: 'Cpu',
-            children: [
-              {
-                "name": "csdn",
-                "url": "https://blog.csdn.net/JAMBO808/article/details/123942817",
-                "src": "https://api.qqsuu.cn/api/dm-get?url=https%3A%2F%2Fblog.csdn.net%2FJAMBO808%2Farticle%2Fdetails%2F123942817",
-                "type": "icon"
-              }
-            ],
-          },
-          {
-            id: 'sheji',
-            name: "设计",
-            icon: 'EditPen',
-            children: [
-              {
-                "name": "gitee",
-                "url": "https://gitee.com/",
-                "src": "https://api.qqsuu.cn/api/dm-get?url=https%3A%2F%2Fgitee.com%2F",
-                "type": "icon"
-              }
-            ],
-          },
+            children: []
+          }
         ]
 )
-//获取对应的nav children
-const getNavListChild = () => {
-  const res = navList.find(item => {
-    return item.id === workId.value
-  })
-  return res.children
-}
-
-//popoverRef
-const popoverRef = ref()
-
 //新工作区数据
-const newWorkArea = reactive({
+const newWorkAreaData = reactive({
   id: '',
   name: '主页',
   icon: 'HomeFilled',
   children: []
 })
-
-//关闭popover 并清空数据
-const handleClosePopover = () => {
-  popoverRef.value.hide()
-  newWorkArea.name = "主页"
-  newWorkArea.icon = "HomeFilled"
+//获取对应工作区的网站列表
+const getWorkArea = (id = workAreaId.value) => workAreaList.find(item => item.id === id)
+//气泡开关
+const popoverVisible = ref(false)
+//打开
+const openPopover = () => popoverVisible.value = true
+//关闭
+const closePopover = () => {
+  popoverVisible.value = false
+  newWorkAreaData.name = "主页"
+  newWorkAreaData.icon = "HomeFilled"
+  newWorkAreaData.children = []
+  currentWorkAreaId.value = null
 }
-
-//增工作区
-const handleCreateWork = () => {
+//工作区的增删改查
+//当前操作的id
+const currentWorkAreaId = ref(null)
+//增
+const handleAddWorkArea = () => {
   const id = uid()
-  newWorkArea.id = id
-  navList.push({...newWorkArea})
-  workId.value = id
-  handleClosePopover()
+  newWorkAreaData.id = id
+  workAreaList.push({...newWorkAreaData})
+  workAreaId.value = id
+  closePopover()
 }
 //工作区右键弹窗
-//右键弹窗
-// const workVisible = ref(false)
-// const workTop = ref(0)
-// const workLeft = ref(0)
-// const rightWorkClick = (id) => {
-//   console.log(id)
-// }
+const workVisible = ref(false)
+const wLeft = ref(0)
+const wTop = ref(0)
+const rightWorkClick = (e, id) => {
+  wLeft.value = e.pageX
+  wTop.value = e.pageY
+  workVisible.value = true
+  currentWorkAreaId.value = id
+}
+//点击编辑的逻辑
+const handleWorkEdit = () => {
+  const res = getWorkArea(currentWorkAreaId.value)
+  newWorkAreaData.name = res.name
+  newWorkAreaData.icon = res.icon
+  openPopover()
+}
+
 //删
+const handleDelWorkArea = () => {
+  const index = workAreaList.findIndex(item => item.id === currentWorkAreaId.value)
+  if (currentWorkAreaId.value === 'zhuye') {
+    ElMessage({
+      message: '该分组不允许删除',
+      type: 'warning',
+    })
+    return
+  }
+  workAreaList.splice(index, 1)
+  //如果删除的和当前工作区一致
+  if (currentWorkAreaId.value === workAreaId.value) {
+    workAreaId.value = 'zhuye'
+  }
+}
+//更新
+const handleUpdateWorkArea = () => {
+  const res = getWorkArea(currentWorkAreaId.value)
+  res.name = newWorkAreaData.name
+  res.icon = newWorkAreaData.icon
+  closePopover()
+}
+// endregion
 
-//改
+//网站捷径
+//region
 
+//网站捷径默认数据结构
+const shortcutData = reactive({
+  id: "",
+  name: "",
+  url: "",
+  src: `${IMG_URL}default.png`,
+  type: "icon",
+})
+
+//重置shortcutData
+const reDefaultShortcut = () => {
+  shortcutData.id = ""
+  shortcutData.name = ""
+  shortcutData.url = ""
+  shortcutData.src = `${IMG_URL}default.png`
+  shortcutData.type = "icon"
+}
+
+//网站捷径弹窗
+const editDialogVisible = ref(false)
+
+//当前操作的id
+const currentShortcutId = ref(null)
+watch(currentShortcutId, d => {
+  console.log('123', d)
+})
+//打开
+const openDialog = () => editDialogVisible.value = true
+//关闭
+const closeDialog = () => {
+  editDialogVisible.value = false
+  reDefaultShortcut()
+  currentShortcutId.value = null
+}
 
 //获取网站图标
 const loading = ref(false)
 const getIcon = () => {
-  if (!toolObj?.url) {
+  if (!shortcutData?.url) {
     ElMessage({
       message: '请先填写网址',
       type: 'warning',
@@ -412,176 +414,130 @@ const getIcon = () => {
     return
   }
   loading.value = true
-  get_url_icon({url: toolObj?.url}).then(
+  get_url_icon({url: shortcutData?.url}).then(
       (res) => {
         if (res) {
-          toolObj.src = res
-          toolObj.type = 'icon'
-          loading.value = false
+          shortcutData.src = res
+          shortcutData.type = 'icon'
+          shortcutData.value = false
         }
       }
   )
 }
 //图标是文字
 const getText = () => {
-  if (!toolObj?.name) {
+  if (!shortcutData?.name) {
     ElMessage({
       message: '请先填写网站名称',
       type: 'warning',
     })
     return
   }
-  toolObj.src = toolObj?.name[0]
-  toolObj.type = 'text'
+  shortcutData.src = shortcutData?.name[0]
+  shortcutData.type = 'text'
 }
 //默认
 const getDefault = () => {
-  toolObj.src = `${IMG_URL}default.png`
-  toolObj.type = 'icon'
-}
-//重置toolobj
-const clearObj = () => {
-  toolObj.name = ""
-  toolObj.url = ""
-  toolObj.src = `${IMG_URL}default.png`
-  toolObj.type = "icon"
+  shortcutData.src = `${IMG_URL}default.png`
+  shortcutData.type = 'icon'
 }
 
-//保存
-const handleSaveTool = () => {
-  if (!toolObj?.name) {
+//网站捷径增删改查
+//增加
+const handleAddShortcut = () => {
+  if (!shortcutData?.name) {
     ElMessage({
       message: '未填写名称',
       type: 'warning',
     })
     return
   }
-  if (!toolObj?.url) {
+  if (!shortcutData?.url) {
     ElMessage({
       message: '未填写网址',
       type: 'warning',
     })
     return
   }
-  const children = getNavListChild()
-  children.push({...toolObj})
-  clearObj()
-  handleEditClose()
-}
-//更新
-const handleUpdateTool = () => {
-  if (!toolObj?.name) {
-    ElMessage({
-      message: '未填写名称',
-      type: 'warning',
-    })
-    return
-  }
-  if (!toolObj?.url) {
-    ElMessage({
-      message: '未填写网址',
-      type: 'warning',
-    })
-    return
-  }
-  const children = getNavListChild()
-  children[currentIndex.value] = {...toolObj}
-  clearObj()
-  handleEditClose()
-}
-
-//编辑
-const handleEditTool = () => {
-  const children = getNavListChild()
-  let obj = {...children[currentIndex.value]}
-  toolObj.name = obj.name
-  toolObj.url = obj.url
-  toolObj.src = obj.src
-  toolObj.type = obj.type
-  handleEditOpen()
-}
-
-//删除 tool
-const handleDelTool = () => {
-  const children = getNavListChild()
-  children.splice(currentIndex.value, 1)
-}
-
-//编辑弹框
-const editDialogVisible = ref(false)
-const handleEditOpen = () => editDialogVisible.value = true
-const handleEditClose = () => {
-  editDialogVisible.value = false
-  currentIndex.value = null
-  clearObj()
+  shortcutData.id = uid()
+  const children = getWorkArea()?.children
+  children.push({...shortcutData})
+  closeDialog()
 }
 
 //右键弹窗
 const visible = ref(false)
 const top = ref(0)
 const left = ref(0)
-
-//当前操作的index
-const currentIndex = ref(null)
-//打开menu
-const openMenu = (x, y) => {
-  left.value = x;
-  top.value = y;
+const rightClick = (e, id) => {
+  left.value = e.pageX;
+  top.value = e.pageY;
   visible.value = true;
-}
-//右键打开
-const rightClick = (e, index) => {
-  openMenu(e.pageX, e.pageY)
-  currentIndex.value = index
-}
-//关闭
-const closeMenu = () => {
-  top.value = 0;
-  left.value = 0;
-  visible.value = false;
-  // currentIndex.value = null
-}
-//移动端长按
-let timeOutEvent
-//长按事件（起始）
-const touchStart = (e, index) => {
-  timeOutEvent = setTimeout(() => {
-    //真正长按后应该执行的内容
-    timeOutEvent = 0;
-    const touches = e.touches[0]
-    currentIndex.value = index
-    openMenu(touches.pageX, touches.pageY)
-  }, 500); //这里设置定时器，定义长按500毫秒触发长按事件
-  return false;
-}
-//手释放，如果在500毫秒内就释放，则取消长按事件，此时可以执行onclick应该执行的事件
-const touchEnd = () => {
-  clearTimeout(timeOutEvent); //清除定时器
-  if (timeOutEvent !== 0) {
-    //这里写要执行的内容（如onclick事件）
-    console.log("点击但未长按");
-  }
-  return false;
-}
-//如果手指有移动，则取消所有事件，此时说明用户只是要移动而不是长按
-const touchMove = () => {
-  clearTimeout(timeOutEvent); //清除定时器
-  timeOutEvent = 0;
+  currentShortcutId.value = id
 }
 
-//持久化存储
-watch(workId, () => {
-  store.set('workId', workId.value)
+//点击编辑
+const handleEditShortcut = () => {
+  const children = getWorkArea()?.children
+  const res = children.find(item => item.id === currentShortcutId.value)
+  shortcutData.id = res.id
+  shortcutData.name = res.name
+  shortcutData.url = res.url
+  shortcutData.src = res.src
+  shortcutData.type = res.type
+  openDialog()
+}
+
+//获取对应的index
+const getShortcutIndex = (children) => children.findIndex(item => item.id === currentShortcutId.value)
+
+//更新
+const handleUpdateShortcut = () => {
+  if (!shortcutData?.name) {
+    ElMessage({
+      message: '未填写名称',
+      type: 'warning',
+    })
+    return
+  }
+  if (!shortcutData?.url) {
+    ElMessage({
+      message: '未填写网址',
+      type: 'warning',
+    })
+    return
+  }
+  const children = getWorkArea()?.children
+  const index = getShortcutIndex(children)
+  children[index] = {...shortcutData}
+  closeDialog()
+}
+//删除
+const handleDelShortcut = () => {
+  const children = getWorkArea()?.children
+  const index = getShortcutIndex(children)
+  children.splice(index, 1)
+}
+// endregion
+
+//全局监听 工作区
+watch(workAreaId, (newData) => {
+  if (newData) {
+    store.set('workAreaId', newData)
+  }
 })
-watch(navList, (newTool) => {
-  store.set("navList", newTool)
+
+watch(workAreaList, (newTool) => {
+  if (newTool) {
+    store.set("workAreaList", newTool)
+  }
 })
-//全局监听
-watch(visible, (newValue, oldValue) => {
+
+watch(popoverVisible, (newValue) => {
   if (newValue) {
-    document.body.addEventListener('click', closeMenu)
+    document.body.addEventListener('click', closePopover)
   } else {
-    document.body.removeEventListener('click', closeMenu)
+    document.body.removeEventListener('click', closePopover)
   }
 })
 </script>
@@ -698,7 +654,7 @@ watch(visible, (newValue, oldValue) => {
 
 /*工作区*/
 .sidebar-box {
-  height: 40%;
+  height: 50%;
   width: 48px;
 }
 
