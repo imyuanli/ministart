@@ -29,7 +29,7 @@
     </div>
     <div
         v-show="searchVisible"
-        class="p-2 flex justify-start items-center flex-wrap fadeInDown absolute search-box z-20 rounded-lg bg-white grid grid-cols-4 md:grid-cols-6 sm:grid-cols-5"
+        class="p-2 flex justify-start items-center flex-wrap fadeInDown absolute search-box z-20 rounded-lg bg-white grid grid-cols-3 md:grid-cols-5 sm:grid-cols-4"
     >
       <div v-for="check in checkEngList">
         <div v-for="(item,index) in searchEngines">
@@ -76,7 +76,7 @@
         搜索引擎偏好设置
       </template>
       <template #content>
-        <el-checkbox-group class="grid grid-cols-1 sm:grid-cols-2 gap-3" v-model="checkEngList" :min="1" :max="6">
+        <el-checkbox-group class="grid grid-cols-1 sm:grid-cols-2 gap-3" v-model="checkEngList" :min="1" :max="9">
           <div v-for="item in DEFAULT_ENGINES"
                class="w-full flex cursor-pointer bg-gray-100 hover:bg-gray-200 duration-200 truncate overflow-ellipsis"
           >
@@ -200,7 +200,7 @@ const searchData = () => {
 
 <style scoped>
 .search-box {
-  max-width: 520px;
+  max-width: 620px;
   width: 92%;
   overflow: hidden;
 }
