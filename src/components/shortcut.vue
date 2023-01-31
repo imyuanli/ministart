@@ -432,15 +432,18 @@ const urlNotNull = () => {
 const getIcon = () => {
   if (!urlNotNull()) return;
   loading.value = true
-  get_url_icon({url: shortcutData?.url}).then(
-      (res) => {
+  get_url_icon({url: shortcutData?.url})
+      .then((res) => {
         if (res) {
           shortcutData.src = res
           shortcutData.type = 'icon'
           shortcutData.value = false
+          loading.value = false
         }
-      }
-  )
+      })
+      .catch(() => {
+        loading.value = false
+      })
 }
 //图标是文字
 const getText = () => {
