@@ -37,61 +37,59 @@
         </template>
       </draggable>
       <el-divider style="margin: 12px 0"/>
-      <div class="popover-box">
-        <el-popover
-            placement="left"
-            :width="200"
-            popper-class="my-popper"
-            :show-arrow="false"
-            :visible="popoverVisible"
-        >
-          <template #reference>
-            <div class="icon-box" :class="iconBoxCss" @click.stop="openPopover">
-              <el-icon style="font-size:21px">
-                <CirclePlus/>
+      <el-popover
+          placement="left"
+          :width="250"
+          popper-class="my-popper"
+          :show-arrow="false"
+          :visible="popoverVisible"
+      >
+        <template #reference>
+          <div class="icon-box" :class="iconBoxCss" @click.stop="openPopover">
+            <el-icon style="font-size:21px">
+              <CirclePlus/>
+            </el-icon>
+          </div>
+        </template>
+        <div class="p-4" @click.stop>
+          <el-input
+              maxlength='6'
+              clearable
+              v-model="newWorkAreaData.name"
+              show-word-limit
+          />
+          <div class="grid grid-cols-5 gap-3 my-3">
+            <div
+                v-for="item in ICON_BOX"
+                class="cursor-pointer p-1 flex-center rounded-md duration-200"
+                :class="[newWorkAreaData.icon === item && 'bg-white']"
+                @click="newWorkAreaData.icon = item"
+            >
+              <el-icon
+                  size="22px"
+              >
+                <component :is="item"></component>
               </el-icon>
             </div>
-          </template>
-          <div @click.stop>
-            <el-input
-                maxlength='6'
-                clearable
-                v-model="newWorkAreaData.name"
-                show-word-limit
-            />
-            <div class="grid grid-cols-5 gap-3 my-3">
-              <div
-                  v-for="item in ICON_BOX"
-                  class="cursor-pointer p-1 flex-center rounded-md duration-200"
-                  :class="[newWorkAreaData.icon === item && 'bg-white']"
-                  @click="newWorkAreaData.icon = item"
-              >
-                <el-icon
-                    size="22px"
-                >
-                  <component :is="item"></component>
-                </el-icon>
-              </div>
-            </div>
-            <el-button
-                v-if="!currentWorkAreaId"
-                type="primary"
-                class="w-full"
-                @click="handleAddWorkArea"
-            >
-              添加工作区
-            </el-button>
-            <el-button
-                v-if="currentWorkAreaId"
-                type="primary"
-                class="w-full"
-                @click="handleUpdateWorkArea"
-            >
-              更新工作区
-            </el-button>
           </div>
-        </el-popover>
-      </div>
+          <el-button
+              v-if="!currentWorkAreaId"
+              type="primary"
+              class="w-full"
+              @click="handleAddWorkArea"
+          >
+            添加工作区
+          </el-button>
+          <el-button
+              v-if="currentWorkAreaId"
+              type="primary"
+              class="w-full"
+              @click="handleUpdateWorkArea"
+          >
+            更新工作区
+          </el-button>
+        </div>
+      </el-popover>
     </div>
     <div class="flex-center cursor-pointer mt-1">
       <div class="more-btn flex-center rounded-md">
@@ -698,5 +696,6 @@ watch(popoverVisible, (newValue) => {
 .my-popper {
   background-color: rgba(255, 255, 255, .8) !important;
   border-radius: 15px;
+  padding: 0 !important;
 }
 </style>
