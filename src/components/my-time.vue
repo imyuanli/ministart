@@ -1,5 +1,5 @@
 <template>
-  <div v-if="show" class="flex-center flex-col mb-9">
+  <div v-if="show" class="flex-center flex-col absolute-center top-16 md:top-40">
     <div
         class="cursor-pointer hover:scale-125 duration-200"
         :style="{
@@ -11,7 +11,7 @@
     >
       {{ nowTime }}
     </div>
-    <div class="text-white" v-show="date">
+    <div class="text-white w-max" v-show="date">
       <span class="m-1">{{ nowMonth }}</span>
       <span class="m-1">{{ nowWeek }}</span>
       <span class="m-1">{{ nowLunar }}</span>

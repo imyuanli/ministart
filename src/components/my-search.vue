@@ -1,5 +1,5 @@
 <template>
-  <div v-if="show" class="search-box mb-9">
+  <div v-if="show" class="search-box absolute-center top-44 md:top-72">
     <div
         class="flex-center shadow-md mb-2"
         :style="{

@@ -110,7 +110,7 @@
   />
   <div
       v-if="show"
-      class="tool-box"
+      class="tool-box absolute-center  top-64 md:top-96"
       :style="{maxWidth:`${maxWidth}px`}"
   >
     <draggable

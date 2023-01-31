@@ -21,6 +21,12 @@ body {
     background-color: #1890ff;
 }
 
+.absolute-center{
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
 :root {
     --primary-color: #1890ff;
     --search-height: 46px;
