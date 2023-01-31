@@ -193,11 +193,11 @@
       <div v-loading="loading" class="flex justify-center items-start flex-col text-base prefix-text-color">
         <div class="py-3 shortcut-box">
           <div>名称</div>
-          <MyInput v-model="shortcutData.name"/>
+          <MyInput v-model.trim="shortcutData.name"/>
         </div>
         <div class="py-3 shortcut-box">
           <div>网址</div>
-          <MyInput v-model="shortcutData.url"/>
+          <MyInput v-model.trim="shortcutData.url"/>
         </div>
         <div class="py-3 shortcut-box">
           <div class="flex-none">图标</div>
@@ -404,14 +404,33 @@ const closeDialog = () => {
 
 //获取网站图标
 const loading = ref(false)
-const getIcon = () => {
-  if (!shortcutData?.url) {
+
+//无名
+const nameNotNull = () => {
+  if (shortcutData?.name) return true
+  else {
     ElMessage({
-      message: '请先填写网址',
+      message: '名称不能为空',
       type: 'warning',
     })
-    return
+    return false
   }
+}
+
+//无网址
+const urlNotNull = () => {
+  if (shortcutData?.url) return true
+  else {
+    ElMessage({
+      message: '网址不能为空',
+      type: 'warning',
+    })
+    return false
+  }
+}
+//在线图标
+const getIcon = () => {
+  if (!urlNotNull()) return;
   loading.value = true
   get_url_icon({url: shortcutData?.url}).then(
       (res) => {
@@ -425,13 +444,7 @@ const getIcon = () => {
 }
 //图标是文字
 const getText = () => {
-  if (!shortcutData?.name) {
-    ElMessage({
-      message: '请先填写网站名称',
-      type: 'warning',
-    })
-    return
-  }
+  if (!nameNotNull()) return;
   shortcutData.src = shortcutData?.name[0]
   shortcutData.type = 'text'
 }
@@ -444,20 +457,8 @@ const getDefault = () => {
 //网站捷径增删改查
 //增加
 const handleAddShortcut = () => {
-  if (!shortcutData?.name) {
-    ElMessage({
-      message: '未填写名称',
-      type: 'warning',
-    })
-    return
-  }
-  if (!shortcutData?.url) {
-    ElMessage({
-      message: '未填写网址',
-      type: 'warning',
-    })
-    return
-  }
+  if (!nameNotNull()) return;
+  if (!urlNotNull()) return;
   shortcutData.id = uid()
   const children = getWorkArea()?.children
   children.push({...shortcutData})
@@ -492,20 +493,8 @@ const getShortcutIndex = (children) => children.findIndex(item => item.id === cu
 
 //更新
 const handleUpdateShortcut = () => {
-  if (!shortcutData?.name) {
-    ElMessage({
-      message: '未填写名称',
-      type: 'warning',
-    })
-    return
-  }
-  if (!shortcutData?.url) {
-    ElMessage({
-      message: '未填写网址',
-      type: 'warning',
-    })
-    return
-  }
+  if (!nameNotNull()) return;
+  if (!urlNotNull()) return;
   const children = getWorkArea()?.children
   const index = getShortcutIndex(children)
   children[index] = {...shortcutData}
