@@ -78,7 +78,7 @@
       <template #content>
         <el-checkbox-group class="grid grid-cols-1 sm:grid-cols-2 gap-3" v-model="checkEngList" :min="1" :max="6">
           <div v-for="item in DEFAULT_ENGINES"
-               class="w-full p-3 flex cursor-pointer bg-gray-100 hover:bg-gray-200 duration-200 truncate overflow-ellipsis"
+               class="w-full flex cursor-pointer bg-gray-100 hover:bg-gray-200 duration-200 truncate overflow-ellipsis"
           >
             <el-tooltip
                 class="box-item"
@@ -87,7 +87,7 @@
                 placement="top"
                 :disabled="currentEngId !== item.id"
             >
-              <el-checkbox :disabled="currentEngId === item.id" class="w-full" :label="item.id">
+              <el-checkbox :disabled="currentEngId === item.id" class="w-full py-6 px-3" :label="item.id">
                 <div class="flex w-full">
                   <img class="menu-img mr-3" :src="IMG_URL+item.icon" alt="">
                   <div class="w-full">
