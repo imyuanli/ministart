@@ -28,6 +28,7 @@
                 :content="element.name"
                 placement="left"
                 :key="index"
+                :disabled="element.name?false:true"
             >
               <el-icon :style="{fontSize}">
                 <component :is="element.icon"></component>
