@@ -47,7 +47,7 @@
       >
         <template #reference>
           <div class="icon-box" :class="iconBoxCss" @click.stop="openPopover">
-            <el-icon style="font-size:21px">
+            <el-icon style="font-size:22px">
               <CirclePlus/>
             </el-icon>
           </div>
@@ -253,7 +253,7 @@ const props = defineProps({
 })
 //侧边栏css
 const iconBoxCss = 'cursor-pointer flex-center flex-col p-2 rounded-md'
-const fontSize = '18px'
+const fontSize = '20px'
 
 //接收的参数进行转化
 const {
