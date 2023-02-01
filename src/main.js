@@ -7,6 +7,7 @@ import 'element-plus/theme-chalk/index.css';
 import * as ElementPlusIconsVue from '@element-plus/icons-vue'
 import locale from 'element-plus/lib/locale/lang/zh-cn'
 import mitt from "mitt";
+import "animate.css/animate.min.css";
 
 const app = createApp(App)
 //事件总线
