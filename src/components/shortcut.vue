@@ -645,7 +645,8 @@ watch(popoverVisible, (newValue) => {
 
 /*工作区*/
 .sidebar-box {
-  height: 50%;
+  height: 70%;
+  max-height: 480px;
   width: 48px;
 }
 
