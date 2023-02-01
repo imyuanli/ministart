@@ -1,5 +1,5 @@
 <template>
-  <div v-if="show" class="search-box absolute-center top-44 md:top-72">
+  <div v-if="show" class="search-box absolute-center top-44 md:top-72 z-10">
     <div
         class="flex-center shadow-md mb-2"
         :style="{
@@ -29,7 +29,7 @@
     </div>
     <div
         v-show="searchVisible"
-        class="p-2 flex justify-start items-center flex-wrap fadeInDown absolute search-box z-20 rounded-lg bg-white grid grid-cols-3 md:grid-cols-5 sm:grid-cols-4"
+        class="p-2 flex justify-start items-center flex-wrap fadeInDown relative w-full rounded-lg bg-white grid grid-cols-3 md:grid-cols-5 sm:grid-cols-4"
     >
       <div v-for="check in checkEngList">
         <div v-for="(item,index) in searchEngines">
@@ -69,43 +69,43 @@
         </div>
       </div>
     </div>
-    <MyDialog
-        v-model:dialogVisible="enginesDialogVisible"
-    >
-      <template #title>
-        搜索引擎偏好设置
-      </template>
-      <template #content>
-        <el-checkbox-group class="grid grid-cols-1 sm:grid-cols-2 gap-3" v-model="checkEngList" :min="1" :max="9">
-          <div v-for="item in DEFAULT_ENGINES"
-               class="w-full flex cursor-pointer bg-gray-100 hover:bg-gray-200 duration-200 truncate overflow-ellipsis"
+  </div>
+  <MyDialog
+      v-model:dialogVisible="enginesDialogVisible"
+  >
+    <template #title>
+      搜索引擎偏好设置
+    </template>
+    <template #content>
+      <el-checkbox-group class="grid grid-cols-1 sm:grid-cols-2 gap-3" v-model="checkEngList" :min="1" :max="9">
+        <div v-for="item in DEFAULT_ENGINES"
+             class="w-full flex cursor-pointer bg-gray-100 hover:bg-gray-200 duration-200 truncate overflow-ellipsis"
+        >
+          <el-tooltip
+              class="box-item"
+              effect="light"
+              content="该搜索引擎正在被使用，无法操作"
+              placement="top"
+              :disabled="currentEngId !== item.id"
           >
-            <el-tooltip
-                class="box-item"
-                effect="light"
-                content="该搜索引擎正在被使用，无法操作"
-                placement="top"
-                :disabled="currentEngId !== item.id"
-            >
-              <el-checkbox :disabled="currentEngId === item.id" class="w-full py-6 px-3" :label="item.id">
-                <div class="flex w-full">
-                  <img class="menu-img mr-3" :src="IMG_URL+item.icon" alt="">
-                  <div class="w-full">
-                    <div class="mb-1 w-full">
-                      {{ item.name }}
-                    </div>
-                    <div class="inline-block truncate overflow-ellipsis w-44" style="font-size:12px">
-                      {{ item.target }}
-                    </div>
+            <el-checkbox :disabled="currentEngId === item.id" class="w-full py-6 px-3" :label="item.id">
+              <div class="flex w-full">
+                <img class="menu-img mr-3" :src="IMG_URL+item.icon" alt="">
+                <div class="w-full">
+                  <div class="mb-1 w-full">
+                    {{ item.name }}
+                  </div>
+                  <div class="inline-block truncate overflow-ellipsis w-44" style="font-size:12px">
+                    {{ item.target }}
                   </div>
                 </div>
-              </el-checkbox>
-            </el-tooltip>
-          </div>
-        </el-checkbox-group>
-      </template>
-    </MyDialog>
-  </div>
+              </div>
+            </el-checkbox>
+          </el-tooltip>
+        </div>
+      </el-checkbox-group>
+    </template>
+  </MyDialog>
 </template>
 
 <script setup>
