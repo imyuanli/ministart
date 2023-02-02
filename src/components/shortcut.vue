@@ -92,13 +92,13 @@
         </div>
       </el-popover>
     </div>
-    <div class="flex-center cursor-pointer mt-1">
-      <div class="more-btn flex-center rounded-md">
-        <el-icon style="color: rgba(255,255,255,.8)">
-          <More/>
-        </el-icon>
-      </div>
-    </div>
+<!--    <div class="flex-center cursor-pointer mt-1">-->
+<!--      <div class="more-btn flex-center rounded-md">-->
+<!--        <el-icon style="color: rgba(255,255,255,.8)">-->
+<!--          <More/>-->
+<!--        </el-icon>-->
+<!--      </div>-->
+<!--    </div>-->
   </div>
   <RightPopover
       v-model:rightVisible="workVisible"
