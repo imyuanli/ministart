@@ -1,17 +1,50 @@
 <template>
-  <div class="relative w-full h-screen min-h-screen flex justify-start items-center flex-col"
+  <div class="relative w-full h-screen max-h-screen"
        @click.self="handleClickClose">
-    <div class="back-img duration-150" :class="[isFocus ? 'scale-105':'']"/>
-    <div v-show="isFocus" class="cover duration-150"/>
-    <Header :commonSettings="commonSettings"/>
-    <MyTime :timeSetting="commonSettings.timeSetting"/>
-    <MySearch
-        :searchSetting="commonSettings.searchSetting"
-        :isFocus="isFocus"
-        :handleClickOpen="handleClickOpen"
-    />
-    <Shortcut :toolSetting="commonSettings.toolSetting" :isFocus="isFocus"/>
-    <MyFooter :simple="commonSettings.baseSetting.simpleFooter"/>
+    <!--    <Shortcut :toolSetting="commonSettings.toolSetting" :isFocus="isFocus"/>-->
+    <!--    <MyFooter :simple="commonSettings.baseSetting.simpleFooter"/>-->
+    <el-button @click="isDrag=true">能</el-button>
+    <el-button @click="isDrag=false">否</el-button>
+    <grid-layout
+        v-model:layout="list"
+        :col-num="12"
+        :row-height="48"
+        :is-draggable="isDrag"
+        :is-resizable="isDrag"
+        :responsive="true"
+        :vertical-compact="false"
+        :use-css-transforms="true"
+        @click.self="handleClickClose"
+    >
+<!--      <div class="back-img duration-150" :class="[isFocus ? 'scale-105':'']"/>-->
+<!--      <div v-show="isFocus" class="cover duration-150"/>-->
+      <grid-item
+          v-for="item in list"
+          :x="item.x"
+          :y="item.y"
+          :w="item.w"
+          :h="item.h"
+          :i="item.i"
+      >
+        <div class="h-full" :class="[isDrag?'asdad':'']">
+          <div v-show="item.i=='search'">
+            <MySearch
+                :searchSetting="commonSettings.searchSetting"
+                :isFocus="isFocus"
+                :handleClickOpen="handleClickOpen"
+            />
+          </div>
+          <div v-show="item.i=='time'">
+            <MyTime :timeSetting="commonSettings.timeSetting"/>
+          </div>
+          <div v-show="item.i=='header'" class="flex-center h-full">
+            <Header :commonSettings="commonSettings"/>
+          </div>
+        </div>
+        <div v-if="isDrag" class="fixed top-0 left-0 t w-full h-full z-50"></div>
+      </grid-item>
+    </grid-layout>
+
   </div>
 </template>
 
@@ -25,6 +58,25 @@ import Shortcut from "../components/shortcut.vue";
 import store from "store";
 import _ from 'lodash'
 import {ElMessage, ElNotification} from "element-plus";
+
+//grid测试
+const isDrag = ref(false)
+
+
+const list = ref(
+    [
+      {"x": 4, "y": 2, "w": 4, "h": 2, "i": "time"},
+      {"x": 4, "y": 3, "w": 4, "h": 2, "i": "search"},
+      {"x": 12, "y": 0, "w": 1, "h": 1, "i": "header"},
+    ],
+)
+
+const mdList =  ref(
+    [
+      {"x": 0, "y": 2, "w": 12, "h": 2, "i": "time"},
+      {"x": 0, "y": 3, "w": 12, "h": 2, "i": "search"},
+    ],
+)
 
 onMounted(() => {
   if (commonSettings.baseSetting.showGreeting) {
@@ -142,4 +194,67 @@ const handleClickClose = () => {
   transition: .25s;
   background-image: radial-gradient(rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.5) 100%), radial-gradient(rgba(0, 0, 0, 0) 33%, rgba(0, 0, 0, 0.3) 166%);
 }
+
+
+.vue-grid-layout {
+
+}
+
+.asdad {
+  border: 1px  greenyellow dotted;
+}
+
+.vue-grid-item .resizing {
+  opacity: 0.9;
+}
+
+.vue-grid-item .static {
+  background: #cce;
+}
+
+.vue-grid-item .text {
+  font-size: 24px;
+  text-align: center;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  height: 100%;
+  width: 100%;
+}
+
+.vue-grid-item .no-drag {
+  height: 100%;
+  width: 100%;
+}
+
+.vue-grid-item .minMax {
+  font-size: 12px;
+}
+
+.vue-grid-item .add {
+  cursor: pointer;
+}
+
+.vue-draggable-handle {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  top: 0;
+  left: 0;
+  background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='10'><circle cx='5' cy='5' r='5' fill='#999999'/></svg>") no-repeat;
+  background-position: bottom right;
+  padding: 0 8px 8px 0;
+  background-repeat: no-repeat;
+  background-origin: content-box;
+  box-sizing: border-box;
+  cursor: pointer;
+}
+
+:deep(.vue-resizable-handle) {
+  z-index: 100 !important;
+}
+
 </style>

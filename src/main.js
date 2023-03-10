@@ -8,12 +8,14 @@ import * as ElementPlusIconsVue from '@element-plus/icons-vue'
 import locale from 'element-plus/lib/locale/lang/zh-cn'
 import mitt from "mitt";
 import "animate.css/animate.min.css";
+import VueGridLayout from 'vue-grid-layout'
 
 const app = createApp(App)
+
 //事件总线
 app.config.globalProperties.$mitt = new mitt();
 
-app.use(router).use(ElementPlus, {locale}).mount('#app')
+app.use(router).use(ElementPlus, {locale}).use(VueGridLayout).mount('#app')
 
 //element icon
 for (const [key, component] of Object.entries(ElementPlusIconsVue)) {

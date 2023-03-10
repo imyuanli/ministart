@@ -1,5 +1,5 @@
 <template>
-  <div v-if="show" class="search-box absolute-center top-44 md:top-72 z-10">
+  <div v-if="show" class="search-box z-10">
     <div
         class="flex-center shadow-md mb-2"
         :style="{
@@ -29,7 +29,7 @@
     </div>
     <div
         v-show="searchVisible"
-        class="p-2 flex justify-start items-center flex-wrap fadeInDown relative w-full rounded-lg bg-white grid grid-cols-3 md:grid-cols-5 sm:grid-cols-4"
+        class="p-2 relative w-full rounded-lg bg-white grid grid-cols-3 md:grid-cols-5 sm:grid-cols-4"
     >
       <div v-for="check in checkEngList">
         <div v-for="(item,index) in searchEngines">
